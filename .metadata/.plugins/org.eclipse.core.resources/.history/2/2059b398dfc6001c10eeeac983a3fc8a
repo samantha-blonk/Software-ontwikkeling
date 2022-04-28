@@ -130,13 +130,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
 	  if(input.command_execute_flag == TRUE)
 	  {
 		  // Do some stuff
 		  printf("yes\n");
 		  colorTest = ~colorTest; // Toggle screen color
-		  UB_VGA_FillScreen(VGA_COL_RED);
+		  UB_VGA_SetPixel(10,10,10);
 
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;

@@ -36,8 +36,8 @@
 //--------------------------------------------------------------
 // define the VGA_display
 //--------------------------------------------------------------
-#define VGA_DISPLAY_X   320
-#define VGA_DISPLAY_Y   240
+#define VGA_DISPLAY_X   640
+#define VGA_DISPLAY_Y   480
 
 
 
