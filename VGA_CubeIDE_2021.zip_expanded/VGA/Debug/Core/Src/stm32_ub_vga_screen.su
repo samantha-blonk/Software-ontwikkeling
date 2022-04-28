@@ -1,9 +1,0 @@
-stm32_ub_vga_screen.c:38:6:UB_VGA_Screen_Init	16	static
-stm32_ub_vga_screen.c:73:6:UB_VGA_FillScreen	24	static
-stm32_ub_vga_screen.c:89:6:UB_VGA_SetPixel	16	static
-stm32_ub_vga_screen.c:103:6:P_VGA_InitIO	16	static
-stm32_ub_vga_screen.c:172:6:P_VGA_InitTIM	40	static
-stm32_ub_vga_screen.c:244:6:P_VGA_InitINT	16	static
-stm32_ub_vga_screen.c:285:6:P_VGA_InitDMA	72	static
-stm32_ub_vga_screen.c:330:6:TIM2_IRQHandler	8	static
-stm32_ub_vga_screen.c:386:6:DMA2_Stream5_IRQHandler	8	static
