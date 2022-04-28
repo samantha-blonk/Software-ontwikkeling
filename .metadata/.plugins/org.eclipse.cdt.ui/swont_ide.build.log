@@ -1,0 +1,10 @@
+13:04:45 **** Incremental Build of configuration Debug for project swont_ide ****
+make -j8 all 
+arm-none-eabi-size   swont_ide.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21224	    120	  79968	 101312	  18bc0	swont_ide.elf
+Finished building: default.size.stdout
+ 
+
+13:04:46 Build Finished. 0 errors, 0 warnings. (took 583ms)
+
