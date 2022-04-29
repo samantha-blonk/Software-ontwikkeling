@@ -1,8 +1,8 @@
 //--------------------------------------------------------------
-// @author
+// @author Franc van der Bent & Niels Vollebregt
 //
-// @brief
-// @details
+// @brief The API that drives the VGA
+// @details The API that drives the VGA output on the STM32, contains code to
 //
 // @version
 // @date

@@ -130,7 +130,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
+	  UB_VGA_FillScreen(VGA_COL_RED);
 	  if(input.command_execute_flag == TRUE)
 	  {
 		  // Do some stuff
