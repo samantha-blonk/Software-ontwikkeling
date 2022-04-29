@@ -11,3 +11,6 @@
 
 
 #endif /* INC_FRONTLAYER_H_ */
+#define BYTE_SIZE 	 1
+
+uint8_t data[BYTE_SIZE];
