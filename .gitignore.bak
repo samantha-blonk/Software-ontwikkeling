@@ -36,5 +36,5 @@
 .metadata/.plugins/org.eclipse.cdt.core/.log
 .metadata/.log
 .metadata/.lock
-.metadata/
+.metadata
 *.log
