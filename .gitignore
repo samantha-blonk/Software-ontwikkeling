@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+*.log
+*.xml
+*.202202250925
+.metadata/.plugins/org.eclipse.cdt.core/.log
+.metadata/.log
+.metadata/.lock
+.metadata/
+*.log
