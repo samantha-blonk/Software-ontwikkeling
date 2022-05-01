@@ -1,11 +1,11 @@
 //--------------------------------------------------------------
-// @author
+// @author Franc van der Bent & Niels Vollebregt
 //
-// @brief
-// @details
+// @brief The API to drive the VGA-output
+// @details The API can draw a single pixel and fill the entire screen with a particular color to a VGA-monitor
 //
-// @version
-// @date
+// @version 1.0
+// @date 29/04/2022
 //--------------------------------------------------------------
 
 
@@ -23,16 +23,9 @@ uint8_t VGA_RAM1[(VGA_DISPLAY_X+1)*VGA_DISPLAY_Y];
 VGA_t VGA;
 
 //--------------------------------------------------------------
-// @brief
-// @details
-//
-// @param[in]
-// @param[out]
-// @param[in,out]
-//
-// @return
-//
-// @retval
+// @brief The initialisation of the VGA driver
+// @details The function initialises the timer registers of timer 1 & 2.
+//			It also initialises the DMA register.
 //--------------------------------------------------------------
 void UB_VGA_Screen_Init(void)
 {
@@ -64,16 +57,10 @@ void UB_VGA_Screen_Init(void)
 
 
 //--------------------------------------------------------------
-// @brief
-// @details
+// @brief Function to fill the whole screen with a single color.
+// @details This function writes for all pixels a single color to the ram.
 //
-// @param[in]
-// @param[out]
-// @param[in,out]
-//
-// @return
-//
-// @retval
+// @param[in] color The 8-bit color-code to display
 //--------------------------------------------------------------
 void UB_VGA_FillScreen(uint8_t color)
 {
@@ -88,16 +75,12 @@ void UB_VGA_FillScreen(uint8_t color)
 
 
 //--------------------------------------------------------------
-// @brief
-// @details
+// @brief Function to color a single pixel
+// @details This function writes a single color of a single pixel to the ram.
 //
-// @param[in]
-// @param[out]
-// @param[in,out]
-//
-// @return
-//
-// @retval
+// @param[in] xp The X-coordinate of the pixel
+// @param[in] yp The Y-coordinate of the pixel
+// @param[in] color The 8-bit color-code to display
 //--------------------------------------------------------------
 void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
 {
@@ -109,3 +92,4 @@ void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
   // Write pixel to ram
   VGA_RAM1[(yp * (VGA_DISPLAY_X + 1)) + xp] = color;
 }
+
