@@ -106,6 +106,8 @@ int main(void)
   UB_VGA_SetPixel(0,0,0x00);
   UB_VGA_SetPixel(319,0,0x00);
 
+  UB_VGA_SetLine(0, 0, 200, 10, VGA_COL_GREEN, 5);
+
   int i;
 
   for(i = 0; i < LINE_BUFLEN; i++)
@@ -130,7 +132,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
+//	  UB_VGA_FillScreen(VGA_COL_WHITE);
+//	  UB_VGA_SetPixel(100, 100, VGA_COL_RED);
+//	  UB_VGA_SetPixel(200, 200, VGA_COL_RED);
+//	  UB_VGA_SetLine(200, 200, 100, 100, VGA_COL_GREEN, 0);
 	  if(input.command_execute_flag == TRUE)
 	  {
 		  // Do some stuff
