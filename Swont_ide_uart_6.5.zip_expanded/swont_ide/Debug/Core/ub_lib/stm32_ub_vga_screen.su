@@ -1,0 +1,3 @@
+../Core/ub_lib/stm32_ub_vga_screen.c:37:6:UB_VGA_Screen_Init	8	static
+../Core/ub_lib/stm32_ub_vga_screen.c:78:6:UB_VGA_FillScreen	24	static
+../Core/ub_lib/stm32_ub_vga_screen.c:102:6:UB_VGA_SetPixel	16	static
