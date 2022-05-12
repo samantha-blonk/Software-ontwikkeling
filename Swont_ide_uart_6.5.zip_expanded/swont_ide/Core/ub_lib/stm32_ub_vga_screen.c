@@ -215,7 +215,7 @@ void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t heigh
 		for(i=0; i <= height; i++)
 		{
 			py = yp + i;
-			px = xp + width + j;
+			px = xp + width - j;
 			UB_VGA_SetPixel(px,py,bordercolor);
 		}
 	}
@@ -240,7 +240,7 @@ void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t heigh
     /* filling in the rectangle */
     if(filled == 1)
     {
-    	for(i=0; i < width-lineWidth; i++)
+    	for(i=0; i <= width-lineWidth*2; i++)
     	{
     		px = xp + i + lineWidth;
 
