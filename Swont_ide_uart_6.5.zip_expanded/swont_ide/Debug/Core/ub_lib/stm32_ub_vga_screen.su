@@ -3,4 +3,4 @@ stm32_ub_vga_screen.c:45:6:UB_VGA_Screen_Init	8	static
 stm32_ub_vga_screen.c:80:6:UB_VGA_FillScreen	24	static
 stm32_ub_vga_screen.c:100:6:UB_VGA_SetPixel	16	static
 stm32_ub_vga_screen.c:124:6:UB_VGA_SetLine	48	static
-stm32_ub_vga_screen.c:192:6:UB_VGA_DrawRectangle	32	static
+stm32_ub_vga_screen.c:205:6:UB_VGA_DrawRectangle	32	static

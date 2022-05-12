@@ -106,7 +106,7 @@ int main(void)
   UB_VGA_SetPixel(0,0,0x00);
   UB_VGA_SetPixel(319,0,0x00);
 
-  UB_VGA_SetLine(0, 0, 200, 10, VGA_COL_GREEN, 5);
+  UB_VGA_DrawRectangle(50, 50, 50, 150, VGA_COL_GREEN, 1, VGA_COL_RED, 3);
 
   int i;
 
