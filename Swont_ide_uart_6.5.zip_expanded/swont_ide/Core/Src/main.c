@@ -23,6 +23,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "Frontlayer.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -133,11 +134,8 @@ int main(void)
 	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
 	  if(input.command_execute_flag == TRUE)
 	  {
-		  // Do some stuff
-		  printf("yes\n");
-		  colorTest = ~colorTest; // Toggle screen color
-		  UB_VGA_FillScreen(VGA_COL_RED);
-
+		  // jump to parser
+		  receive();
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;
 	  }

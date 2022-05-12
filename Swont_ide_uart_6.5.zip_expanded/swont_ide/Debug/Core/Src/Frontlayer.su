@@ -1,0 +1,2 @@
+../Core/Src/Frontlayer.c:17:6:UartTx	8	static
+../Core/Src/Frontlayer.c:22:6:recief	16	static
