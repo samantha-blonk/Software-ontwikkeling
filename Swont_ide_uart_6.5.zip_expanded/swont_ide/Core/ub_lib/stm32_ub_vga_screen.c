@@ -13,6 +13,7 @@
 // Includes
 //--------------------------------------------------------------
 #include "stm32_ub_vga_screen.h"
+#include "bitmap.h"
 
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
@@ -21,21 +22,6 @@ extern DMA_HandleTypeDef hdma_tim1_up;
 
 uint8_t VGA_RAM1[(VGA_DISPLAY_X+1)*VGA_DISPLAY_Y];
 VGA_t VGA;
-
-//--------------------------------------------------------------
-// @brief The SGN function
-// @details Adds the mathematical SGN function
-//
-// @param[in] x The value to be converted to sign
-//
-// @ return sgn When x is positive returns 1, if x is negative returns -1. Otherwise returns 0.
-//--------------------------------------------------------------
-int8_t sgn(int8_t x)
-{
-	if(x > 0) return 1;
-	if(x < 0) return -1;
-	return 0;
-}
 
 //--------------------------------------------------------------
 // @brief The initialisation of the VGA driver
@@ -281,5 +267,53 @@ void UB_VGA_clearScreen()
       UB_VGA_SetPixel(xp, yp, VGA_COL_WHITE);
     }
   }
+}
+
+//--------------------------------------------------------------
+// @brief Function load in a bitmap.
+// @details This function loads a designated bitmap on designated coordinates.
+//
+// @param[in] x: The X-coordinate of the top left corner of the bitmap
+// @param[in] y: The Y-coordinate of the top left corner of the bitmap
+// @param[in] bmNr: The number ID of the bitmap to be loaded in
+//--------------------------------------------------------------
+void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
+{
+	uint16_t bitmap[3][2];
+//	bitmap[0][0] = VGA_COL_GREEN;
+//	bitmap[0][1] = 0x0000;
+//	bitmap[1][0] = 0x0000;
+//	bitmap[1][1] = 0x0000;
+//  	bitmap[2][0] = 0x00FF;
+//  	bitmap[2][1] = 0xFFFF;
+  	uint16_t i; //Counts y coordinate VGA
+  	uint16_t j; //Counts x coordinate VGA
+  	uint8_t xBm;
+  	uint8_t yBm;
+
+  	yBm = 0;
+  	xBm = 0;
+
+  	for(i = 0; i < VGA_DISPLAY_Y; i++)
+    {
+  		if(i >= y)
+  		{
+  			for(j = 0; j < VGA_DISPLAY_X; j++)
+  			{
+  				if(j >= x)
+  				{
+  					if((bitmap[xBm][yBm] & 0x00FF) == 0x00FF)
+  						break;
+
+  					UB_VGA_SetPixel(j, i, bitmap[xBm][yBm]);
+  					xBm++;
+  				}
+	    	}
+  			if(bitmap[xBm][yBm] == 0xFFFF)
+  				break;
+  			xBm = 0;
+  			yBm++;
+  		}
+    }
 }
 
