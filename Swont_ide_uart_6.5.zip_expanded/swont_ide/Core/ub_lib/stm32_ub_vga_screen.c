@@ -188,3 +188,60 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
     }
   }
 }
+
+void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t height, uint8_t color, uint8_t filled,
+		uint8_t bordercolor, uint8_t reserved)
+{
+	uint16_t px;
+	uint16_t py;
+	uint16_t i;
+	uint16_t j;
+
+	if(xp >= VGA_DISPLAY_X)
+	  xp = 0;
+	if(yp >= VGA_DISPLAY_Y)
+	  yp = 0;
+
+	/* the vertical part of the rectangle */
+	for(i=0; i < height; i++)
+	{
+		py = yp + i;
+		px = xp;
+	    UB_VGA_SetPixel(px,py,bordercolor);
+	}
+    for(i=0; i < height; i++)
+    {
+		py = yp + i;
+		px = xp + width;
+	    UB_VGA_SetPixel(px,py,bordercolor);
+    }
+
+
+    /* the horizonal part of the rectangle */
+    for(i=0; i < width; i++)
+    {
+		py = yp;
+		px = xp + i;
+	    UB_VGA_SetPixel(px,py,bordercolor);
+    }
+    for(i=0; i < width; i++)
+    {
+		py = yp + height;
+		px = xp + i;
+	    UB_VGA_SetPixel(px,py,bordercolor);
+    }
+
+    /* filling in the rectangle */
+    if(filled == 1)
+    {
+    	for(i=0; i < width-2; i++)
+    	{
+    		px = xp + i + 1;
+
+        	for(j=0; j < height-2; j++)
+    		py = xp + j + 1;
+        	UB_VGA_SetPixel(px,py,color);
+    	}
+    }
+
+}
