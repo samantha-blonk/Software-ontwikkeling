@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020070  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00012820  00000000  00000000  000200a0  2**0
+ 12 .debug_info   00012853  00000000  00000000  000200a0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00002874  00000000  00000000  000328c0  2**0
+ 13 .debug_abbrev 0000289b  00000000  00000000  000328f3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000d30  00000000  00000000  00035138  2**3
+ 14 .debug_aranges 00000d38  00000000  00000000  00035190  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000bf8  00000000  00000000  00035e68  2**3
+ 15 .debug_ranges 00000c00  00000000  00000000  00035ec8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  000234d7  00000000  00000000  00036a60  2**0
+ 16 .debug_macro  000234d7  00000000  00000000  00036ac8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0000c804  00000000  00000000  00059f37  2**0
+ 17 .debug_line   0000c834  00000000  00000000  00059f9f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000cb2a6  00000000  00000000  0006673b  2**0
+ 18 .debug_str    000cb2b9  00000000  00000000  000667d3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  001319e1  2**0
+ 19 .comment      0000007b  00000000  00000000  00131a8c  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003b24  00000000  00000000  00131a5c  2**2
+ 20 .debug_frame  00003b48  00000000  00000000  00131b08  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2562,7 +2562,7 @@ void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
  80010cc:	200009dc 	.word	0x200009dc
 
 080010d0 <UB_VGA_DrawRectangle>:
-// @param[in] filled:
+// @param[in] lineWidth: The width of the line that determines the border of the rectangle
 //--------------------------------------------------------------
 
 void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t height, uint8_t color, uint8_t filled,

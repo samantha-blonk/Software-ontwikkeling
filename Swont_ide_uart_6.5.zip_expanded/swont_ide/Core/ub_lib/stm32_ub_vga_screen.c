@@ -267,3 +267,19 @@ void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t heigh
     }
 
 }
+
+//--------------------------------------------------------------
+// @brief Function to clear the whole screen.
+// @details This function writes for all pixels the color white to the ram.
+//--------------------------------------------------------------
+void UB_VGA_clearScreen()
+{
+  uint16_t xp,yp;
+
+  for(yp = 0; yp < VGA_DISPLAY_Y; yp++) {
+    for(xp = 0; xp < VGA_DISPLAY_X; xp++) {
+      UB_VGA_SetPixel(xp, yp, VGA_COL_WHITE);
+    }
+  }
+}
+
