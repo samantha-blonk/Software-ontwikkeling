@@ -129,60 +129,60 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
   uint16_t py;
   uint16_t dxabs;
   uint16_t dyabs;
-  uint16_t i;
-  uint16_t j;
+  uint16_t i; 								//Count the x or y pixels
+  uint16_t j; 								//Count amount of width pixels
   uint8_t neg;
   uint16_t amPerSide;
   float slope;
 
-  dx=x2-x1;      /* the horizontal distance of the line */
-  dy=y2-y1;      /* the vertical distance of the line */
+  dx=x2-x1;      							//the horizontal distance of the line
+  dy=y2-y1;      							//the vertical distance of the line
   dxabs=abs(dx);
   dyabs=abs(dy);
   amPerSide = width / 2;
   neg = width % 2;
 
-  if (dxabs>=dyabs) /* the line is more horizontal than vertical */
+  if (dxabs>=dyabs) 						//the line is more horizontal than vertical
   {
     slope=(float)dy / (float)dx;
     for(i=0;i!=dx;i++)
     {
       px=i+x1;
-      py=slope*i+y1;
+      py=slope*i+y1;						//Calculate Y-value for the current Y-value
       UB_VGA_SetPixel(px,py,color);
 
       for(j = 0; j <= amPerSide; j++)
       {
-          py = slope * i + y1 + j;
+          py = slope * i + y1 + j;			//Calculate extra width-pixels on the positive side
           UB_VGA_SetPixel(px,py,color);
 
           if(!(neg) && (j == amPerSide))
-        	  break;
+        	  break;						//Break when positive and last width pixel
 
-          py = slope * i + y1 - j;
+          py = slope * i + y1 - j;			//Calculate extra width-pixels on the negative side
           UB_VGA_SetPixel(px,py,color);
       }
     }
   }
-  else /* the line is more vertical than horizontal */
+  else 										//the line is more vertical than horizontal
   {
     slope=(float)dx / (float)dy;
     for(i=0;i!=dy;i++)
     {
-      px=slope*i+x1;
+      px=slope*i+x1; 						//Calculate X-value for the current Y-value
       py=i+y1;
 
       UB_VGA_SetPixel(px,py,color);
 
       for(j = 0; j <= amPerSide; j++)
       {
-          px = slope * i + x1 + j;
+          px = slope * i + x1 + j;			//Calculate extra width-pixels on the positive side
     	  UB_VGA_SetPixel(px,py,color);
 
     	  if(!(neg) && (j == amPerSide))
-    		  break;
+    		  break;						//Break when positive and last width pixel
 
-          px = slope * i + x1 - j;
+          px = slope * i + x1 - j;			//Calculate extra width-pixels on the negative side
     	  UB_VGA_SetPixel(px,py,color);
       }
     }
