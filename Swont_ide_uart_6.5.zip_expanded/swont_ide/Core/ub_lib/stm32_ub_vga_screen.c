@@ -189,8 +189,21 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
   }
 }
 
+//--------------------------------------------------------------
+// @brief Function to draw a rectangle.
+// @details This function draws a single color to a line with a customisable width from a
+//			custom coordinate (point 1) to another custom coordinate (point 2).
+//
+// @param[in] xp: The X-coordinate of the bottom left corner of the rectangle
+// @param[in] yp: The Y-coordinate of the bottom left corner of the rectangle
+// @param[in] width: The width of the entire rectangle
+// @param[in] height: The height of the entire rectangle
+// @param[in] color: The 8-bit color-code to display as filling of the rectangle
+// @param[in] filled:
+//--------------------------------------------------------------
+
 void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t height, uint8_t color, uint8_t filled,
-		uint8_t bordercolor, uint8_t reserved)
+		uint8_t bordercolor, uint8_t lineWidth)
 {
 	uint16_t px;
 	uint16_t py;
@@ -203,43 +216,48 @@ void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t heigh
 	  yp = 0;
 
 	/* the vertical part of the rectangle */
-	for(i=0; i < height; i++)
+	for(j=0; j < lineWidth; j++)
 	{
-		py = yp + i;
-		px = xp;
-	    UB_VGA_SetPixel(px,py,bordercolor);
+		for(i=0; i < height-lineWidth; i++)
+		{
+			py = yp + i;
+			px = xp + j;
+			UB_VGA_SetPixel(px,py,bordercolor);
+		}
+		for(i=0; i < height-lineWidth; i++)
+		{
+			py = yp + i;
+			px = xp + width + j;
+			UB_VGA_SetPixel(px,py,bordercolor);
+		}
 	}
-    for(i=0; i < height; i++)
-    {
-		py = yp + i;
-		px = xp + width;
-	    UB_VGA_SetPixel(px,py,bordercolor);
-    }
 
-
-    /* the horizonal part of the rectangle */
-    for(i=0; i < width; i++)
-    {
-		py = yp;
-		px = xp + i;
-	    UB_VGA_SetPixel(px,py,bordercolor);
-    }
-    for(i=0; i < width; i++)
-    {
-		py = yp + height;
-		px = xp + i;
-	    UB_VGA_SetPixel(px,py,bordercolor);
-    }
+    /* the horizontal part of the rectangle */
+	for(j=0; j < lineWidth; j++)
+	{
+		for(i=0; i < width; i++)
+		{
+			py = yp + j;
+			px = xp + i;
+			UB_VGA_SetPixel(px,py,bordercolor);
+		}
+		for(i=0; i < width; i++)
+		{
+			py = yp + height + j;
+			px = xp + i;
+			UB_VGA_SetPixel(px,py,bordercolor);
+		}
+	}
 
     /* filling in the rectangle */
-    if(filled == 1)
+    if(filled == true)
     {
-    	for(i=0; i < width-2; i++)
+    	for(i=0; i < width-lineWidth*2; i++)
     	{
-    		px = xp + i + 1;
+    		px = xp + i + lineWidth;
 
-        	for(j=0; j < height-2; j++)
-    		py = xp + j + 1;
+        	for(j=0; j < height-lineWidth*2; j++)
+    		py = xp + j + lineWidth;
         	UB_VGA_SetPixel(px,py,color);
     	}
     }
