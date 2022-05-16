@@ -279,13 +279,6 @@ void UB_VGA_clearScreen()
 //--------------------------------------------------------------
 void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
 {
-	uint16_t bitmap[3][2];
-//	bitmap[0][0] = VGA_COL_GREEN;
-//	bitmap[0][1] = 0x0000;
-//	bitmap[1][0] = 0x0000;
-//	bitmap[1][1] = 0x0000;
-//  	bitmap[2][0] = 0x00FF;
-//  	bitmap[2][1] = 0xFFFF;
   	uint16_t i; //Counts y coordinate VGA
   	uint16_t j; //Counts x coordinate VGA
   	uint8_t xBm;
@@ -293,6 +286,12 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
 
   	yBm = 0;
   	xBm = 0;
+
+  	for(i = 0; i < 31; i++)
+  	{
+  		if(bmNr == bmLookup[i])
+  			bmNr = i;
+  	}
 
   	for(i = 0; i < VGA_DISPLAY_Y; i++)
     {
@@ -302,14 +301,14 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
   			{
   				if(j >= x)
   				{
-  					if((bitmap[xBm][yBm] & 0x00FF) == 0x00FF)
+  					if((bitmap[bmNr][xBm][yBm] & 0xFF00) == 0xFF00)
   						break;
 
-  					UB_VGA_SetPixel(j, i, bitmap[xBm][yBm]);
+  					UB_VGA_SetPixel(j, i, bitmap[bmNr][xBm][yBm]);
   					xBm++;
   				}
 	    	}
-  			if(bitmap[xBm][yBm] == 0xFFFF)
+  			if(bitmap[bmNr][xBm][yBm] == 0xFFFF)
   				break;
   			xBm = 0;
   			yBm++;

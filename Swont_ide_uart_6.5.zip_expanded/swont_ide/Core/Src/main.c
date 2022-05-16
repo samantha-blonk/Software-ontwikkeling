@@ -97,6 +97,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_USART2_UART_Init();
+  Bitmap_init();
   /* USER CODE BEGIN 2 */
 
   UB_VGA_Screen_Init(); // Init VGA-Screen
@@ -106,7 +107,9 @@ int main(void)
   UB_VGA_SetPixel(0,0,0x00);
   UB_VGA_SetPixel(319,0,0x00);
 
-  UB_VGA_DrawRectangle(50, 50, 50, 150, VGA_COL_GREEN, 1, VGA_COL_RED, 3);
+
+  UB_VGA_DrawBitmap(100, 100, 1);
+
 
   int i;
 
