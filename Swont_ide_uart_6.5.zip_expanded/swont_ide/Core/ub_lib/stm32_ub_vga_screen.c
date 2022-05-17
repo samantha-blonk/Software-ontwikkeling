@@ -289,27 +289,30 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
 
   	for(i = 0; i < 31; i++)
   	{
-  		if(bmNr == bmLookup[i])
+  		if(bmNr == bmLookup[i][ID])
+  		{
   			bmNr = i;
+  			break;
+  		}
   	}
 
   	for(i = 0; i < VGA_DISPLAY_Y; i++)
     {
   		if(i >= y)
   		{
+  			if(yBm == bmLookup[bmNr][Y_LEN])
+  				break;
   			for(j = 0; j < VGA_DISPLAY_X; j++)
   			{
   				if(j >= x)
   				{
-  					if((bitmap[bmNr][xBm][yBm] & 0xFF00) == 0xFF00)
+  					if(xBm == bmLookup[bmNr][X_LEN])
   						break;
 
-  					UB_VGA_SetPixel(j, i, bitmap[bmNr][xBm][yBm]);
+  					UB_VGA_SetPixel(j, i, bitmap[bmNr][yBm][xBm]);
   					xBm++;
   				}
 	    	}
-  			if(bitmap[bmNr][xBm][yBm] == 0xFFFF)
-  				break;
   			xBm = 0;
   			yBm++;
   		}

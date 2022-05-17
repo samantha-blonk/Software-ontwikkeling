@@ -107,11 +107,12 @@ int main(void)
   UB_VGA_SetPixel(0,0,0x00);
   UB_VGA_SetPixel(319,0,0x00);
 
+  uint8_t i;
+  for(i=0; i<26; i++)
+  {
+	  UB_VGA_DrawBitmap(0 + (i*6), 100, ('a'+i));
+  }
 
-  UB_VGA_DrawBitmap(100, 100, 1);
-
-
-  int i;
 
   for(i = 0; i < LINE_BUFLEN; i++)
 	  input.line_rx_buffer[i] = 0;
