@@ -1,2 +1,3 @@
-../Core/Src/Frontlayer.c:17:6:UartTx	8	static
-../Core/Src/Frontlayer.c:22:6:recief	16	static
+../Core/Src/Frontlayer.c:41:6:UartTx	8	static
+../Core/Src/Frontlayer.c:46:6:receive	8	static
+../Core/Src/Frontlayer.c:96:5:arg	56	dynamic

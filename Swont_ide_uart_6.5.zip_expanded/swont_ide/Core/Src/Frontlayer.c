@@ -28,7 +28,11 @@
 #define clearscreenLenght 11
 #define clearscreenArguments 1
 
-char command[12];
+
+uint8_t Line_s[6];
+uint8_t bitmap_s[3];
+uint8_t rectangle_s[6];
+uint8_t clearscreen_s;
 
 uint8_t value;
 uint8_t trigger;
@@ -51,41 +55,50 @@ char receive()
 			trigger = 0;
 	}
 	*/
-
 	switch(input.line_rx_buffer[0])
 	{
 		case line:
-			line.x1 = argument(1);
-			line.y1 = argument(2);
-			line.x2 = argument(3);
-			line.y2 = argument(4);
-			line.color = argument(5);
-			line.weight = argument(6);
+			Line_s[0] = arg(1);
+			Line_s[1] = arg(2);
+			Line_s[2] = arg(3);
+			Line_s[3] = arg(4);
+			Line_s[4] = arg(5);
+			Line_s[5] = arg(6);
 			break;
 		case text:
-
+			printf("sexy met belly");
 			break;
 		case rectangle:
+			rectangle_s[0] = arg(1);
+			rectangle_s[1] = arg(2);
+			rectangle_s[2] = arg(3);
+			rectangle_s[3] = arg(4);
+			rectangle_s[4] = arg(5);
+			rectangle_s[5] = arg(6);
 			break;
 		case bitmap:
+			bitmap_s[0] = arg(1);
+			bitmap_s[1] = arg(2);
+			bitmap_s[2] = arg(3);
 			break;
 		case clearscreen:
+			clearscreen_s = arg(1);
 			break;
 		default:
 			break;
 	}
 
 
-return command;
+return 1;
 }
 
 
-char argument(uint_8 argument)
+int arg(int a)
 {
-	uint_8 i = 0;
+	uint8_t i = 0;
 	char stored_args = 0;
-	uint_8 arg_counter = 0;
-	uint_8 arg_character_counter = 0;
+	uint8_t arg_counter = 0;
+	uint8_t arg_character_counter = 0;
 	char string_container[input.msglen];
 	while(i <= input.msglen)
 			{
@@ -96,13 +109,13 @@ char argument(uint_8 argument)
 				}
 				else if(input.line_rx_buffer[i] == ' ')
 				i++;
-				else if(arg_counter == argument)
+				else if(arg_counter == a)
 				{
-					string_container[arg_character_counter++] = line_rx_buffer[i++];
+					string_container[arg_character_counter++] = input.line_rx_buffer[i++];
 				}
 				else i++;
 			}
-	return string_container;
+	return atoi(string_container);
 }
 
 
