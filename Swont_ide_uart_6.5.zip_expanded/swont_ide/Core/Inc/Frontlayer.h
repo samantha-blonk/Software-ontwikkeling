@@ -19,6 +19,11 @@
 #define rectangle 'r'
 #define bitmap 'b'
 #define clearscreen 'c'
+#define lineLen 6
+#define textLen 7
+#define rectangleLen 8
+#define bitmapLen 3
+#define clearscreenLen 1
 #define NOTEXT 0
 #define YESTEXT 1
 #define argumentZERO 0
