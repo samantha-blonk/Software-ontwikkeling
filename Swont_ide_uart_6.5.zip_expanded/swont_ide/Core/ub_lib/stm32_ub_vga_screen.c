@@ -319,43 +319,55 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
     }
 }
 
-void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[20], char fontname, uint8_t fontsize, uint8_t fontstyle, uint16_t reserved)
+//--------------------------------------------------------------
+// @brief Function write text on screen
+// @details This function checks the fontname, fontsize and fontstyle and prints the appropriate
+//			letter that fits the given parameters
+// @param[in] x_lup: The X-coordinate of the top left corner of the printed letter
+// @param[in] y_lup: The Y-coordinate of the top left corner of the printed letter
+// @param[in] color: The color code which the letter is printed in
+// @param[in] text: The text that has the be written on the screen
+// @param[in] fontname: The fontname that the text is printed in
+// @param[in] fontsize: The fontsize that the text is printed in
+// @param[in] fontstyle: The fontstyle that the text is printed in
+//--------------------------------------------------------------
+void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[20], char fontname, uint8_t fontsize, uint8_t fontstyle)
 {
     uint16_t px = 0;
     uint8_t i = 0;
     uint8_t letterWidth = 0;
-    if(fontsize == 1)
+    if(fontsize == 1)	//normal fontsize is selected
     {
         letterWidth = 8;
     }
-    else if(fontsize == 2)
+    else if(fontsize == 2)	//large fontsize is selected
     {
         letterWidth = 16;
     }
 
 
-    for(i=0; i < 20; i++)
+    for(i=0; i < 20; i++)	//maximum text size of 20 letters
     {
-        px = x_lup + (i * letterWidth);
+        px = x_lup + (i * letterWidth);	//changes the position of x
         switch(text[i])
         {
-            case 'a':
-            	switch(fontname)
+            case 'a':	//if the letter is 'a'
+            	switch(fontname)	//checks what the fontname is
             	{
-            		case 1:
-            			switch(fontstyle)
+            		case ARIAL_FONT:	//arial font
+            			switch(fontstyle)	//checks what fontname is
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, a, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, A, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 0, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, a, color, fontsize); break;	//normal fontstyle
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, A, color, fontsize); break;	//bold fontstyle
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 0, color, fontsize); break;	//cursive fontstyle
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:	//consolas font
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 27, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 500, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 527, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 27, color, fontsize); break;	//normal fontstyle
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 500, color, fontsize); break;	//bold fontstyle
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 527, color, fontsize); break;	//cursive fontstyle
                 			default: break;
                 		}
                 	default: break;
@@ -364,20 +376,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'b':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, b, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, B, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 1, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, b, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, B, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 1, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 28, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 501, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 528, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 28, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 501, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 528, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -386,20 +398,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'c':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, c, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, C, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 2, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, c, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, C, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 2, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 29, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 502, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 529, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 29, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 502, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 529, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -408,20 +420,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'd':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, d, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, D, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 3, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, d, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, D, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 3, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 30, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 503, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 530, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 30, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 503, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 530, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -430,20 +442,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'e':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, e, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, E, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 4, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, e, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, E, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 4, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 31, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 504, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 531, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 31, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 504, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 531, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -452,20 +464,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'f':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, f, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, F, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 5, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, f, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, F, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 5, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 32, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 505, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 532, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 32, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 505, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 532, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -474,20 +486,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'g':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, g, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, G, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 6, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, g, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, G, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 6, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 33, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 506, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 533, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 33, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 506, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 533, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -496,20 +508,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'h':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, h, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, H, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 7, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, h, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, H, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 7, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 34, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 507, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 534, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 34, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 507, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 534, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -518,20 +530,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'i':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, i, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, I, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 8, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, i, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, I, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 8, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 35, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 508, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 535, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 35, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 508, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 535, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -540,20 +552,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'j':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, j, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, J, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 9, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, j, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, J, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 9, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 36, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 509, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 536, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 36, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 509, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 536, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -562,20 +574,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'k':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, k, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, K, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 10, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, k, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, K, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 10, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 37, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 510, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 537, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 37, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 510, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 537, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -584,20 +596,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'l':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, l, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, L, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 11, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, l, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, L, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 11, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 38, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 511, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 538, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 38, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 511, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 538, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -606,20 +618,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'm':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, m, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, M, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 12, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, m, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, M, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 12, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 39, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 512, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 539, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 39, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 512, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 539, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -628,20 +640,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'n':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, n, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, N, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 13, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, n, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, N, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 13, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 40, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 513, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 540, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 40, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 513, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 540, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -650,20 +662,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'o':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, o, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, O, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 14, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, o, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, O, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 14, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 41, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 514, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 541, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 41, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 514, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 541, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -672,20 +684,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'p':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, p, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, P, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 15, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, p, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, P, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 15, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 42, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 515, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 542, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 42, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 515, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 542, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -694,20 +706,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'q':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, q, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, Q, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 16, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, q, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, Q, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 16, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 43, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 516, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 543, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 43, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 516, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 543, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -716,20 +728,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'r':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, r, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, R, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 17, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, r, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, R, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 17, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 44, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 517, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 544, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 44, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 517, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 544, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -738,20 +750,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 's':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, s, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, S, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 18, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, s, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, S, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 18, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 45, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 518, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 545, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 45, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 518, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 545, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -760,20 +772,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 't':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, t, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, T, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 19, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, t, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, T, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 19, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 46, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 519, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 546, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 46, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 519, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 546, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -782,20 +794,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'u':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, u, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, U, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 20, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, u, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, U, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 20, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 47, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 520, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 547, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 47, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 520, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 547, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -804,20 +816,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'v':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, v, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, V, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 21, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, v, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, V, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 21, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 48, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 521, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 548, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 48, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 521, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 548, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -826,20 +838,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'w':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, w, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, W, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 22, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, w, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, W, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 22, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 49, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 522, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 549, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 49, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 522, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 549, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -848,20 +860,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'x':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, x, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, X, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 23, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, x, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, X, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 23, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 50, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 523, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 550, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 50, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 523, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 550, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -870,20 +882,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'y':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, y, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, Y, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 24, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, y, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, Y, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 24, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 51, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 524, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 551, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 51, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 524, color, fontsize); break;
+                			case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 551, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
@@ -892,20 +904,20 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
             case 'z':
             	switch(fontname)
             	{
-            		case 1:
+            		case ARIAL_FONT:
             			switch(fontstyle)
             			{
-            				case 1: UB_VGA_DrawBitmap(px, y_lup, z, color, fontsize); break;
-            				case 2: UB_VGA_DrawBitmap(px, y_lup, Z, color, fontsize); break;
-            				case 3: UB_VGA_DrawBitmap(px, y_lup, 25, color, fontsize); break;
+            				case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, z, color, fontsize); break;
+            				case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, Z, color, fontsize); break;
+            				case CURSIVE_STYLE: UB_VGA_DrawBitmap(px, y_lup, 25, color, fontsize); break;
             				default: break;
             			}
-                	case 2:
+                	case CONSOLAS_FONT:
                 		switch(fontstyle)
                 		{
-                			case 1: UB_VGA_DrawBitmap(px, y_lup, 52, color, fontsize); break;
-                			case 2: UB_VGA_DrawBitmap(px, y_lup, 525, color, fontsize); break;
-                			case 3: UB_VGA_DrawBitmap(px, y_lup, 552, color, fontsize); break;
+                			case NORMAL_STYLE: UB_VGA_DrawBitmap(px, y_lup, 52, color, fontsize); break;
+                			case BOLD_STYLE: UB_VGA_DrawBitmap(px, y_lup, 525, color, fontsize); break;
+                			case CURSIVE_STYLE UB_VGA_DrawBitmap(px, y_lup, 552, color, fontsize); break;
                 			default: break;
                 		}
                 	default: break;
