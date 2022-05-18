@@ -23,13 +23,21 @@
 //--------------------------------------------------------------
 #define  VGA_COL_BLACK          0x00
 #define  VGA_COL_BLUE           0x03
+#define  VGA_COL_LIGHTBLUE		0x2D
 #define  VGA_COL_GREEN          0x1C
+#define  VGA_COL_LIGHTGREEN		0x2E
 #define  VGA_COL_RED            0xE0
+#define  VGA_COL_LIGHTRED		0xC4
 #define  VGA_COL_WHITE          0xFF
 
 #define  VGA_COL_CYAN           0x1F
+#define  VGA_COL_LIGHTCYAN      0x75
 #define  VGA_COL_MAGENTA        0xE3
+#define  VGA_COL_LIGHTMAGENTA	0x00
 #define  VGA_COL_YELLOW         0xFC
+#define  VGA_COL_BROWN    		0x00
+#define  VGA_COL_GRAY			0x00
+
 
 
 
@@ -126,6 +134,8 @@ extern uint8_t VGA_RAM1[(VGA_DISPLAY_X+1)*VGA_DISPLAY_Y];
 void UB_VGA_Screen_Init(void);
 void UB_VGA_FillScreen(uint8_t color);
 void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color);
+
+void UB_VGA_clearScreen();
 
 //--------------------------------------------------------------
 #endif // __STM32F4_UB_VGA_SCREEN_H

@@ -77,6 +77,13 @@ typedef struct
     char fontstyle[maxColorLen];
 }TEXT_S;
 
+extern LINE_S line_s;
+extern BITMAP_S bitmap_s;
+extern CLEARSCREEN_S clearscreen_s;
+extern LINE_S line_s;
+extern RECTANGLE_S rectangle_s;
+extern TEXT_S text_s;
+
 void FL_Input(void);
 
 

@@ -12,6 +12,7 @@
 void arg(uint8_t, char*, bool);
 
 char string_container[128];
+
 LINE_S line_s;
 BITMAP_S bitmap_s;
 CLEARSCREEN_S clearscreen_s;
