@@ -13,18 +13,24 @@
 #include "main.h"
 
 //--------------------------------------------------------------
+// Defines
+//--------------------------------------------------------------
+#define BM_AMOUNT (53)
+#define STANDARD_BM_SIZE (16)
+#define ALPHABET_SIZE (26)
+
+//--------------------------------------------------------------
 // Macro's
 //--------------------------------------------------------------
 #define ID (0)
 #define X_LEN (1)
 #define Y_LEN (2)
 
-
 //--------------------------------------------------------------
 // Global variables
 //--------------------------------------------------------------
-extern uint16_t bmLookup[60][3];
-extern uint8_t bitmap[31][16][16];
+extern uint16_t bmLookup[BM_AMOUNT][3];
+extern uint8_t bitmap[BM_AMOUNT][STANDARD_BM_SIZE][STANDARD_BM_SIZE];
 
 //--------------------------------------------------------------
 #endif // __BITMAP_H

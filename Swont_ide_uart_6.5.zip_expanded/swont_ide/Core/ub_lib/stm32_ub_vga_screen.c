@@ -281,13 +281,13 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
 {
   	uint16_t i; //Counts y coordinate VGA
   	uint16_t j; //Counts x coordinate VGA
-  	uint8_t xBm;
-  	uint8_t yBm;
+  	uint8_t xBm; //Counts x of the bitmap
+  	uint8_t yBm; //Counts y of the bitmap
 
   	yBm = 0;
   	xBm = 0;
 
-  	for(i = 0; i < 31; i++)
+  	for(i = 0; i < BM_AMOUNT; i++) //Look for bm ID
   	{
   		if(bmNr == bmLookup[i][ID])
   		{
@@ -300,13 +300,13 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint8_t bmNr)
     {
   		if(i >= y)
   		{
-  			if(yBm == bmLookup[bmNr][Y_LEN])
+  			if(yBm == bmLookup[bmNr][Y_LEN]) //Check for Y length of bm
   				break;
   			for(j = 0; j < VGA_DISPLAY_X; j++)
   			{
   				if(j >= x)
   				{
-  					if(xBm == bmLookup[bmNr][X_LEN])
+  					if(xBm == bmLookup[bmNr][X_LEN]) //Check for X length of bm
   						break;
 
   					UB_VGA_SetPixel(j, i, bitmap[bmNr][yBm][xBm]);
