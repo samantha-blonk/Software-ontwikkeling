@@ -12,58 +12,54 @@
 
 #define maxTextLen 128
 #define maxFontnameLen 30
+#define maxColorLen 12
 
-//typedef struct
-//{
-//	uint8_t nr;
-//    uint16_t xlup;
-//    uint16_t ylup;
-//}bitmap;
-//
-//typedef struct
-//{
-//	uint8_t color;
-//}clearscreen;
-//
-//typedef struct
-//{
-//    uint16_t x1;
-//    uint16_t y1;
-//    uint16_t x2;
-//    uint16_t y2;
-//    uint8_t color;
-//    uint8_t weight;
-//}Line_s;
-//extern Line_s line_s;
-//
-//typedef struct
-//{
-//    uint16_t xlup;
-//    uint16_t ylup;
-//    uint8_t width;
-//    uint8_t height;
-//    uint8_t color;
-//    uint8_t filled;
-//    uint8_t bordercolor;
-//    uint8_t linewidth;
-//} rectangle;
-//
-//typedef struct
-//{
-//    uint16_t xlup;
-//    uint16_t ylup;
-//    uint8_t color;
-//    char text[maxTextLen];
-//    char fontname[maxFontnameLen];
-//    uint8_t fontsize;
-//    uint8_t fontstyle;
-//}text;
-//
+typedef struct
+{
+	uint8_t nr;
+    uint16_t xlup;
+    uint16_t ylup;
+}BITMAP_S;
 
+typedef struct
+{
+	char color[maxColorLen];
+}CLEARSCREEN_S;
 
+typedef struct
+{
+    uint16_t x1;
+    uint16_t y1;
+    uint16_t x2;
+    uint16_t y2;
+    char color[maxColorLen];
+    uint8_t weight;
+}LINE_S;
 
-void UartTx(void);
-char receive(void);
+typedef struct
+{
+    uint16_t xlup;
+    uint16_t ylup;
+    uint8_t width;
+    uint8_t height;
+    char color[maxColorLen];
+    uint8_t filled;
+    char bordercolor[maxColorLen];
+    uint8_t linewidth;
+} RECTANGLE_S;
+
+typedef struct
+{
+    uint16_t xlup;
+    uint16_t ylup;
+    char color[maxColorLen];
+    char textin[maxTextLen];
+    char fontname[maxFontnameLen];
+    uint8_t fontsize;
+    char fontstyle[maxColorLen];
+}TEXT_S;
+
+void FL_Input(void);
 
 
 #endif /* INC_FRONTLAYER_H_ */
