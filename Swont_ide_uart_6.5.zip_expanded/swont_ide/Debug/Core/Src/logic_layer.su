@@ -1,4 +1,4 @@
 ../Core/Src/logic_layer.c:44:6:logic	48	static
-../Core/Src/logic_layer.c:100:5:font_check	24	static
-../Core/Src/logic_layer.c:133:5:style_check	24	static
-../Core/Src/logic_layer.c:169:5:color_check	24	static
+../Core/Src/logic_layer.c:99:5:font_check	24	static
+../Core/Src/logic_layer.c:132:5:style_check	24	static
+../Core/Src/logic_layer.c:168:5:color_check	24	static

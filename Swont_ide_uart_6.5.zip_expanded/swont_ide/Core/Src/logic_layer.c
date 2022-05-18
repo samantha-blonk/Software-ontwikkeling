@@ -48,7 +48,6 @@ void logic()
 	{
 		case line:
 			 UB_VGA_SetLine(line_s.x1,
-							 line_s.x1,
 							 line_s.y1,
 							 line_s.x2,
 							 line_s.y2,

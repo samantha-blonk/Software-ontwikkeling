@@ -24,6 +24,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "Frontlayer.h"
+#include "logic_layer.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -142,6 +143,7 @@ int main(void)
 	  {
 		  // jump to parser
 		  FL_Input();
+		  logic();
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;
 	  }
