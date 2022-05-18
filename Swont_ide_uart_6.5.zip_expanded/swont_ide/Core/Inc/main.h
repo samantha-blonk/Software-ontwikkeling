@@ -100,7 +100,7 @@ typedef struct
 {
 	uint8_t byte_buffer_rx[BYTE_BUFLEN];	// Store the rx byte from the USART2
 	char line_rx_buffer[LINE_BUFLEN];		// Buffer to hold all the bytes from rx USART2
-	int msglen;
+	int msglen;								// Counter for line_rx_buffer length
 	volatile int char_counter;				// Counter for line_rx_buffer
 	char command_execute_flag;				/* Set = whole transmission is received, ready for processing \
 											   Reset = still receiving*/
