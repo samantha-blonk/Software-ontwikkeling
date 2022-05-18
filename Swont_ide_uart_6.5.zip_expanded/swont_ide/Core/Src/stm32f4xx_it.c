@@ -256,7 +256,7 @@ void USART2_IRQHandler(void)
 	//Ignore the '\n' character
 	if(uart_char != LINE_FEED)
 	{
-		//Check for CR or a dot
+		// Check for CR or a dot
 		// There was a small bug in the terminal program.
 		// By terminating your message with a dot you can ignore the CR (Enter) character
 		if((uart_char == CARRIAGE_RETURN) || (uart_char == '.'))

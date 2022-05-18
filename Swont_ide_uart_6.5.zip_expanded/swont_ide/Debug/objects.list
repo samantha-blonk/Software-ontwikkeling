@@ -1,6 +1,8 @@
+"./Core/Src/Frontlayer.o"
 "./Core/Src/bitmap.o"
 "./Core/Src/dma.o"
 "./Core/Src/gpio.o"
+"./Core/Src/logic_layer.o"
 "./Core/Src/main.o"
 "./Core/Src/stm32f4xx_hal_msp.o"
 "./Core/Src/stm32f4xx_it.o"

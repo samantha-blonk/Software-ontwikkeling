@@ -23,6 +23,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "Frontlayer.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -146,14 +147,12 @@ int main(void)
   input.byte_buffer_rx[0] = 0;
   input.char_counter = 0;
   input.command_execute_flag = FALSE;
-
   // HAl wants a memory location to store the charachter it receives from the UART
   // We will pass it an array, but we will not use it. We declare our own variable in the interupt handler
   // See stm32f4xx_it.c
   HAL_UART_Receive_IT(&huart2, input.byte_buffer_rx, BYTE_BUFLEN);
 
   // Test to see if the screen reacts to UART
-  unsigned char colorTest = TRUE;
 
   /* USER CODE END 2 */
 
@@ -161,17 +160,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	  UB_VGA_FillScreen(VGA_COL_WHITE);
-//	  UB_VGA_SetPixel(100, 100, VGA_COL_RED);
-//	  UB_VGA_SetPixel(200, 200, VGA_COL_RED);
-//	  UB_VGA_SetLine(200, 200, 100, 100, VGA_COL_GREEN, 0);
+//	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
 	  if(input.command_execute_flag == TRUE)
 	  {
-		  // Do some stuff
-		  printf("yes\n");
-		  colorTest = ~colorTest; // Toggle screen color
-		  UB_VGA_FillScreen(VGA_COL_RED);
-
+		  // jump to parser
+		  FL_Input();
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;
 	  }

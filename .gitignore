@@ -38,3 +38,4 @@
 .metadata/.lock
 .metadata/
 *.log
+*.xml
