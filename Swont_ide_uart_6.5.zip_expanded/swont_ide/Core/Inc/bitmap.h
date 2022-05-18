@@ -15,8 +15,9 @@
 //--------------------------------------------------------------
 // Defines
 //--------------------------------------------------------------
-#define BM_AMOUNT (53)
+#define BM_AMOUNT (200)
 #define STANDARD_BM_SIZE (16)
+#define TEXT_SIZE (8)
 #define ALPHABET_SIZE (26)
 
 //--------------------------------------------------------------
@@ -25,12 +26,13 @@
 #define ID (0)
 #define X_LEN (1)
 #define Y_LEN (2)
+#define OFFSET (3)
 
 //--------------------------------------------------------------
 // Global variables
 //--------------------------------------------------------------
-extern uint16_t bmLookup[BM_AMOUNT][3];
-extern uint8_t bitmap[BM_AMOUNT][STANDARD_BM_SIZE][STANDARD_BM_SIZE];
+extern uint16_t bmLookup[BM_AMOUNT][4];
+extern const uint16_t bitmap_test[];
 
 //--------------------------------------------------------------
 #endif // __BITMAP_H
