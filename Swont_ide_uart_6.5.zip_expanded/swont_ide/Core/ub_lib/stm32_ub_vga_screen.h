@@ -31,6 +31,12 @@
 #define  VGA_COL_MAGENTA        0xE3
 #define  VGA_COL_YELLOW         0xFC
 
+#define ARIAL_FONT	1
+#define CONSOLAS_FONT 2
+
+#define NORMAL_STYLE 1
+#define BOLD_STYLE 2
+#define CURSIVE_STYLE 3
 
 
 //--------------------------------------------------------------
