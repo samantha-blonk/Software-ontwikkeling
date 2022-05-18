@@ -29,7 +29,7 @@ char wit[3] = "wit";
 char consolas[] = "consolas", arial[] = "arial";
 char normaal[] = "normaal" , vet[] = "vet", cursief[] = "cursief";
 
-int color_check(char color[11]);
+int color_check(char color[12]);
 int style_check(char stl[7]);
 int font_check(char fnt[8]);
 
@@ -170,7 +170,7 @@ int style_check(char stl[7])
 //
 // @return return the color code
 //--------------------------------------------------------------
-int color_check(char color[11])
+int color_check(char color[12])
 {
 		int ret_val = 0;
 		uint8_t result = 1;
@@ -297,7 +297,7 @@ int color_check(char color[11])
 			ret_val = VGA_COL_GREEN;
 			result = 1;
 			}
-			else
+			else if(strcmp(color, geel) != 0 && strcmp(color, grijs) != 0)
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
@@ -339,7 +339,7 @@ int color_check(char color[11])
 			ret_val = VGA_COL_BROWN;
 			result = 1;
 			}
-			else
+			else if(strcmp(color, blauw) != 0)
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}

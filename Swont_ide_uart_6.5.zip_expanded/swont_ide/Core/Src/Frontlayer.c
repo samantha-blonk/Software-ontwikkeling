@@ -131,9 +131,9 @@ void arg(uint8_t a,char *string_container ,bool text_trigger)
 	uint8_t j = 0;	//counter
 	uint8_t arg_counter = 0;	//is needed to check what argument is currently beeing read
 	uint8_t arg_character_counter = 0;	//checks what the current character from the argument is
-	for (j=0; j<input.msglen; j++)	//cleans string container
+	for (j=0; j<=input.msglen; j++)	//cleans string container
 	string_container[j] = 0;
-	while(i <= input.msglen)
+	while(i < input.msglen)
 			{
 				if(input.line_rx_buffer[i] == ',')	//if current character is a ',' the argument counter goes up
 				{
@@ -147,7 +147,11 @@ void arg(uint8_t a,char *string_container ,bool text_trigger)
 					string_container[arg_character_counter++] = input.line_rx_buffer[i++];
 				}
 				else if(arg_counter == a)	//if its a character in the correct argument it gets read
-				string_container[arg_character_counter++] = input.line_rx_buffer[i++];
+				{
+				string_container[arg_character_counter] = input.line_rx_buffer[i];
+				arg_character_counter++;
+				i++;
+				}
 				else i++;	//else skips
 			}
 }
