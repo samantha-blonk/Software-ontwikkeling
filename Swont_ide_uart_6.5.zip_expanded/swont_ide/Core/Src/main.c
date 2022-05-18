@@ -98,6 +98,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_USART2_UART_Init();
+  Bitmap_init();
   /* USER CODE BEGIN 2 */
 
   UB_VGA_Screen_Init(); // Init VGA-Screen
@@ -107,7 +108,14 @@ int main(void)
   UB_VGA_SetPixel(0,0,0x00);
   UB_VGA_SetPixel(319,0,0x00);
 
-  int i;
+//  UB_VGA_DrawBitmap(100, 100, 1);
+
+  uint8_t i;
+  for(i=0; i < 26; i++)
+  {
+	  UB_VGA_DrawBitmap(0 + (i*11), 100, ('A'+i));
+  }
+
 
   for(i = 0; i < LINE_BUFLEN; i++)
 	  input.line_rx_buffer[i] = 0;
