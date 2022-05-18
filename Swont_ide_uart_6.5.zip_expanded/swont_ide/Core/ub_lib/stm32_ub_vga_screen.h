@@ -144,7 +144,7 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
 void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t height, uint8_t color, uint8_t filled,
         uint8_t bordercolor, uint8_t lineWidth);
 void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uint8_t double_size);
-
+void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[20], char fontname, uint8_t fontsize, uint8_t fontstyle);
 
 void UB_VGA_clearScreen();
 

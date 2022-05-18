@@ -59,7 +59,7 @@ void FL_Input()
 				strcpy(text_s.color, string_container);
 				arg(argumentFOUR, string_container, YESTEXT);
 				strcpy(text_s.textin, string_container);
-				arg(argumentFIVE, string_container, YESTEXT);
+				arg(argumentFIVE, string_container, NOTEXT);
 				strcpy(text_s.fontname, string_container);
 				arg(argumentSIX, string_container, NOTEXT);
 				text_s.fontsize = atoi(string_container);

@@ -375,11 +375,11 @@ void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[2
     uint8_t letterWidth = 0;
     if(fontsize == 1)	//normal fontsize is selected
     {
-        letterWidth = 8;
+        letterWidth = 16;
     }
     else if(fontsize == 2)	//large fontsize is selected
     {
-        letterWidth = 16;
+        letterWidth = 24;
     }
 
 

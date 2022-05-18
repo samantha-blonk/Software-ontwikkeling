@@ -26,10 +26,10 @@ char geel[4] = "geel";
 char grijs[5] = "grijs";
 char wit[3] = "wit";
 
-char consolas[] = "consolas", ariel[] = "ariel";
+char consolas[] = "consolas", arial[] = "arial";
 char normaal[] = "normaal" , vet[] = "vet", cursief[] = "cursief";
 
-int color_check(char color[12]);
+int color_check(char color[11]);
 int style_check(char stl[7]);
 int font_check(char fnt[8]);
 
@@ -53,6 +53,7 @@ void logic()
 							 line_s.y2,
 							 color_check(line_s.color),
 							 line_s.weight);
+			 memset(&line_s, 0, sizeof(LINE_S));
 			 break;
 		case rectangle:
 			UB_VGA_DrawRectangle(rectangle_s.xlup,
@@ -61,8 +62,9 @@ void logic()
 					rectangle_s.height,
 					color_check(rectangle_s.color),
 					rectangle_s.filled,
-					rectangle_s.bordercolor,
+					color_check(rectangle_s.bordercolor),
 					rectangle_s.linewidth);
+			 memset(&rectangle_s, 0, sizeof(RECTANGLE_S));
 			break;
 		case text:
 			UB_VGA_writeText(text_s.xlup,
@@ -72,14 +74,17 @@ void logic()
 					font_check(text_s.fontname),
 					text_s.fontsize,
 					style_check(text_s.fontstyle));
+			 memset(&text_s, 0, sizeof(TEXT_S));
 			break;
 		case bitmap:
 			UB_VGA_DrawBitmap(bitmap_s.nr,
 					bitmap_s.xlup,
 					bitmap_s.ylup, 0, 0);
+			 memset(&bitmap_s, 0, sizeof(BITMAP_S));
 			break;
 		case clearscreen:
 			UB_VGA_clearScreen(color_check(clearscreen_s.color));
+			 memset(&clearscreen_s, 0, sizeof(CLEARSCREEN_S));
 			break;
 		default:
 			HAL_UART_Transmit(&huart2, (uint8_t *)"no comando\n\r", sizeof("no comando"),100);
@@ -99,9 +104,9 @@ void logic()
 int font_check(char fnt[8])
 {
 	int font;
-	uint8_t result;
+	uint8_t result = 0;
 
-	result = strcmp(fnt, ariel);
+	result = strcmp(fnt, arial);
 	if (result == 0)
 	{
 		font = 1;
@@ -111,7 +116,7 @@ int font_check(char fnt[8])
 	{
 		font = 2;
 	}
-	else
+	else if(strcmp(fnt, arial) != 0)
 	{
 		HAL_UART_Transmit(&huart2, (uint8_t *)"wrong font\n\r", sizeof("wrong font"),100);
 	}
@@ -149,7 +154,7 @@ int style_check(char stl[7])
 	{
 		style = 3;
 	}
-	else
+	else if(strcmp(stl, vet) != 0 && strcmp(stl, normaal) != 0)
 	{
 		HAL_UART_Transmit(&huart2, (uint8_t *)"wrong style\n\r", sizeof("wrong style"),100);
 	}
@@ -165,11 +170,10 @@ int style_check(char stl[7])
 //
 // @return return the color code
 //--------------------------------------------------------------
-int color_check(char color[12])
+int color_check(char color[11])
 {
-		int ret_val;
-		uint8_t result;
-		result = 1;
+		int ret_val = 0;
+		uint8_t result = 1;
 		switch(color[0])
 		{
 		case 'z':
@@ -183,6 +187,7 @@ int color_check(char color[12])
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
+			break;
 		case 'l':
 			switch(color[5])
 			{
@@ -197,6 +202,7 @@ int color_check(char color[12])
 				{
 					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
+				break;
 			case 'g':
 				result = strcmp(color, lgroen);
 				if (result == 0)
@@ -208,6 +214,7 @@ int color_check(char color[12])
 				{
 					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
+				break;
 			case 'r':
 				result = strcmp(color, lrood);
 				if (result == 0)
@@ -219,6 +226,7 @@ int color_check(char color[12])
 				{
 					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
+				break;
 			case 'c':
 				result = strcmp(color, lcyaan);
 				if (result == 0)
@@ -230,6 +238,7 @@ int color_check(char color[12])
 				{
 					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
+				break;
 			case 'm':
 				result = strcmp(color, lmagenta);
 				if (result == 0)
@@ -241,7 +250,9 @@ int color_check(char color[12])
 				{
 					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
+				break;
 			}
+			break;
 		case 'r':
 			result = strcmp(color, rood);
 			if (result == 0)
@@ -253,6 +264,7 @@ int color_check(char color[12])
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
+			break;
 		case 'w':
 			result = strcmp(color, wit);
 			if (result == 0)
@@ -264,6 +276,7 @@ int color_check(char color[12])
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
+			break;
 		case 'g':
 			result = strcmp(color, geel);
 			if (result == 0)
@@ -288,6 +301,7 @@ int color_check(char color[12])
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
+			break;
 		case 'c':
 			result = strcmp(color, cyaan);
 			if (result == 0)
@@ -299,6 +313,7 @@ int color_check(char color[12])
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
+			break;
 		case 'm':
 			result = strcmp(color, magenta);
 			if (result == 0)
@@ -310,6 +325,7 @@ int color_check(char color[12])
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
+			break;
 		case 'b':
 			result = strcmp(color, blauw);
 			if (result == 0)
@@ -327,6 +343,7 @@ int color_check(char color[12])
 			{
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
+			break;
 		}
 
 	return ret_val;
