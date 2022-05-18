@@ -44,7 +44,7 @@ int font_check(char fnt[8]);
 void logic()
 {
 
-	switch(input.byte_buffer_rx[firstCharacter])
+	switch(input.line_rx_buffer[firstCharacter])
 	{
 		case line:
 			 UB_VGA_SetLine(line_s.x1,
@@ -76,7 +76,7 @@ void logic()
 		case bitmap:
 			UB_VGA_DrawBitmap(bitmap_s.nr,
 					bitmap_s.xlup,
-					bitmap_s.ylup);
+					bitmap_s.ylup, 0, 0);
 			break;
 		case clearscreen:
 			UB_VGA_clearScreen(color_check(clearscreen_s.color));
