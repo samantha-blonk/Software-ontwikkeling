@@ -1,3 +1,2 @@
-../Core/Src/Frontlayer.c:43:6:UartTx	8	static
-../Core/Src/Frontlayer.c:48:6:receive	8	static
-../Core/Src/Frontlayer.c:121:6:arg	24	static
+../Core/Src/Frontlayer.c:27:6:FL_Input	8	static
+../Core/Src/Frontlayer.c:105:6:arg	24	static

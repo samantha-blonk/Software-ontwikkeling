@@ -7,43 +7,43 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   1 .text         000048a8  08000188  08000188  00010188  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000184  08004a30  08004a30  00014a30  2**2
+  2 .rodata       00000124  08004a30  08004a30  00014a30  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08004bb4  08004bb4  00020070  2**0
+  3 .ARM.extab    00000000  08004b54  08004b54  00020070  2**0
                   CONTENTS
-  4 .ARM          00000008  08004bb4  08004bb4  00014bb4  2**2
+  4 .ARM          00000008  08004b54  08004b54  00014b54  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08004bbc  08004bbc  00020070  2**0
+  5 .preinit_array 00000000  08004b5c  08004b5c  00020070  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08004bbc  08004bbc  00014bbc  2**2
+  6 .init_array   00000004  08004b5c  08004b5c  00014b5c  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  08004bc0  08004bc0  00014bc0  2**2
+  7 .fini_array   00000004  08004b60  08004b60  00014b60  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000070  20000000  08004bc4  00020000  2**2
+  8 .data         00000070  20000000  08004b64  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000133d4  20000070  08004c34  00020070  2**2
+  9 .bss          000133d4  20000070  08004bd4  00020070  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20013444  08004c34  00023444  2**0
+ 10 ._user_heap_stack 00000604  20013444  08004bd4  00023444  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020070  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000cdec  00000000  00000000  000200a0  2**0
+ 12 .debug_info   0000cd8f  00000000  00000000  000200a0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002382  00000000  00000000  0002ce8c  2**0
+ 13 .debug_abbrev 00002361  00000000  00000000  0002ce2f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000c80  00000000  00000000  0002f210  2**3
+ 14 .debug_aranges 00000c78  00000000  00000000  0002f190  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000b58  00000000  00000000  0002fe90  2**3
+ 15 .debug_ranges 00000b50  00000000  00000000  0002fe08  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00022950  00000000  00000000  000309e8  2**0
+ 16 .debug_macro  000229e7  00000000  00000000  00030958  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000f3a2  00000000  00000000  00053338  2**0
+ 17 .debug_line   0000f39b  00000000  00000000  0005333f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000ca018  00000000  00000000  000626da  2**0
+ 18 .debug_str    000ca058  00000000  00000000  000626da  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  0012c6f2  2**0
+ 19 .comment      00000050  00000000  00000000  0012c732  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000034bc  00000000  00000000  0012c744  2**2
+ 20 .debug_frame  00003354  00000000  00000000  0012c784  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -350,22 +350,22 @@ Disassembly of section .text:
  80004c8:	4770      	bx	lr
  80004ca:	bf00      	nop
 
-080004cc <receive>:
-{
-	printf("fakka kill ");
-}
-
-char receive()
+080004cc <FL_Input>:
+//--------------------------------------------------------------
+// @brief Function load input into structs
+// @details This function loads the different arguments into the assigned structs
+//--------------------------------------------------------------
+void FL_Input()
 {
  80004cc:	b580      	push	{r7, lr}
  80004ce:	af00      	add	r7, sp, #0
-	switch(input.line_rx_buffer[0])
- 80004d0:	4ba6      	ldr	r3, [pc, #664]	; (800076c <receive+0x2a0>)
+	switch(input.line_rx_buffer[firstCharacter])
+ 80004d0:	4ba6      	ldr	r3, [pc, #664]	; (800076c <FL_Input+0x2a0>)
  80004d2:	785b      	ldrb	r3, [r3, #1]
  80004d4:	3b62      	subs	r3, #98	; 0x62
  80004d6:	2b12      	cmp	r3, #18
- 80004d8:	f200 8144 	bhi.w	8000764 <receive+0x298>
- 80004dc:	a201      	add	r2, pc, #4	; (adr r2, 80004e4 <receive+0x18>)
+ 80004d8:	f200 8144 	bhi.w	8000764 <FL_Input+0x298>
+ 80004dc:	a201      	add	r2, pc, #4	; (adr r2, 80004e4 <FL_Input+0x18>)
  80004de:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
  80004e2:	bf00      	nop
  80004e4:	08000707 	.word	0x08000707
@@ -388,308 +388,306 @@ char receive()
  8000528:	08000765 	.word	0x08000765
  800052c:	080005bd 	.word	0x080005bd
 	{
-		case line:
-			arg(argumentONE, string_container, NOTEXT);
+		case line:	//if the function line is called
+			arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
  8000530:	2200      	movs	r2, #0
- 8000532:	498f      	ldr	r1, [pc, #572]	; (8000770 <receive+0x2a4>)
+ 8000532:	498f      	ldr	r1, [pc, #572]	; (8000770 <FL_Input+0x2a4>)
  8000534:	2001      	movs	r0, #1
  8000536:	f000 f935 	bl	80007a4 <arg>
-			line_s.x1 = atoi(string_container);
- 800053a:	488d      	ldr	r0, [pc, #564]	; (8000770 <receive+0x2a4>)
+			line_s.x1 = atoi(string_container);	//stores the information from argument 1 into line struct
+ 800053a:	488d      	ldr	r0, [pc, #564]	; (8000770 <FL_Input+0x2a4>)
  800053c:	f004 f9a2 	bl	8004884 <atoi>
  8000540:	4603      	mov	r3, r0
  8000542:	b29a      	uxth	r2, r3
- 8000544:	4b8b      	ldr	r3, [pc, #556]	; (8000774 <receive+0x2a8>)
+ 8000544:	4b8b      	ldr	r3, [pc, #556]	; (8000774 <FL_Input+0x2a8>)
  8000546:	801a      	strh	r2, [r3, #0]
-			arg(argumentTWO, string_container, NOTEXT);
+			arg(argumentTWO, string_container, NOTEXT);	//etc
  8000548:	2200      	movs	r2, #0
- 800054a:	4989      	ldr	r1, [pc, #548]	; (8000770 <receive+0x2a4>)
+ 800054a:	4989      	ldr	r1, [pc, #548]	; (8000770 <FL_Input+0x2a4>)
  800054c:	2002      	movs	r0, #2
  800054e:	f000 f929 	bl	80007a4 <arg>
 			line_s.y1 = atoi(string_container);
- 8000552:	4887      	ldr	r0, [pc, #540]	; (8000770 <receive+0x2a4>)
+ 8000552:	4887      	ldr	r0, [pc, #540]	; (8000770 <FL_Input+0x2a4>)
  8000554:	f004 f996 	bl	8004884 <atoi>
  8000558:	4603      	mov	r3, r0
  800055a:	b29a      	uxth	r2, r3
- 800055c:	4b85      	ldr	r3, [pc, #532]	; (8000774 <receive+0x2a8>)
+ 800055c:	4b85      	ldr	r3, [pc, #532]	; (8000774 <FL_Input+0x2a8>)
  800055e:	805a      	strh	r2, [r3, #2]
 			arg(argumentTHREE, string_container, NOTEXT);
  8000560:	2200      	movs	r2, #0
- 8000562:	4983      	ldr	r1, [pc, #524]	; (8000770 <receive+0x2a4>)
+ 8000562:	4983      	ldr	r1, [pc, #524]	; (8000770 <FL_Input+0x2a4>)
  8000564:	2003      	movs	r0, #3
  8000566:	f000 f91d 	bl	80007a4 <arg>
 			line_s.x2 = atoi(string_container);
- 800056a:	4881      	ldr	r0, [pc, #516]	; (8000770 <receive+0x2a4>)
+ 800056a:	4881      	ldr	r0, [pc, #516]	; (8000770 <FL_Input+0x2a4>)
  800056c:	f004 f98a 	bl	8004884 <atoi>
  8000570:	4603      	mov	r3, r0
  8000572:	b29a      	uxth	r2, r3
- 8000574:	4b7f      	ldr	r3, [pc, #508]	; (8000774 <receive+0x2a8>)
+ 8000574:	4b7f      	ldr	r3, [pc, #508]	; (8000774 <FL_Input+0x2a8>)
  8000576:	809a      	strh	r2, [r3, #4]
 			arg(argumentFOUR, string_container, NOTEXT);
  8000578:	2200      	movs	r2, #0
- 800057a:	497d      	ldr	r1, [pc, #500]	; (8000770 <receive+0x2a4>)
+ 800057a:	497d      	ldr	r1, [pc, #500]	; (8000770 <FL_Input+0x2a4>)
  800057c:	2004      	movs	r0, #4
  800057e:	f000 f911 	bl	80007a4 <arg>
 			line_s.y2 = atoi(string_container);
- 8000582:	487b      	ldr	r0, [pc, #492]	; (8000770 <receive+0x2a4>)
+ 8000582:	487b      	ldr	r0, [pc, #492]	; (8000770 <FL_Input+0x2a4>)
  8000584:	f004 f97e 	bl	8004884 <atoi>
  8000588:	4603      	mov	r3, r0
  800058a:	b29a      	uxth	r2, r3
- 800058c:	4b79      	ldr	r3, [pc, #484]	; (8000774 <receive+0x2a8>)
+ 800058c:	4b79      	ldr	r3, [pc, #484]	; (8000774 <FL_Input+0x2a8>)
  800058e:	80da      	strh	r2, [r3, #6]
 			arg(argumentFIVE, string_container, NOTEXT);
  8000590:	2200      	movs	r2, #0
- 8000592:	4977      	ldr	r1, [pc, #476]	; (8000770 <receive+0x2a4>)
+ 8000592:	4977      	ldr	r1, [pc, #476]	; (8000770 <FL_Input+0x2a4>)
  8000594:	2005      	movs	r0, #5
  8000596:	f000 f905 	bl	80007a4 <arg>
 			strcpy(line_s.color, string_container);
- 800059a:	4975      	ldr	r1, [pc, #468]	; (8000770 <receive+0x2a4>)
- 800059c:	4876      	ldr	r0, [pc, #472]	; (8000778 <receive+0x2ac>)
+ 800059a:	4975      	ldr	r1, [pc, #468]	; (8000770 <FL_Input+0x2a4>)
+ 800059c:	4876      	ldr	r0, [pc, #472]	; (8000778 <FL_Input+0x2ac>)
  800059e:	f004 f9a7 	bl	80048f0 <strcpy>
 			arg(argumentSIX, string_container, NOTEXT);
  80005a2:	2200      	movs	r2, #0
- 80005a4:	4972      	ldr	r1, [pc, #456]	; (8000770 <receive+0x2a4>)
+ 80005a4:	4972      	ldr	r1, [pc, #456]	; (8000770 <FL_Input+0x2a4>)
  80005a6:	2006      	movs	r0, #6
  80005a8:	f000 f8fc 	bl	80007a4 <arg>
 			line_s.weight = atoi(string_container);
- 80005ac:	4870      	ldr	r0, [pc, #448]	; (8000770 <receive+0x2a4>)
+ 80005ac:	4870      	ldr	r0, [pc, #448]	; (8000770 <FL_Input+0x2a4>)
  80005ae:	f004 f969 	bl	8004884 <atoi>
  80005b2:	4603      	mov	r3, r0
  80005b4:	b2da      	uxtb	r2, r3
- 80005b6:	4b6f      	ldr	r3, [pc, #444]	; (8000774 <receive+0x2a8>)
+ 80005b6:	4b6f      	ldr	r3, [pc, #444]	; (8000774 <FL_Input+0x2a8>)
  80005b8:	751a      	strb	r2, [r3, #20]
 			break;
- 80005ba:	e0d4      	b.n	8000766 <receive+0x29a>
-		case text:
-			arg(argumentONE, string_container, NOTEXT);
+ 80005ba:	e0d4      	b.n	8000766 <FL_Input+0x29a>
+		case text:	//if the function text is called
+			arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
  80005bc:	2200      	movs	r2, #0
- 80005be:	496c      	ldr	r1, [pc, #432]	; (8000770 <receive+0x2a4>)
+ 80005be:	496c      	ldr	r1, [pc, #432]	; (8000770 <FL_Input+0x2a4>)
  80005c0:	2001      	movs	r0, #1
  80005c2:	f000 f8ef 	bl	80007a4 <arg>
-			text_s.xlup = atoi(string_container);
- 80005c6:	486a      	ldr	r0, [pc, #424]	; (8000770 <receive+0x2a4>)
+			text_s.xlup = atoi(string_container);	//stores the information from argument 1 into text struct
+ 80005c6:	486a      	ldr	r0, [pc, #424]	; (8000770 <FL_Input+0x2a4>)
  80005c8:	f004 f95c 	bl	8004884 <atoi>
  80005cc:	4603      	mov	r3, r0
  80005ce:	b29a      	uxth	r2, r3
- 80005d0:	4b6a      	ldr	r3, [pc, #424]	; (800077c <receive+0x2b0>)
+ 80005d0:	4b6a      	ldr	r3, [pc, #424]	; (800077c <FL_Input+0x2b0>)
  80005d2:	801a      	strh	r2, [r3, #0]
-			arg(argumentTWO, string_container, NOTEXT);
+			arg(argumentTWO, string_container, NOTEXT);	//etc
  80005d4:	2200      	movs	r2, #0
- 80005d6:	4966      	ldr	r1, [pc, #408]	; (8000770 <receive+0x2a4>)
+ 80005d6:	4966      	ldr	r1, [pc, #408]	; (8000770 <FL_Input+0x2a4>)
  80005d8:	2002      	movs	r0, #2
  80005da:	f000 f8e3 	bl	80007a4 <arg>
 			text_s.ylup = atoi(string_container);
- 80005de:	4864      	ldr	r0, [pc, #400]	; (8000770 <receive+0x2a4>)
+ 80005de:	4864      	ldr	r0, [pc, #400]	; (8000770 <FL_Input+0x2a4>)
  80005e0:	f004 f950 	bl	8004884 <atoi>
  80005e4:	4603      	mov	r3, r0
  80005e6:	b29a      	uxth	r2, r3
- 80005e8:	4b64      	ldr	r3, [pc, #400]	; (800077c <receive+0x2b0>)
+ 80005e8:	4b64      	ldr	r3, [pc, #400]	; (800077c <FL_Input+0x2b0>)
  80005ea:	805a      	strh	r2, [r3, #2]
 			arg(argumentTHREE, string_container, NOTEXT);
  80005ec:	2200      	movs	r2, #0
- 80005ee:	4960      	ldr	r1, [pc, #384]	; (8000770 <receive+0x2a4>)
+ 80005ee:	4960      	ldr	r1, [pc, #384]	; (8000770 <FL_Input+0x2a4>)
  80005f0:	2003      	movs	r0, #3
  80005f2:	f000 f8d7 	bl	80007a4 <arg>
 			strcpy(text_s.color, string_container);
- 80005f6:	495e      	ldr	r1, [pc, #376]	; (8000770 <receive+0x2a4>)
- 80005f8:	4861      	ldr	r0, [pc, #388]	; (8000780 <receive+0x2b4>)
+ 80005f6:	495e      	ldr	r1, [pc, #376]	; (8000770 <FL_Input+0x2a4>)
+ 80005f8:	4861      	ldr	r0, [pc, #388]	; (8000780 <FL_Input+0x2b4>)
  80005fa:	f004 f979 	bl	80048f0 <strcpy>
 			arg(argumentFOUR, string_container, YESTEXT);
  80005fe:	2201      	movs	r2, #1
- 8000600:	495b      	ldr	r1, [pc, #364]	; (8000770 <receive+0x2a4>)
+ 8000600:	495b      	ldr	r1, [pc, #364]	; (8000770 <FL_Input+0x2a4>)
  8000602:	2004      	movs	r0, #4
  8000604:	f000 f8ce 	bl	80007a4 <arg>
 			strcpy(text_s.textin, string_container);
- 8000608:	4959      	ldr	r1, [pc, #356]	; (8000770 <receive+0x2a4>)
- 800060a:	485e      	ldr	r0, [pc, #376]	; (8000784 <receive+0x2b8>)
+ 8000608:	4959      	ldr	r1, [pc, #356]	; (8000770 <FL_Input+0x2a4>)
+ 800060a:	485e      	ldr	r0, [pc, #376]	; (8000784 <FL_Input+0x2b8>)
  800060c:	f004 f970 	bl	80048f0 <strcpy>
 			arg(argumentFIVE, string_container, YESTEXT);
  8000610:	2201      	movs	r2, #1
- 8000612:	4957      	ldr	r1, [pc, #348]	; (8000770 <receive+0x2a4>)
+ 8000612:	4957      	ldr	r1, [pc, #348]	; (8000770 <FL_Input+0x2a4>)
  8000614:	2005      	movs	r0, #5
  8000616:	f000 f8c5 	bl	80007a4 <arg>
 			strcpy(text_s.fontname, string_container);
- 800061a:	4955      	ldr	r1, [pc, #340]	; (8000770 <receive+0x2a4>)
- 800061c:	485a      	ldr	r0, [pc, #360]	; (8000788 <receive+0x2bc>)
+ 800061a:	4955      	ldr	r1, [pc, #340]	; (8000770 <FL_Input+0x2a4>)
+ 800061c:	485a      	ldr	r0, [pc, #360]	; (8000788 <FL_Input+0x2bc>)
  800061e:	f004 f967 	bl	80048f0 <strcpy>
 			arg(argumentSIX, string_container, NOTEXT);
  8000622:	2200      	movs	r2, #0
- 8000624:	4952      	ldr	r1, [pc, #328]	; (8000770 <receive+0x2a4>)
+ 8000624:	4952      	ldr	r1, [pc, #328]	; (8000770 <FL_Input+0x2a4>)
  8000626:	2006      	movs	r0, #6
  8000628:	f000 f8bc 	bl	80007a4 <arg>
 			text_s.fontsize = atoi(string_container);
- 800062c:	4850      	ldr	r0, [pc, #320]	; (8000770 <receive+0x2a4>)
+ 800062c:	4850      	ldr	r0, [pc, #320]	; (8000770 <FL_Input+0x2a4>)
  800062e:	f004 f929 	bl	8004884 <atoi>
  8000632:	4603      	mov	r3, r0
  8000634:	b2da      	uxtb	r2, r3
- 8000636:	4b51      	ldr	r3, [pc, #324]	; (800077c <receive+0x2b0>)
+ 8000636:	4b51      	ldr	r3, [pc, #324]	; (800077c <FL_Input+0x2b0>)
  8000638:	f883 20ae 	strb.w	r2, [r3, #174]	; 0xae
 			arg(argumentSEVEN, string_container, NOTEXT);
  800063c:	2200      	movs	r2, #0
- 800063e:	494c      	ldr	r1, [pc, #304]	; (8000770 <receive+0x2a4>)
+ 800063e:	494c      	ldr	r1, [pc, #304]	; (8000770 <FL_Input+0x2a4>)
  8000640:	2007      	movs	r0, #7
  8000642:	f000 f8af 	bl	80007a4 <arg>
 			strcpy(text_s.fontstyle, string_container);
- 8000646:	494a      	ldr	r1, [pc, #296]	; (8000770 <receive+0x2a4>)
- 8000648:	4850      	ldr	r0, [pc, #320]	; (800078c <receive+0x2c0>)
+ 8000646:	494a      	ldr	r1, [pc, #296]	; (8000770 <FL_Input+0x2a4>)
+ 8000648:	4850      	ldr	r0, [pc, #320]	; (800078c <FL_Input+0x2c0>)
  800064a:	f004 f951 	bl	80048f0 <strcpy>
 			break;
- 800064e:	e08a      	b.n	8000766 <receive+0x29a>
-		case rectangle:
-			arg(argumentONE, string_container, NOTEXT);
+ 800064e:	e08a      	b.n	8000766 <FL_Input+0x29a>
+		case rectangle:	//if the function rectangle is called
+			arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
  8000650:	2200      	movs	r2, #0
- 8000652:	4947      	ldr	r1, [pc, #284]	; (8000770 <receive+0x2a4>)
+ 8000652:	4947      	ldr	r1, [pc, #284]	; (8000770 <FL_Input+0x2a4>)
  8000654:	2001      	movs	r0, #1
  8000656:	f000 f8a5 	bl	80007a4 <arg>
-			rectangle_s.xlup = atoi(string_container);
- 800065a:	4845      	ldr	r0, [pc, #276]	; (8000770 <receive+0x2a4>)
+			rectangle_s.xlup = atoi(string_container);	//stores the information from argument 1 into rectangle struct
+ 800065a:	4845      	ldr	r0, [pc, #276]	; (8000770 <FL_Input+0x2a4>)
  800065c:	f004 f912 	bl	8004884 <atoi>
  8000660:	4603      	mov	r3, r0
  8000662:	b29a      	uxth	r2, r3
- 8000664:	4b4a      	ldr	r3, [pc, #296]	; (8000790 <receive+0x2c4>)
+ 8000664:	4b4a      	ldr	r3, [pc, #296]	; (8000790 <FL_Input+0x2c4>)
  8000666:	801a      	strh	r2, [r3, #0]
 			arg(argumentTWO, string_container, NOTEXT);
  8000668:	2200      	movs	r2, #0
- 800066a:	4941      	ldr	r1, [pc, #260]	; (8000770 <receive+0x2a4>)
+ 800066a:	4941      	ldr	r1, [pc, #260]	; (8000770 <FL_Input+0x2a4>)
  800066c:	2002      	movs	r0, #2
  800066e:	f000 f899 	bl	80007a4 <arg>
 			rectangle_s.ylup = atoi(string_container);
- 8000672:	483f      	ldr	r0, [pc, #252]	; (8000770 <receive+0x2a4>)
+ 8000672:	483f      	ldr	r0, [pc, #252]	; (8000770 <FL_Input+0x2a4>)
  8000674:	f004 f906 	bl	8004884 <atoi>
  8000678:	4603      	mov	r3, r0
  800067a:	b29a      	uxth	r2, r3
- 800067c:	4b44      	ldr	r3, [pc, #272]	; (8000790 <receive+0x2c4>)
+ 800067c:	4b44      	ldr	r3, [pc, #272]	; (8000790 <FL_Input+0x2c4>)
  800067e:	805a      	strh	r2, [r3, #2]
 			arg(argumentTHREE, string_container, NOTEXT);
  8000680:	2200      	movs	r2, #0
- 8000682:	493b      	ldr	r1, [pc, #236]	; (8000770 <receive+0x2a4>)
+ 8000682:	493b      	ldr	r1, [pc, #236]	; (8000770 <FL_Input+0x2a4>)
  8000684:	2003      	movs	r0, #3
  8000686:	f000 f88d 	bl	80007a4 <arg>
 			rectangle_s.width = atoi(string_container);
- 800068a:	4839      	ldr	r0, [pc, #228]	; (8000770 <receive+0x2a4>)
+ 800068a:	4839      	ldr	r0, [pc, #228]	; (8000770 <FL_Input+0x2a4>)
  800068c:	f004 f8fa 	bl	8004884 <atoi>
  8000690:	4603      	mov	r3, r0
  8000692:	b2da      	uxtb	r2, r3
- 8000694:	4b3e      	ldr	r3, [pc, #248]	; (8000790 <receive+0x2c4>)
+ 8000694:	4b3e      	ldr	r3, [pc, #248]	; (8000790 <FL_Input+0x2c4>)
  8000696:	711a      	strb	r2, [r3, #4]
 			arg(argumentFOUR, string_container, NOTEXT);
  8000698:	2200      	movs	r2, #0
- 800069a:	4935      	ldr	r1, [pc, #212]	; (8000770 <receive+0x2a4>)
+ 800069a:	4935      	ldr	r1, [pc, #212]	; (8000770 <FL_Input+0x2a4>)
  800069c:	2004      	movs	r0, #4
  800069e:	f000 f881 	bl	80007a4 <arg>
 			rectangle_s.height = atoi(string_container);
- 80006a2:	4833      	ldr	r0, [pc, #204]	; (8000770 <receive+0x2a4>)
+ 80006a2:	4833      	ldr	r0, [pc, #204]	; (8000770 <FL_Input+0x2a4>)
  80006a4:	f004 f8ee 	bl	8004884 <atoi>
  80006a8:	4603      	mov	r3, r0
  80006aa:	b2da      	uxtb	r2, r3
- 80006ac:	4b38      	ldr	r3, [pc, #224]	; (8000790 <receive+0x2c4>)
+ 80006ac:	4b38      	ldr	r3, [pc, #224]	; (8000790 <FL_Input+0x2c4>)
  80006ae:	715a      	strb	r2, [r3, #5]
 			arg(argumentFIVE, string_container, NOTEXT);
  80006b0:	2200      	movs	r2, #0
- 80006b2:	492f      	ldr	r1, [pc, #188]	; (8000770 <receive+0x2a4>)
+ 80006b2:	492f      	ldr	r1, [pc, #188]	; (8000770 <FL_Input+0x2a4>)
  80006b4:	2005      	movs	r0, #5
  80006b6:	f000 f875 	bl	80007a4 <arg>
 			strcpy(rectangle_s.color, string_container);
- 80006ba:	492d      	ldr	r1, [pc, #180]	; (8000770 <receive+0x2a4>)
- 80006bc:	4835      	ldr	r0, [pc, #212]	; (8000794 <receive+0x2c8>)
+ 80006ba:	492d      	ldr	r1, [pc, #180]	; (8000770 <FL_Input+0x2a4>)
+ 80006bc:	4835      	ldr	r0, [pc, #212]	; (8000794 <FL_Input+0x2c8>)
  80006be:	f004 f917 	bl	80048f0 <strcpy>
 			arg(argumentSIX, string_container, NOTEXT);
  80006c2:	2200      	movs	r2, #0
- 80006c4:	492a      	ldr	r1, [pc, #168]	; (8000770 <receive+0x2a4>)
+ 80006c4:	492a      	ldr	r1, [pc, #168]	; (8000770 <FL_Input+0x2a4>)
  80006c6:	2006      	movs	r0, #6
  80006c8:	f000 f86c 	bl	80007a4 <arg>
 			rectangle_s.filled = atoi(string_container);
- 80006cc:	4828      	ldr	r0, [pc, #160]	; (8000770 <receive+0x2a4>)
+ 80006cc:	4828      	ldr	r0, [pc, #160]	; (8000770 <FL_Input+0x2a4>)
  80006ce:	f004 f8d9 	bl	8004884 <atoi>
  80006d2:	4603      	mov	r3, r0
  80006d4:	b2da      	uxtb	r2, r3
- 80006d6:	4b2e      	ldr	r3, [pc, #184]	; (8000790 <receive+0x2c4>)
+ 80006d6:	4b2e      	ldr	r3, [pc, #184]	; (8000790 <FL_Input+0x2c4>)
  80006d8:	749a      	strb	r2, [r3, #18]
 			arg(argumentSEVEN, string_container, NOTEXT);
  80006da:	2200      	movs	r2, #0
- 80006dc:	4924      	ldr	r1, [pc, #144]	; (8000770 <receive+0x2a4>)
+ 80006dc:	4924      	ldr	r1, [pc, #144]	; (8000770 <FL_Input+0x2a4>)
  80006de:	2007      	movs	r0, #7
  80006e0:	f000 f860 	bl	80007a4 <arg>
 			strcpy(rectangle_s.bordercolor, string_container);
- 80006e4:	4922      	ldr	r1, [pc, #136]	; (8000770 <receive+0x2a4>)
- 80006e6:	482c      	ldr	r0, [pc, #176]	; (8000798 <receive+0x2cc>)
+ 80006e4:	4922      	ldr	r1, [pc, #136]	; (8000770 <FL_Input+0x2a4>)
+ 80006e6:	482c      	ldr	r0, [pc, #176]	; (8000798 <FL_Input+0x2cc>)
  80006e8:	f004 f902 	bl	80048f0 <strcpy>
 			arg(argumentEIGHT, string_container, NOTEXT);
  80006ec:	2200      	movs	r2, #0
- 80006ee:	4920      	ldr	r1, [pc, #128]	; (8000770 <receive+0x2a4>)
+ 80006ee:	4920      	ldr	r1, [pc, #128]	; (8000770 <FL_Input+0x2a4>)
  80006f0:	2008      	movs	r0, #8
  80006f2:	f000 f857 	bl	80007a4 <arg>
 			rectangle_s.linewidth = atoi(string_container);
- 80006f6:	481e      	ldr	r0, [pc, #120]	; (8000770 <receive+0x2a4>)
+ 80006f6:	481e      	ldr	r0, [pc, #120]	; (8000770 <FL_Input+0x2a4>)
  80006f8:	f004 f8c4 	bl	8004884 <atoi>
  80006fc:	4603      	mov	r3, r0
  80006fe:	b2da      	uxtb	r2, r3
- 8000700:	4b23      	ldr	r3, [pc, #140]	; (8000790 <receive+0x2c4>)
+ 8000700:	4b23      	ldr	r3, [pc, #140]	; (8000790 <FL_Input+0x2c4>)
  8000702:	77da      	strb	r2, [r3, #31]
 			break;
- 8000704:	e02f      	b.n	8000766 <receive+0x29a>
-		case bitmap:
-			arg(argumentONE, string_container, NOTEXT);
+ 8000704:	e02f      	b.n	8000766 <FL_Input+0x29a>
+		case bitmap:	//if the function bitmap is called
+			arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
  8000706:	2200      	movs	r2, #0
- 8000708:	4919      	ldr	r1, [pc, #100]	; (8000770 <receive+0x2a4>)
+ 8000708:	4919      	ldr	r1, [pc, #100]	; (8000770 <FL_Input+0x2a4>)
  800070a:	2001      	movs	r0, #1
  800070c:	f000 f84a 	bl	80007a4 <arg>
-			bitmap_s.nr = atoi(string_container);
- 8000710:	4817      	ldr	r0, [pc, #92]	; (8000770 <receive+0x2a4>)
+			bitmap_s.nr = atoi(string_container);	//stores the information from argument 1 into bitmap struct
+ 8000710:	4817      	ldr	r0, [pc, #92]	; (8000770 <FL_Input+0x2a4>)
  8000712:	f004 f8b7 	bl	8004884 <atoi>
  8000716:	4603      	mov	r3, r0
  8000718:	b2da      	uxtb	r2, r3
- 800071a:	4b20      	ldr	r3, [pc, #128]	; (800079c <receive+0x2d0>)
+ 800071a:	4b20      	ldr	r3, [pc, #128]	; (800079c <FL_Input+0x2d0>)
  800071c:	701a      	strb	r2, [r3, #0]
 			arg(argumentTWO, string_container, NOTEXT);
  800071e:	2200      	movs	r2, #0
- 8000720:	4913      	ldr	r1, [pc, #76]	; (8000770 <receive+0x2a4>)
+ 8000720:	4913      	ldr	r1, [pc, #76]	; (8000770 <FL_Input+0x2a4>)
  8000722:	2002      	movs	r0, #2
  8000724:	f000 f83e 	bl	80007a4 <arg>
 			bitmap_s.xlup = atoi(string_container);
- 8000728:	4811      	ldr	r0, [pc, #68]	; (8000770 <receive+0x2a4>)
+ 8000728:	4811      	ldr	r0, [pc, #68]	; (8000770 <FL_Input+0x2a4>)
  800072a:	f004 f8ab 	bl	8004884 <atoi>
  800072e:	4603      	mov	r3, r0
  8000730:	b29a      	uxth	r2, r3
- 8000732:	4b1a      	ldr	r3, [pc, #104]	; (800079c <receive+0x2d0>)
+ 8000732:	4b1a      	ldr	r3, [pc, #104]	; (800079c <FL_Input+0x2d0>)
  8000734:	805a      	strh	r2, [r3, #2]
 			arg(argumentTHREE, string_container, NOTEXT);
  8000736:	2200      	movs	r2, #0
- 8000738:	490d      	ldr	r1, [pc, #52]	; (8000770 <receive+0x2a4>)
+ 8000738:	490d      	ldr	r1, [pc, #52]	; (8000770 <FL_Input+0x2a4>)
  800073a:	2003      	movs	r0, #3
  800073c:	f000 f832 	bl	80007a4 <arg>
 			bitmap_s.ylup = atoi(string_container);
- 8000740:	480b      	ldr	r0, [pc, #44]	; (8000770 <receive+0x2a4>)
+ 8000740:	480b      	ldr	r0, [pc, #44]	; (8000770 <FL_Input+0x2a4>)
  8000742:	f004 f89f 	bl	8004884 <atoi>
  8000746:	4603      	mov	r3, r0
  8000748:	b29a      	uxth	r2, r3
- 800074a:	4b14      	ldr	r3, [pc, #80]	; (800079c <receive+0x2d0>)
+ 800074a:	4b14      	ldr	r3, [pc, #80]	; (800079c <FL_Input+0x2d0>)
  800074c:	809a      	strh	r2, [r3, #4]
 			break;
- 800074e:	e00a      	b.n	8000766 <receive+0x29a>
-		case clearscreen:
-			arg(argumentONE, string_container, NOTEXT);
+ 800074e:	e00a      	b.n	8000766 <FL_Input+0x29a>
+		case clearscreen:	//if the function clearscreen is called
+			arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
  8000750:	2200      	movs	r2, #0
- 8000752:	4907      	ldr	r1, [pc, #28]	; (8000770 <receive+0x2a4>)
+ 8000752:	4907      	ldr	r1, [pc, #28]	; (8000770 <FL_Input+0x2a4>)
  8000754:	2001      	movs	r0, #1
  8000756:	f000 f825 	bl	80007a4 <arg>
-			strcpy(clearscreen_s.color, string_container);
- 800075a:	4905      	ldr	r1, [pc, #20]	; (8000770 <receive+0x2a4>)
- 800075c:	4810      	ldr	r0, [pc, #64]	; (80007a0 <receive+0x2d4>)
+			strcpy(clearscreen_s.color, string_container);	//stores the information from argument 1 into line struct
+ 800075a:	4905      	ldr	r1, [pc, #20]	; (8000770 <FL_Input+0x2a4>)
+ 800075c:	4810      	ldr	r0, [pc, #64]	; (80007a0 <FL_Input+0x2d4>)
  800075e:	f004 f8c7 	bl	80048f0 <strcpy>
 			break;
- 8000762:	e000      	b.n	8000766 <receive+0x29a>
+ 8000762:	e000      	b.n	8000766 <FL_Input+0x29a>
 		default:
 			break;
  8000764:	bf00      	nop
 	}
 
-
-return 1;
- 8000766:	2301      	movs	r3, #1
 }
- 8000768:	4618      	mov	r0, r3
- 800076a:	bd80      	pop	{r7, pc}
+ 8000766:	bf00      	nop
+ 8000768:	bd80      	pop	{r7, pc}
+ 800076a:	bf00      	nop
  800076c:	20000214 	.word	0x20000214
  8000770:	2000008c 	.word	0x2000008c
  8000774:	2000010c 	.word	0x2000010c
@@ -706,9 +704,11 @@ return 1;
  80007a0:	2000012c 	.word	0x2000012c
 
 080007a4 <arg>:
-
-
-void arg(uint8_t a,char *string_container ,uint8_t text_trigger)
+// @param[in] a: The variable that determines which argument has to be read
+// @param[in] *string_container: A pointer where the string will be put into
+// @param[in] text_trigger: A boolean that determines if the argument is a text or not
+//--------------------------------------------------------------
+void arg(uint8_t a,char *string_container ,bool text_trigger)
 {
  80007a4:	b480      	push	{r7}
  80007a6:	b085      	sub	sp, #20
@@ -718,19 +718,19 @@ void arg(uint8_t a,char *string_container ,uint8_t text_trigger)
  80007ae:	71fb      	strb	r3, [r7, #7]
  80007b0:	4613      	mov	r3, r2
  80007b2:	71bb      	strb	r3, [r7, #6]
-	uint8_t i = 0;
+	uint8_t i = 0;	//counter
  80007b4:	2300      	movs	r3, #0
  80007b6:	73fb      	strb	r3, [r7, #15]
-	uint8_t j = 0;
+	uint8_t j = 0;	//counter
  80007b8:	2300      	movs	r3, #0
  80007ba:	73bb      	strb	r3, [r7, #14]
-	uint8_t arg_counter = 0;
+	uint8_t arg_counter = 0;	//is needed to check what argument is currently beeing read
  80007bc:	2300      	movs	r3, #0
  80007be:	737b      	strb	r3, [r7, #13]
-	uint8_t arg_character_counter = 0;
+	uint8_t arg_character_counter = 0;	//checks what the current character from the argument is
  80007c0:	2300      	movs	r3, #0
  80007c2:	733b      	strb	r3, [r7, #12]
-	for (j=0; j<input.msglen; j++)
+	for (j=0; j<input.msglen; j++)	//cleans string container
  80007c4:	2300      	movs	r3, #0
  80007c6:	73bb      	strb	r3, [r7, #14]
  80007c8:	e007      	b.n	80007da <arg+0x36>
@@ -740,21 +740,21 @@ void arg(uint8_t a,char *string_container ,uint8_t text_trigger)
  80007ce:	4413      	add	r3, r2
  80007d0:	2200      	movs	r2, #0
  80007d2:	701a      	strb	r2, [r3, #0]
-	for (j=0; j<input.msglen; j++)
+	for (j=0; j<input.msglen; j++)	//cleans string container
  80007d4:	7bbb      	ldrb	r3, [r7, #14]
  80007d6:	3301      	adds	r3, #1
  80007d8:	73bb      	strb	r3, [r7, #14]
  80007da:	7bba      	ldrb	r2, [r7, #14]
- 80007dc:	4b2f      	ldr	r3, [pc, #188]	; (800089c <arg+0xf8>)
+ 80007dc:	4b30      	ldr	r3, [pc, #192]	; (80008a0 <arg+0xfc>)
  80007de:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
  80007e2:	429a      	cmp	r2, r3
  80007e4:	dbf1      	blt.n	80007ca <arg+0x26>
 	while(i <= input.msglen)
- 80007e6:	e04b      	b.n	8000880 <arg+0xdc>
+ 80007e6:	e04e      	b.n	8000886 <arg+0xe2>
 			{
-				if(input.line_rx_buffer[i] == ',')
+				if(input.line_rx_buffer[i] == ',')	//if current character is a ',' the argument counter goes up
  80007e8:	7bfb      	ldrb	r3, [r7, #15]
- 80007ea:	4a2c      	ldr	r2, [pc, #176]	; (800089c <arg+0xf8>)
+ 80007ea:	4a2d      	ldr	r2, [pc, #180]	; (80008a0 <arg+0xfc>)
  80007ec:	4413      	add	r3, r2
  80007ee:	785b      	ldrb	r3, [r3, #1]
  80007f0:	2b2c      	cmp	r3, #44	; 0x2c
@@ -768,392 +768,388 @@ void arg(uint8_t a,char *string_container ,uint8_t text_trigger)
  80007fa:	7bfb      	ldrb	r3, [r7, #15]
  80007fc:	3301      	adds	r3, #1
  80007fe:	73fb      	strb	r3, [r7, #15]
- 8000800:	e03e      	b.n	8000880 <arg+0xdc>
+ 8000800:	e041      	b.n	8000886 <arg+0xe2>
 				}
-				else if(input.line_rx_buffer[i] == ' ' && text_trigger == 0)
+				else if(input.line_rx_buffer[i] == ' ' && text_trigger == false)	//if its a space it doesnt get read
  8000802:	7bfb      	ldrb	r3, [r7, #15]
- 8000804:	4a25      	ldr	r2, [pc, #148]	; (800089c <arg+0xf8>)
+ 8000804:	4a26      	ldr	r2, [pc, #152]	; (80008a0 <arg+0xfc>)
  8000806:	4413      	add	r3, r2
  8000808:	785b      	ldrb	r3, [r3, #1]
  800080a:	2b20      	cmp	r3, #32
- 800080c:	d106      	bne.n	800081c <arg+0x78>
+ 800080c:	d109      	bne.n	8000822 <arg+0x7e>
  800080e:	79bb      	ldrb	r3, [r7, #6]
- 8000810:	2b00      	cmp	r3, #0
- 8000812:	d103      	bne.n	800081c <arg+0x78>
+ 8000810:	f083 0301 	eor.w	r3, r3, #1
+ 8000814:	b2db      	uxtb	r3, r3
+ 8000816:	2b00      	cmp	r3, #0
+ 8000818:	d003      	beq.n	8000822 <arg+0x7e>
 				i++;
- 8000814:	7bfb      	ldrb	r3, [r7, #15]
- 8000816:	3301      	adds	r3, #1
- 8000818:	73fb      	strb	r3, [r7, #15]
- 800081a:	e031      	b.n	8000880 <arg+0xdc>
-				else if(input.line_rx_buffer[i] == ' ' && text_trigger == 1 && arg_counter == a)
- 800081c:	7bfb      	ldrb	r3, [r7, #15]
- 800081e:	4a1f      	ldr	r2, [pc, #124]	; (800089c <arg+0xf8>)
- 8000820:	4413      	add	r3, r2
- 8000822:	785b      	ldrb	r3, [r3, #1]
- 8000824:	2b20      	cmp	r3, #32
- 8000826:	d115      	bne.n	8000854 <arg+0xb0>
- 8000828:	79bb      	ldrb	r3, [r7, #6]
- 800082a:	2b01      	cmp	r3, #1
- 800082c:	d112      	bne.n	8000854 <arg+0xb0>
- 800082e:	7b7a      	ldrb	r2, [r7, #13]
- 8000830:	79fb      	ldrb	r3, [r7, #7]
- 8000832:	429a      	cmp	r2, r3
- 8000834:	d10e      	bne.n	8000854 <arg+0xb0>
+ 800081a:	7bfb      	ldrb	r3, [r7, #15]
+ 800081c:	3301      	adds	r3, #1
+ 800081e:	73fb      	strb	r3, [r7, #15]
+ 8000820:	e031      	b.n	8000886 <arg+0xe2>
+				else if(input.line_rx_buffer[i] == ' ' && text_trigger == true && arg_counter == a)	//if its a space but its in a text argument, it gets read
+ 8000822:	7bfb      	ldrb	r3, [r7, #15]
+ 8000824:	4a1e      	ldr	r2, [pc, #120]	; (80008a0 <arg+0xfc>)
+ 8000826:	4413      	add	r3, r2
+ 8000828:	785b      	ldrb	r3, [r3, #1]
+ 800082a:	2b20      	cmp	r3, #32
+ 800082c:	d115      	bne.n	800085a <arg+0xb6>
+ 800082e:	79bb      	ldrb	r3, [r7, #6]
+ 8000830:	2b00      	cmp	r3, #0
+ 8000832:	d012      	beq.n	800085a <arg+0xb6>
+ 8000834:	7b7a      	ldrb	r2, [r7, #13]
+ 8000836:	79fb      	ldrb	r3, [r7, #7]
+ 8000838:	429a      	cmp	r2, r3
+ 800083a:	d10e      	bne.n	800085a <arg+0xb6>
 				{
 					string_container[arg_character_counter++] = input.line_rx_buffer[i++];
- 8000836:	7bfb      	ldrb	r3, [r7, #15]
- 8000838:	1c5a      	adds	r2, r3, #1
- 800083a:	73fa      	strb	r2, [r7, #15]
- 800083c:	4619      	mov	r1, r3
- 800083e:	7b3b      	ldrb	r3, [r7, #12]
- 8000840:	1c5a      	adds	r2, r3, #1
- 8000842:	733a      	strb	r2, [r7, #12]
- 8000844:	461a      	mov	r2, r3
- 8000846:	683b      	ldr	r3, [r7, #0]
- 8000848:	4413      	add	r3, r2
- 800084a:	4a14      	ldr	r2, [pc, #80]	; (800089c <arg+0xf8>)
- 800084c:	440a      	add	r2, r1
- 800084e:	7852      	ldrb	r2, [r2, #1]
- 8000850:	701a      	strb	r2, [r3, #0]
- 8000852:	e015      	b.n	8000880 <arg+0xdc>
+ 800083c:	7bfb      	ldrb	r3, [r7, #15]
+ 800083e:	1c5a      	adds	r2, r3, #1
+ 8000840:	73fa      	strb	r2, [r7, #15]
+ 8000842:	4619      	mov	r1, r3
+ 8000844:	7b3b      	ldrb	r3, [r7, #12]
+ 8000846:	1c5a      	adds	r2, r3, #1
+ 8000848:	733a      	strb	r2, [r7, #12]
+ 800084a:	461a      	mov	r2, r3
+ 800084c:	683b      	ldr	r3, [r7, #0]
+ 800084e:	4413      	add	r3, r2
+ 8000850:	4a13      	ldr	r2, [pc, #76]	; (80008a0 <arg+0xfc>)
+ 8000852:	440a      	add	r2, r1
+ 8000854:	7852      	ldrb	r2, [r2, #1]
+ 8000856:	701a      	strb	r2, [r3, #0]
+ 8000858:	e015      	b.n	8000886 <arg+0xe2>
 				}
-				else if(arg_counter == a)
- 8000854:	7b7a      	ldrb	r2, [r7, #13]
- 8000856:	79fb      	ldrb	r3, [r7, #7]
- 8000858:	429a      	cmp	r2, r3
- 800085a:	d10e      	bne.n	800087a <arg+0xd6>
+				else if(arg_counter == a)	//if its a character in the correct argument it gets read
+ 800085a:	7b7a      	ldrb	r2, [r7, #13]
+ 800085c:	79fb      	ldrb	r3, [r7, #7]
+ 800085e:	429a      	cmp	r2, r3
+ 8000860:	d10e      	bne.n	8000880 <arg+0xdc>
 				string_container[arg_character_counter++] = input.line_rx_buffer[i++];
- 800085c:	7bfb      	ldrb	r3, [r7, #15]
- 800085e:	1c5a      	adds	r2, r3, #1
- 8000860:	73fa      	strb	r2, [r7, #15]
- 8000862:	4619      	mov	r1, r3
- 8000864:	7b3b      	ldrb	r3, [r7, #12]
- 8000866:	1c5a      	adds	r2, r3, #1
- 8000868:	733a      	strb	r2, [r7, #12]
- 800086a:	461a      	mov	r2, r3
- 800086c:	683b      	ldr	r3, [r7, #0]
- 800086e:	4413      	add	r3, r2
- 8000870:	4a0a      	ldr	r2, [pc, #40]	; (800089c <arg+0xf8>)
- 8000872:	440a      	add	r2, r1
- 8000874:	7852      	ldrb	r2, [r2, #1]
- 8000876:	701a      	strb	r2, [r3, #0]
- 8000878:	e002      	b.n	8000880 <arg+0xdc>
-				else i++;
- 800087a:	7bfb      	ldrb	r3, [r7, #15]
- 800087c:	3301      	adds	r3, #1
- 800087e:	73fb      	strb	r3, [r7, #15]
+ 8000862:	7bfb      	ldrb	r3, [r7, #15]
+ 8000864:	1c5a      	adds	r2, r3, #1
+ 8000866:	73fa      	strb	r2, [r7, #15]
+ 8000868:	4619      	mov	r1, r3
+ 800086a:	7b3b      	ldrb	r3, [r7, #12]
+ 800086c:	1c5a      	adds	r2, r3, #1
+ 800086e:	733a      	strb	r2, [r7, #12]
+ 8000870:	461a      	mov	r2, r3
+ 8000872:	683b      	ldr	r3, [r7, #0]
+ 8000874:	4413      	add	r3, r2
+ 8000876:	4a0a      	ldr	r2, [pc, #40]	; (80008a0 <arg+0xfc>)
+ 8000878:	440a      	add	r2, r1
+ 800087a:	7852      	ldrb	r2, [r2, #1]
+ 800087c:	701a      	strb	r2, [r3, #0]
+ 800087e:	e002      	b.n	8000886 <arg+0xe2>
+				else i++;	//else skips
+ 8000880:	7bfb      	ldrb	r3, [r7, #15]
+ 8000882:	3301      	adds	r3, #1
+ 8000884:	73fb      	strb	r3, [r7, #15]
 	while(i <= input.msglen)
- 8000880:	7bfa      	ldrb	r2, [r7, #15]
- 8000882:	4b06      	ldr	r3, [pc, #24]	; (800089c <arg+0xf8>)
- 8000884:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
- 8000888:	429a      	cmp	r2, r3
- 800088a:	ddad      	ble.n	80007e8 <arg+0x44>
+ 8000886:	7bfa      	ldrb	r2, [r7, #15]
+ 8000888:	4b05      	ldr	r3, [pc, #20]	; (80008a0 <arg+0xfc>)
+ 800088a:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
+ 800088e:	429a      	cmp	r2, r3
+ 8000890:	ddaa      	ble.n	80007e8 <arg+0x44>
 			}
 }
- 800088c:	bf00      	nop
- 800088e:	bf00      	nop
- 8000890:	3714      	adds	r7, #20
- 8000892:	46bd      	mov	sp, r7
- 8000894:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000898:	4770      	bx	lr
- 800089a:	bf00      	nop
- 800089c:	20000214 	.word	0x20000214
+ 8000892:	bf00      	nop
+ 8000894:	bf00      	nop
+ 8000896:	3714      	adds	r7, #20
+ 8000898:	46bd      	mov	sp, r7
+ 800089a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800089e:	4770      	bx	lr
+ 80008a0:	20000214 	.word	0x20000214
 
-080008a0 <MX_DMA_Init>:
+080008a4 <MX_DMA_Init>:
 
 /**
   * Enable DMA controller clock
   */
 void MX_DMA_Init(void)
 {
- 80008a0:	b580      	push	{r7, lr}
- 80008a2:	b082      	sub	sp, #8
- 80008a4:	af00      	add	r7, sp, #0
+ 80008a4:	b580      	push	{r7, lr}
+ 80008a6:	b082      	sub	sp, #8
+ 80008a8:	af00      	add	r7, sp, #0
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
- 80008a6:	2300      	movs	r3, #0
- 80008a8:	607b      	str	r3, [r7, #4]
- 80008aa:	4b0c      	ldr	r3, [pc, #48]	; (80008dc <MX_DMA_Init+0x3c>)
- 80008ac:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 80008ae:	4a0b      	ldr	r2, [pc, #44]	; (80008dc <MX_DMA_Init+0x3c>)
- 80008b0:	f443 0380 	orr.w	r3, r3, #4194304	; 0x400000
- 80008b4:	6313      	str	r3, [r2, #48]	; 0x30
- 80008b6:	4b09      	ldr	r3, [pc, #36]	; (80008dc <MX_DMA_Init+0x3c>)
- 80008b8:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 80008ba:	f403 0380 	and.w	r3, r3, #4194304	; 0x400000
- 80008be:	607b      	str	r3, [r7, #4]
- 80008c0:	687b      	ldr	r3, [r7, #4]
+ 80008aa:	2300      	movs	r3, #0
+ 80008ac:	607b      	str	r3, [r7, #4]
+ 80008ae:	4b0c      	ldr	r3, [pc, #48]	; (80008e0 <MX_DMA_Init+0x3c>)
+ 80008b0:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 80008b2:	4a0b      	ldr	r2, [pc, #44]	; (80008e0 <MX_DMA_Init+0x3c>)
+ 80008b4:	f443 0380 	orr.w	r3, r3, #4194304	; 0x400000
+ 80008b8:	6313      	str	r3, [r2, #48]	; 0x30
+ 80008ba:	4b09      	ldr	r3, [pc, #36]	; (80008e0 <MX_DMA_Init+0x3c>)
+ 80008bc:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 80008be:	f403 0380 	and.w	r3, r3, #4194304	; 0x400000
+ 80008c2:	607b      	str	r3, [r7, #4]
+ 80008c4:	687b      	ldr	r3, [r7, #4]
 
   /* DMA interrupt init */
   /* DMA2_Stream5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream5_IRQn, 0, 0);
- 80008c2:	2200      	movs	r2, #0
- 80008c4:	2100      	movs	r1, #0
- 80008c6:	2044      	movs	r0, #68	; 0x44
- 80008c8:	f000 fe7f 	bl	80015ca <HAL_NVIC_SetPriority>
+ 80008c6:	2200      	movs	r2, #0
+ 80008c8:	2100      	movs	r1, #0
+ 80008ca:	2044      	movs	r0, #68	; 0x44
+ 80008cc:	f000 fe7d 	bl	80015ca <HAL_NVIC_SetPriority>
   HAL_NVIC_EnableIRQ(DMA2_Stream5_IRQn);
- 80008cc:	2044      	movs	r0, #68	; 0x44
- 80008ce:	f000 fe98 	bl	8001602 <HAL_NVIC_EnableIRQ>
+ 80008d0:	2044      	movs	r0, #68	; 0x44
+ 80008d2:	f000 fe96 	bl	8001602 <HAL_NVIC_EnableIRQ>
 
 }
- 80008d2:	bf00      	nop
- 80008d4:	3708      	adds	r7, #8
- 80008d6:	46bd      	mov	sp, r7
- 80008d8:	bd80      	pop	{r7, pc}
- 80008da:	bf00      	nop
- 80008dc:	40023800 	.word	0x40023800
+ 80008d6:	bf00      	nop
+ 80008d8:	3708      	adds	r7, #8
+ 80008da:	46bd      	mov	sp, r7
+ 80008dc:	bd80      	pop	{r7, pc}
+ 80008de:	bf00      	nop
+ 80008e0:	40023800 	.word	0x40023800
 
-080008e0 <MX_GPIO_Init>:
+080008e4 <MX_GPIO_Init>:
         * Output
         * EVENT_OUT
         * EXTI
 */
 void MX_GPIO_Init(void)
 {
- 80008e0:	b580      	push	{r7, lr}
- 80008e2:	b08a      	sub	sp, #40	; 0x28
- 80008e4:	af00      	add	r7, sp, #0
+ 80008e4:	b580      	push	{r7, lr}
+ 80008e6:	b08a      	sub	sp, #40	; 0x28
+ 80008e8:	af00      	add	r7, sp, #0
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 80008e6:	f107 0314 	add.w	r3, r7, #20
- 80008ea:	2200      	movs	r2, #0
- 80008ec:	601a      	str	r2, [r3, #0]
- 80008ee:	605a      	str	r2, [r3, #4]
- 80008f0:	609a      	str	r2, [r3, #8]
- 80008f2:	60da      	str	r2, [r3, #12]
- 80008f4:	611a      	str	r2, [r3, #16]
+ 80008ea:	f107 0314 	add.w	r3, r7, #20
+ 80008ee:	2200      	movs	r2, #0
+ 80008f0:	601a      	str	r2, [r3, #0]
+ 80008f2:	605a      	str	r2, [r3, #4]
+ 80008f4:	609a      	str	r2, [r3, #8]
+ 80008f6:	60da      	str	r2, [r3, #12]
+ 80008f8:	611a      	str	r2, [r3, #16]
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
- 80008f6:	2300      	movs	r3, #0
- 80008f8:	613b      	str	r3, [r7, #16]
- 80008fa:	4b32      	ldr	r3, [pc, #200]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 80008fc:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 80008fe:	4a31      	ldr	r2, [pc, #196]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000900:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 8000904:	6313      	str	r3, [r2, #48]	; 0x30
- 8000906:	4b2f      	ldr	r3, [pc, #188]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000908:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 800090a:	f003 0380 	and.w	r3, r3, #128	; 0x80
- 800090e:	613b      	str	r3, [r7, #16]
- 8000910:	693b      	ldr	r3, [r7, #16]
+ 80008fa:	2300      	movs	r3, #0
+ 80008fc:	613b      	str	r3, [r7, #16]
+ 80008fe:	4b32      	ldr	r3, [pc, #200]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000900:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000902:	4a31      	ldr	r2, [pc, #196]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000904:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+ 8000908:	6313      	str	r3, [r2, #48]	; 0x30
+ 800090a:	4b2f      	ldr	r3, [pc, #188]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 800090c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800090e:	f003 0380 	and.w	r3, r3, #128	; 0x80
+ 8000912:	613b      	str	r3, [r7, #16]
+ 8000914:	693b      	ldr	r3, [r7, #16]
   __HAL_RCC_GPIOA_CLK_ENABLE();
- 8000912:	2300      	movs	r3, #0
- 8000914:	60fb      	str	r3, [r7, #12]
- 8000916:	4b2b      	ldr	r3, [pc, #172]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000918:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 800091a:	4a2a      	ldr	r2, [pc, #168]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 800091c:	f043 0301 	orr.w	r3, r3, #1
- 8000920:	6313      	str	r3, [r2, #48]	; 0x30
- 8000922:	4b28      	ldr	r3, [pc, #160]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000924:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000926:	f003 0301 	and.w	r3, r3, #1
- 800092a:	60fb      	str	r3, [r7, #12]
- 800092c:	68fb      	ldr	r3, [r7, #12]
+ 8000916:	2300      	movs	r3, #0
+ 8000918:	60fb      	str	r3, [r7, #12]
+ 800091a:	4b2b      	ldr	r3, [pc, #172]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 800091c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800091e:	4a2a      	ldr	r2, [pc, #168]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000920:	f043 0301 	orr.w	r3, r3, #1
+ 8000924:	6313      	str	r3, [r2, #48]	; 0x30
+ 8000926:	4b28      	ldr	r3, [pc, #160]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000928:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800092a:	f003 0301 	and.w	r3, r3, #1
+ 800092e:	60fb      	str	r3, [r7, #12]
+ 8000930:	68fb      	ldr	r3, [r7, #12]
   __HAL_RCC_GPIOE_CLK_ENABLE();
- 800092e:	2300      	movs	r3, #0
- 8000930:	60bb      	str	r3, [r7, #8]
- 8000932:	4b24      	ldr	r3, [pc, #144]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000934:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000936:	4a23      	ldr	r2, [pc, #140]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000938:	f043 0310 	orr.w	r3, r3, #16
- 800093c:	6313      	str	r3, [r2, #48]	; 0x30
- 800093e:	4b21      	ldr	r3, [pc, #132]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000940:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000942:	f003 0310 	and.w	r3, r3, #16
- 8000946:	60bb      	str	r3, [r7, #8]
- 8000948:	68bb      	ldr	r3, [r7, #8]
+ 8000932:	2300      	movs	r3, #0
+ 8000934:	60bb      	str	r3, [r7, #8]
+ 8000936:	4b24      	ldr	r3, [pc, #144]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000938:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800093a:	4a23      	ldr	r2, [pc, #140]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 800093c:	f043 0310 	orr.w	r3, r3, #16
+ 8000940:	6313      	str	r3, [r2, #48]	; 0x30
+ 8000942:	4b21      	ldr	r3, [pc, #132]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000944:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000946:	f003 0310 	and.w	r3, r3, #16
+ 800094a:	60bb      	str	r3, [r7, #8]
+ 800094c:	68bb      	ldr	r3, [r7, #8]
   __HAL_RCC_GPIOB_CLK_ENABLE();
- 800094a:	2300      	movs	r3, #0
- 800094c:	607b      	str	r3, [r7, #4]
- 800094e:	4b1d      	ldr	r3, [pc, #116]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000950:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000952:	4a1c      	ldr	r2, [pc, #112]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 8000954:	f043 0302 	orr.w	r3, r3, #2
- 8000958:	6313      	str	r3, [r2, #48]	; 0x30
- 800095a:	4b1a      	ldr	r3, [pc, #104]	; (80009c4 <MX_GPIO_Init+0xe4>)
- 800095c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 800095e:	f003 0302 	and.w	r3, r3, #2
- 8000962:	607b      	str	r3, [r7, #4]
- 8000964:	687b      	ldr	r3, [r7, #4]
+ 800094e:	2300      	movs	r3, #0
+ 8000950:	607b      	str	r3, [r7, #4]
+ 8000952:	4b1d      	ldr	r3, [pc, #116]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000954:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000956:	4a1c      	ldr	r2, [pc, #112]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000958:	f043 0302 	orr.w	r3, r3, #2
+ 800095c:	6313      	str	r3, [r2, #48]	; 0x30
+ 800095e:	4b1a      	ldr	r3, [pc, #104]	; (80009c8 <MX_GPIO_Init+0xe4>)
+ 8000960:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000962:	f003 0302 	and.w	r3, r3, #2
+ 8000966:	607b      	str	r3, [r7, #4]
+ 8000968:	687b      	ldr	r3, [r7, #4]
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, VGA_BLUE0_Pin|VGA_BLUE1_Pin|VGA_GREEN0_Pin|VGA_GREEN1_Pin
- 8000966:	2200      	movs	r2, #0
- 8000968:	f44f 417f 	mov.w	r1, #65280	; 0xff00
- 800096c:	4816      	ldr	r0, [pc, #88]	; (80009c8 <MX_GPIO_Init+0xe8>)
- 800096e:	f001 fb91 	bl	8002094 <HAL_GPIO_WritePin>
+ 800096a:	2200      	movs	r2, #0
+ 800096c:	f44f 417f 	mov.w	r1, #65280	; 0xff00
+ 8000970:	4816      	ldr	r0, [pc, #88]	; (80009cc <MX_GPIO_Init+0xe8>)
+ 8000972:	f001 fb8f 	bl	8002094 <HAL_GPIO_WritePin>
                           |VGA_GREEN2_Pin|VGA_RED0_Pin|VGA_RED1_Pin|VGA_RED2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(VGA_VSYNC_GPIO_Port, VGA_VSYNC_Pin, GPIO_PIN_RESET);
- 8000972:	2200      	movs	r2, #0
- 8000974:	f44f 5180 	mov.w	r1, #4096	; 0x1000
- 8000978:	4814      	ldr	r0, [pc, #80]	; (80009cc <MX_GPIO_Init+0xec>)
- 800097a:	f001 fb8b 	bl	8002094 <HAL_GPIO_WritePin>
+ 8000976:	2200      	movs	r2, #0
+ 8000978:	f44f 5180 	mov.w	r1, #4096	; 0x1000
+ 800097c:	4814      	ldr	r0, [pc, #80]	; (80009d0 <MX_GPIO_Init+0xec>)
+ 800097e:	f001 fb89 	bl	8002094 <HAL_GPIO_WritePin>
 
   /*Configure GPIO pins : PEPin PEPin PEPin PEPin
                            PEPin PEPin PEPin PEPin */
   GPIO_InitStruct.Pin = VGA_BLUE0_Pin|VGA_BLUE1_Pin|VGA_GREEN0_Pin|VGA_GREEN1_Pin
- 800097e:	f44f 437f 	mov.w	r3, #65280	; 0xff00
- 8000982:	617b      	str	r3, [r7, #20]
+ 8000982:	f44f 437f 	mov.w	r3, #65280	; 0xff00
+ 8000986:	617b      	str	r3, [r7, #20]
                           |VGA_GREEN2_Pin|VGA_RED0_Pin|VGA_RED1_Pin|VGA_RED2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 8000984:	2301      	movs	r3, #1
- 8000986:	61bb      	str	r3, [r7, #24]
+ 8000988:	2301      	movs	r3, #1
+ 800098a:	61bb      	str	r3, [r7, #24]
   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 8000988:	2300      	movs	r3, #0
- 800098a:	61fb      	str	r3, [r7, #28]
+ 800098c:	2300      	movs	r3, #0
+ 800098e:	61fb      	str	r3, [r7, #28]
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
- 800098c:	2303      	movs	r3, #3
- 800098e:	623b      	str	r3, [r7, #32]
+ 8000990:	2303      	movs	r3, #3
+ 8000992:	623b      	str	r3, [r7, #32]
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
- 8000990:	f107 0314 	add.w	r3, r7, #20
- 8000994:	4619      	mov	r1, r3
- 8000996:	480c      	ldr	r0, [pc, #48]	; (80009c8 <MX_GPIO_Init+0xe8>)
- 8000998:	f001 f9e0 	bl	8001d5c <HAL_GPIO_Init>
+ 8000994:	f107 0314 	add.w	r3, r7, #20
+ 8000998:	4619      	mov	r1, r3
+ 800099a:	480c      	ldr	r0, [pc, #48]	; (80009cc <MX_GPIO_Init+0xe8>)
+ 800099c:	f001 f9de 	bl	8001d5c <HAL_GPIO_Init>
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = VGA_VSYNC_Pin;
- 800099c:	f44f 5380 	mov.w	r3, #4096	; 0x1000
- 80009a0:	617b      	str	r3, [r7, #20]
+ 80009a0:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+ 80009a4:	617b      	str	r3, [r7, #20]
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 80009a2:	2301      	movs	r3, #1
- 80009a4:	61bb      	str	r3, [r7, #24]
+ 80009a6:	2301      	movs	r3, #1
+ 80009a8:	61bb      	str	r3, [r7, #24]
   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 80009a6:	2300      	movs	r3, #0
- 80009a8:	61fb      	str	r3, [r7, #28]
+ 80009aa:	2300      	movs	r3, #0
+ 80009ac:	61fb      	str	r3, [r7, #28]
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
- 80009aa:	2303      	movs	r3, #3
- 80009ac:	623b      	str	r3, [r7, #32]
+ 80009ae:	2303      	movs	r3, #3
+ 80009b0:	623b      	str	r3, [r7, #32]
   HAL_GPIO_Init(VGA_VSYNC_GPIO_Port, &GPIO_InitStruct);
- 80009ae:	f107 0314 	add.w	r3, r7, #20
- 80009b2:	4619      	mov	r1, r3
- 80009b4:	4805      	ldr	r0, [pc, #20]	; (80009cc <MX_GPIO_Init+0xec>)
- 80009b6:	f001 f9d1 	bl	8001d5c <HAL_GPIO_Init>
+ 80009b2:	f107 0314 	add.w	r3, r7, #20
+ 80009b6:	4619      	mov	r1, r3
+ 80009b8:	4805      	ldr	r0, [pc, #20]	; (80009d0 <MX_GPIO_Init+0xec>)
+ 80009ba:	f001 f9cf 	bl	8001d5c <HAL_GPIO_Init>
 
 }
- 80009ba:	bf00      	nop
- 80009bc:	3728      	adds	r7, #40	; 0x28
- 80009be:	46bd      	mov	sp, r7
- 80009c0:	bd80      	pop	{r7, pc}
- 80009c2:	bf00      	nop
- 80009c4:	40023800 	.word	0x40023800
- 80009c8:	40021000 	.word	0x40021000
- 80009cc:	40020400 	.word	0x40020400
+ 80009be:	bf00      	nop
+ 80009c0:	3728      	adds	r7, #40	; 0x28
+ 80009c2:	46bd      	mov	sp, r7
+ 80009c4:	bd80      	pop	{r7, pc}
+ 80009c6:	bf00      	nop
+ 80009c8:	40023800 	.word	0x40023800
+ 80009cc:	40021000 	.word	0x40021000
+ 80009d0:	40020400 	.word	0x40020400
 
-080009d0 <main>:
+080009d4 <main>:
 /**
   * @brief  The application entry point.
   * @retval int
   */
 int main(void)
 {
- 80009d0:	b580      	push	{r7, lr}
- 80009d2:	b082      	sub	sp, #8
- 80009d4:	af00      	add	r7, sp, #0
+ 80009d4:	b580      	push	{r7, lr}
+ 80009d6:	b082      	sub	sp, #8
+ 80009d8:	af00      	add	r7, sp, #0
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
- 80009d6:	f000 fcab 	bl	8001330 <HAL_Init>
+ 80009da:	f000 fca9 	bl	8001330 <HAL_Init>
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
- 80009da:	f000 f857 	bl	8000a8c <SystemClock_Config>
+ 80009de:	f000 f855 	bl	8000a8c <SystemClock_Config>
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
- 80009de:	f7ff ff7f 	bl	80008e0 <MX_GPIO_Init>
+ 80009e2:	f7ff ff7f 	bl	80008e4 <MX_GPIO_Init>
   MX_DMA_Init();
- 80009e2:	f7ff ff5d 	bl	80008a0 <MX_DMA_Init>
+ 80009e6:	f7ff ff5d 	bl	80008a4 <MX_DMA_Init>
   MX_TIM1_Init();
- 80009e6:	f000 f9f9 	bl	8000ddc <MX_TIM1_Init>
+ 80009ea:	f000 f9f7 	bl	8000ddc <MX_TIM1_Init>
   MX_TIM2_Init();
- 80009ea:	f000 fa47 	bl	8000e7c <MX_TIM2_Init>
+ 80009ee:	f000 fa45 	bl	8000e7c <MX_TIM2_Init>
   MX_USART2_UART_Init();
- 80009ee:	f000 fb5d 	bl	80010ac <MX_USART2_UART_Init>
+ 80009f2:	f000 fb5b 	bl	80010ac <MX_USART2_UART_Init>
   /* USER CODE BEGIN 2 */
 
   UB_VGA_Screen_Init(); // Init VGA-Screen
- 80009f2:	f000 fbff 	bl	80011f4 <UB_VGA_Screen_Init>
+ 80009f6:	f000 fbfd 	bl	80011f4 <UB_VGA_Screen_Init>
 
   UB_VGA_FillScreen(VGA_COL_WHITE);
- 80009f6:	20ff      	movs	r0, #255	; 0xff
- 80009f8:	f000 fc4e 	bl	8001298 <UB_VGA_FillScreen>
+ 80009fa:	20ff      	movs	r0, #255	; 0xff
+ 80009fc:	f000 fc4c 	bl	8001298 <UB_VGA_FillScreen>
   UB_VGA_SetPixel(10,10,10);
- 80009fc:	220a      	movs	r2, #10
- 80009fe:	210a      	movs	r1, #10
- 8000a00:	200a      	movs	r0, #10
- 8000a02:	f000 fc6d 	bl	80012e0 <UB_VGA_SetPixel>
+ 8000a00:	220a      	movs	r2, #10
+ 8000a02:	210a      	movs	r1, #10
+ 8000a04:	200a      	movs	r0, #10
+ 8000a06:	f000 fc6b 	bl	80012e0 <UB_VGA_SetPixel>
   UB_VGA_SetPixel(0,0,0x00);
- 8000a06:	2200      	movs	r2, #0
- 8000a08:	2100      	movs	r1, #0
- 8000a0a:	2000      	movs	r0, #0
- 8000a0c:	f000 fc68 	bl	80012e0 <UB_VGA_SetPixel>
+ 8000a0a:	2200      	movs	r2, #0
+ 8000a0c:	2100      	movs	r1, #0
+ 8000a0e:	2000      	movs	r0, #0
+ 8000a10:	f000 fc66 	bl	80012e0 <UB_VGA_SetPixel>
   UB_VGA_SetPixel(319,0,0x00);
- 8000a10:	2200      	movs	r2, #0
- 8000a12:	2100      	movs	r1, #0
- 8000a14:	f240 103f 	movw	r0, #319	; 0x13f
- 8000a18:	f000 fc62 	bl	80012e0 <UB_VGA_SetPixel>
+ 8000a14:	2200      	movs	r2, #0
+ 8000a16:	2100      	movs	r1, #0
+ 8000a18:	f240 103f 	movw	r0, #319	; 0x13f
+ 8000a1c:	f000 fc60 	bl	80012e0 <UB_VGA_SetPixel>
 
   int i;
 
   for(i = 0; i < LINE_BUFLEN; i++)
- 8000a1c:	2300      	movs	r3, #0
- 8000a1e:	607b      	str	r3, [r7, #4]
- 8000a20:	e008      	b.n	8000a34 <main+0x64>
+ 8000a20:	2300      	movs	r3, #0
+ 8000a22:	607b      	str	r3, [r7, #4]
+ 8000a24:	e008      	b.n	8000a38 <main+0x64>
 	  input.line_rx_buffer[i] = 0;
- 8000a22:	4a18      	ldr	r2, [pc, #96]	; (8000a84 <main+0xb4>)
- 8000a24:	687b      	ldr	r3, [r7, #4]
- 8000a26:	4413      	add	r3, r2
- 8000a28:	3301      	adds	r3, #1
- 8000a2a:	2200      	movs	r2, #0
- 8000a2c:	701a      	strb	r2, [r3, #0]
+ 8000a26:	4a17      	ldr	r2, [pc, #92]	; (8000a84 <main+0xb0>)
+ 8000a28:	687b      	ldr	r3, [r7, #4]
+ 8000a2a:	4413      	add	r3, r2
+ 8000a2c:	3301      	adds	r3, #1
+ 8000a2e:	2200      	movs	r2, #0
+ 8000a30:	701a      	strb	r2, [r3, #0]
   for(i = 0; i < LINE_BUFLEN; i++)
- 8000a2e:	687b      	ldr	r3, [r7, #4]
- 8000a30:	3301      	adds	r3, #1
- 8000a32:	607b      	str	r3, [r7, #4]
- 8000a34:	687b      	ldr	r3, [r7, #4]
- 8000a36:	f5b3 6f80 	cmp.w	r3, #1024	; 0x400
- 8000a3a:	dbf2      	blt.n	8000a22 <main+0x52>
+ 8000a32:	687b      	ldr	r3, [r7, #4]
+ 8000a34:	3301      	adds	r3, #1
+ 8000a36:	607b      	str	r3, [r7, #4]
+ 8000a38:	687b      	ldr	r3, [r7, #4]
+ 8000a3a:	f5b3 6f80 	cmp.w	r3, #1024	; 0x400
+ 8000a3e:	dbf2      	blt.n	8000a26 <main+0x52>
 
   // Reset some stuff
   input.byte_buffer_rx[0] = 0;
- 8000a3c:	4b11      	ldr	r3, [pc, #68]	; (8000a84 <main+0xb4>)
- 8000a3e:	2200      	movs	r2, #0
- 8000a40:	701a      	strb	r2, [r3, #0]
+ 8000a40:	4b10      	ldr	r3, [pc, #64]	; (8000a84 <main+0xb0>)
+ 8000a42:	2200      	movs	r2, #0
+ 8000a44:	701a      	strb	r2, [r3, #0]
   input.char_counter = 0;
- 8000a42:	4b10      	ldr	r3, [pc, #64]	; (8000a84 <main+0xb4>)
- 8000a44:	2200      	movs	r2, #0
- 8000a46:	f8c3 2408 	str.w	r2, [r3, #1032]	; 0x408
+ 8000a46:	4b0f      	ldr	r3, [pc, #60]	; (8000a84 <main+0xb0>)
+ 8000a48:	2200      	movs	r2, #0
+ 8000a4a:	f8c3 2408 	str.w	r2, [r3, #1032]	; 0x408
   input.command_execute_flag = FALSE;
- 8000a4a:	4b0e      	ldr	r3, [pc, #56]	; (8000a84 <main+0xb4>)
- 8000a4c:	2200      	movs	r2, #0
- 8000a4e:	f883 240c 	strb.w	r2, [r3, #1036]	; 0x40c
+ 8000a4e:	4b0d      	ldr	r3, [pc, #52]	; (8000a84 <main+0xb0>)
+ 8000a50:	2200      	movs	r2, #0
+ 8000a52:	f883 240c 	strb.w	r2, [r3, #1036]	; 0x40c
 
   // HAl wants a memory location to store the charachter it receives from the UART
   // We will pass it an array, but we will not use it. We declare our own variable in the interupt handler
   // See stm32f4xx_it.c
   HAL_UART_Receive_IT(&huart2, input.byte_buffer_rx, BYTE_BUFLEN);
- 8000a52:	2201      	movs	r2, #1
- 8000a54:	490b      	ldr	r1, [pc, #44]	; (8000a84 <main+0xb4>)
- 8000a56:	480c      	ldr	r0, [pc, #48]	; (8000a88 <main+0xb8>)
- 8000a58:	f002 ffb1 	bl	80039be <HAL_UART_Receive_IT>
-
-  // Test to see if the screen reacts to UART
-  unsigned char colorTest = TRUE;
- 8000a5c:	23ff      	movs	r3, #255	; 0xff
- 8000a5e:	70fb      	strb	r3, [r7, #3]
+ 8000a56:	2201      	movs	r2, #1
+ 8000a58:	490a      	ldr	r1, [pc, #40]	; (8000a84 <main+0xb0>)
+ 8000a5a:	480b      	ldr	r0, [pc, #44]	; (8000a88 <main+0xb4>)
+ 8000a5c:	f002 ffaf 	bl	80039be <HAL_UART_Receive_IT>
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -1165,21 +1161,21 @@ int main(void)
  8000a64:	20a0      	movs	r0, #160	; 0xa0
  8000a66:	f000 fc3b 	bl	80012e0 <UB_VGA_SetPixel>
 	  if(input.command_execute_flag == TRUE)
- 8000a6a:	4b06      	ldr	r3, [pc, #24]	; (8000a84 <main+0xb4>)
+ 8000a6a:	4b06      	ldr	r3, [pc, #24]	; (8000a84 <main+0xb0>)
  8000a6c:	f893 340c 	ldrb.w	r3, [r3, #1036]	; 0x40c
  8000a70:	2bff      	cmp	r3, #255	; 0xff
- 8000a72:	d1f5      	bne.n	8000a60 <main+0x90>
+ 8000a72:	d1f5      	bne.n	8000a60 <main+0x8c>
 	  {
 		  // jump to parser
-		  receive();
- 8000a74:	f7ff fd2a 	bl	80004cc <receive>
+		  FL_Input();
+ 8000a74:	f7ff fd2a 	bl	80004cc <FL_Input>
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;
- 8000a78:	4b02      	ldr	r3, [pc, #8]	; (8000a84 <main+0xb4>)
+ 8000a78:	4b02      	ldr	r3, [pc, #8]	; (8000a84 <main+0xb0>)
  8000a7a:	2200      	movs	r2, #0
  8000a7c:	f883 240c 	strb.w	r2, [r3, #1036]	; 0x40c
 	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
- 8000a80:	e7ee      	b.n	8000a60 <main+0x90>
+ 8000a80:	e7ee      	b.n	8000a60 <main+0x8c>
  8000a82:	bf00      	nop
  8000a84:	20000214 	.word	0x20000214
  8000a88:	20000704 	.word	0x20000704
@@ -2565,13 +2561,13 @@ LoopFillZerobss:
  80011ce:	f003 fb63 	bl	8004898 <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
- 80011d2:	f7ff fbfd 	bl	80009d0 <main>
+ 80011d2:	f7ff fbff 	bl	80009d4 <main>
   bx  lr    
  80011d6:	4770      	bx	lr
   ldr   sp, =_estack     /* set stack pointer */
  80011d8:	20020000 	.word	0x20020000
   ldr  r3, =_sidata
- 80011dc:	08004bc4 	.word	0x08004bc4
+ 80011dc:	08004b64 	.word	0x08004b64
   ldr  r0, =_sdata
  80011e0:	20000000 	.word	0x20000000
   ldr  r3, =_edata
@@ -11700,10 +11696,10 @@ static void UART_SetConfig(UART_HandleTypeDef *huart)
  80048ca:	4798      	blx	r3
  80048cc:	3601      	adds	r6, #1
  80048ce:	e7f2      	b.n	80048b6 <__libc_init_array+0x1e>
- 80048d0:	08004bbc 	.word	0x08004bbc
- 80048d4:	08004bbc 	.word	0x08004bbc
- 80048d8:	08004bbc 	.word	0x08004bbc
- 80048dc:	08004bc0 	.word	0x08004bc0
+ 80048d0:	08004b5c 	.word	0x08004b5c
+ 80048d4:	08004b5c 	.word	0x08004b5c
+ 80048d8:	08004b5c 	.word	0x08004b5c
+ 80048dc:	08004b60 	.word	0x08004b60
 
 080048e0 <memset>:
  80048e0:	4402      	add	r2, r0

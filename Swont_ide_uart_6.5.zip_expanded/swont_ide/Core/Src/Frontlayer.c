@@ -7,32 +7,11 @@
 #include "Frontlayer.h"
 #include "usart.h"
 #include "main.h"
+#include <stdbool.h>
 
-#define line 'l'
-#define text 't'
-#define rectangle 'r'
-#define bitmap 'b'
-#define clearscreen 'c'
-#define NOTEXT 0
-#define YESTEXT 1
-#define argumentZERO 0
-#define argumentONE 1
-#define argumentTWO 2
-#define argumentTHREE 3
-#define argumentFOUR 4
-#define argumentFIVE 5
-#define argumentSIX 6
-#define argumentSEVEN 7
-#define argumentEIGHT 8
+void arg(uint8_t, char*, bool);
 
-
-void arg(uint8_t, char*, uint8_t);
-
-
-uint8_t value;
-uint8_t trigger;
 char string_container[128];
-
 LINE_S line_s;
 BITMAP_S bitmap_s;
 CLEARSCREEN_S clearscreen_s;
@@ -47,7 +26,7 @@ TEXT_S text_s;
 //--------------------------------------------------------------
 void FL_Input()
 {
-	switch(input.line_rx_buffer[0])
+	switch(input.line_rx_buffer[firstCharacter])
 	{
 		case line:	//if the function line is called
 			arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
@@ -113,35 +92,40 @@ void FL_Input()
 			break;
 	}
 
-
-return 1;
 }
 
-
-void arg(uint8_t a,char *string_container ,uint8_t text_trigger)
+//--------------------------------------------------------------
+// @brief Function reads argument from uart
+// @details This function reads a certain argument from the uart and puts this in a string
+//
+// @param[in] a: The variable that determines which argument has to be read
+// @param[in] *string_container: A pointer where the string will be put into
+// @param[in] text_trigger: A boolean that determines if the argument is a text or not
+//--------------------------------------------------------------
+void arg(uint8_t a,char *string_container ,bool text_trigger)
 {
-	uint8_t i = 0;
-	uint8_t j = 0;
-	uint8_t arg_counter = 0;
-	uint8_t arg_character_counter = 0;
-	for (j=0; j<input.msglen; j++)
+	uint8_t i = 0;	//counter
+	uint8_t j = 0;	//counter
+	uint8_t arg_counter = 0;	//is needed to check what argument is currently beeing read
+	uint8_t arg_character_counter = 0;	//checks what the current character from the argument is
+	for (j=0; j<input.msglen; j++)	//cleans string container
 	string_container[j] = 0;
 	while(i <= input.msglen)
 			{
-				if(input.line_rx_buffer[i] == ',')
+				if(input.line_rx_buffer[i] == ',')	//if current character is a ',' the argument counter goes up
 				{
 					arg_counter++;
 					i++;
 				}
-				else if(input.line_rx_buffer[i] == ' ' && text_trigger == 0)
+				else if(input.line_rx_buffer[i] == ' ' && text_trigger == false)	//if its a space it doesnt get read
 				i++;
-				else if(input.line_rx_buffer[i] == ' ' && text_trigger == 1 && arg_counter == a)
+				else if(input.line_rx_buffer[i] == ' ' && text_trigger == true && arg_counter == a)	//if its a space but its in a text argument, it gets read
 				{
 					string_container[arg_character_counter++] = input.line_rx_buffer[i++];
 				}
-				else if(arg_counter == a)
+				else if(arg_counter == a)	//if its a character in the correct argument it gets read
 				string_container[arg_character_counter++] = input.line_rx_buffer[i++];
-				else i++;
+				else i++;	//else skips
 			}
 }
 

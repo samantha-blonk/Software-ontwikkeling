@@ -8,11 +8,29 @@
 #ifndef INC_FRONTLAYER_H_
 #define INC_FRONTLAYER_H_
 
+
 #include "main.h"
 
 #define maxTextLen 128
 #define maxFontnameLen 30
 #define maxColorLen 12
+#define line 'l'
+#define text 't'
+#define rectangle 'r'
+#define bitmap 'b'
+#define clearscreen 'c'
+#define NOTEXT 0
+#define YESTEXT 1
+#define argumentZERO 0
+#define argumentONE 1
+#define argumentTWO 2
+#define argumentTHREE 3
+#define argumentFOUR 4
+#define argumentFIVE 5
+#define argumentSIX 6
+#define argumentSEVEN 7
+#define argumentEIGHT 8
+#define firstCharacter 0
 
 typedef struct
 {

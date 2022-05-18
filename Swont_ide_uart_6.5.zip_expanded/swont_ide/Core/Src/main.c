@@ -123,7 +123,6 @@ int main(void)
   HAL_UART_Receive_IT(&huart2, input.byte_buffer_rx, BYTE_BUFLEN);
 
   // Test to see if the screen reacts to UART
-  unsigned char colorTest = TRUE;
 
   /* USER CODE END 2 */
 
@@ -135,7 +134,7 @@ int main(void)
 	  if(input.command_execute_flag == TRUE)
 	  {
 		  // jump to parser
-		  receive();
+		  FL_Input();
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;
 	  }
