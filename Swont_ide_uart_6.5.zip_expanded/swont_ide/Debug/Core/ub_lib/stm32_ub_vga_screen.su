@@ -4,4 +4,4 @@
 ../Core/ub_lib/stm32_ub_vga_screen.c:110:6:UB_VGA_SetLine	48	static
 ../Core/ub_lib/stm32_ub_vga_screen.c:193:6:UB_VGA_DrawRectangle	32	static
 ../Core/ub_lib/stm32_ub_vga_screen.c:261:6:UB_VGA_clearScreen	16	static
-../Core/ub_lib/stm32_ub_vga_screen.c:280:6:UB_VGA_DrawBitmap	24	static
+../Core/ub_lib/stm32_ub_vga_screen.c:280:6:UB_VGA_DrawBitmap	40	static
