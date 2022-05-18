@@ -7,6 +7,7 @@
 #include "Frontlayer.h"
 #include "logic_layer.h"
 #include "main.h"
+#include "usart.h"
 
 
 char rood[4] = "rood";
@@ -46,8 +47,6 @@ void logic()
 	switch(input.byte_buffer_rx[firstCharacter])
 	{
 		case line:
-			 printf("comando lijn");
-
 			 UB_VGA_SetLine(line_s.x1,
 							 line_s.x1,
 							 line_s.y1,
@@ -57,7 +56,6 @@ void logic()
 							 line_s.weight);
 			 break;
 		case rectangle:
-			printf("comando rechthoek");
 			UB_VGA_DrawRectangle(rectangle_s.xlup,
 					rectangle_s.ylup,
 					rectangle_s.width,
@@ -68,7 +66,6 @@ void logic()
 					rectangle_s.linewidth);
 			break;
 		case text:
-			printf("comando tekst");
 			UB_VGA_writeText(text_s.xlup,
 					text_s.ylup,
 					color_check(text_s.color),
@@ -78,17 +75,15 @@ void logic()
 					style_check(text_s.fontstyle));
 			break;
 		case bitmap:
-			printf("comando clearscherm");
 			UB_VGA_DrawBitmap(bitmap_s.nr,
 					bitmap_s.xlup,
 					bitmap_s.ylup);
 			break;
 		case clearscreen:
-			printf("comando bitmap");
 			UB_VGA_clearScreen(color_check(clearscreen_s.color));
 			break;
 		default:
-			printf("onbekent comando");
+			HAL_UART_Transmit(&huart2, (uint8_t *)"no comando\n\r", sizeof("no comando"),100);
 			break;
 	}
 }
@@ -119,7 +114,7 @@ int font_check(char fnt[8])
 	}
 	else
 	{
-		printf("foute kleur");
+		HAL_UART_Transmit(&huart2, (uint8_t *)"wrong font\n\r", sizeof("wrong font"),100);
 	}
 
 
@@ -157,7 +152,7 @@ int style_check(char stl[7])
 	}
 	else
 	{
-		printf("foute kleur");
+		HAL_UART_Transmit(&huart2, (uint8_t *)"wrong style\n\r", sizeof("wrong style"),100);
 	}
 
 	return style;
@@ -175,7 +170,7 @@ int color_check(char color[12])
 {
 		int ret_val;
 		uint8_t result;
-
+		result = 1;
 		switch(color[0])
 		{
 		case 'z':
@@ -183,10 +178,11 @@ int color_check(char color[12])
 			if (result == 0)
 			{
 			ret_val = VGA_COL_BLACK;
+			result = 1;
 			}
 			else
 			{
-				printf("foute kleur");
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
 		case 'l':
 			switch(color[5])
@@ -196,50 +192,55 @@ int color_check(char color[12])
 				if (result == 0)
 				{
 				ret_val = VGA_COL_LIGHTBLUE;
+				result = 1;
 				}
 				else
 				{
-					printf("foute kleur");
+					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
 			case 'g':
 				result = strcmp(color, lgroen);
 				if (result == 0)
 				{
 				ret_val = VGA_COL_LIGHTGREEN;
+				result = 1;
 				}
 				else
 				{
-					printf("foute kleur");
+					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
 			case 'r':
 				result = strcmp(color, lrood);
 				if (result == 0)
 				{
 				ret_val = VGA_COL_LIGHTRED;
+				result = 1;
 				}
 				else
 				{
-					printf("foute kleur");
+					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
 			case 'c':
 				result = strcmp(color, lcyaan);
 				if (result == 0)
 				{
 				ret_val = VGA_COL_LIGHTCYAN;
+				result = 1;
 				}
 				else
 				{
-					printf("foute kleur");
+					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
 			case 'm':
 				result = strcmp(color, lmagenta);
 				if (result == 0)
 				{
 				ret_val = VGA_COL_LIGHTMAGENTA;
+				result = 1;
 				}
 				else
 				{
-					printf("foute kleur");
+					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
 			}
 		case 'r':
@@ -247,77 +248,86 @@ int color_check(char color[12])
 			if (result == 0)
 			{
 			ret_val = VGA_COL_RED;
+			result = 1;
 			}
 			else
 			{
-				printf("foute kleur");
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
 		case 'w':
 			result = strcmp(color, wit);
 			if (result == 0)
 			{
 			ret_val = VGA_COL_WHITE;
+			result = 1;
 			}
 			else
 			{
-				printf("foute kleur");
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
 		case 'g':
 			result = strcmp(color, geel);
 			if (result == 0)
 			{
 			ret_val = VGA_COL_YELLOW;
+			result = 1;
 			}
 			result = strcmp(color, grijs);
 			if (result == 0)
 			{
 			ret_val = VGA_COL_GRAY;
+			result = 1;
 			}
 			result = strcmp(color, groen);
+
 			if (result == 0)
 			{
 			ret_val = VGA_COL_GREEN;
+			result = 1;
 			}
 			else
 			{
-				printf("foute kleur");
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
 		case 'c':
 			result = strcmp(color, cyaan);
 			if (result == 0)
 			{
 			ret_val = VGA_COL_CYAN;
+			result = 1;
 			}
 			else
 			{
-				printf("foute kleur");
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
 		case 'm':
 			result = strcmp(color, magenta);
 			if (result == 0)
 			{
 			ret_val = VGA_COL_MAGENTA;
+			result = 1;
 			}
 			else
 			{
-				printf("foute kleur");
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
 		case 'b':
 			result = strcmp(color, blauw);
 			if (result == 0)
 			{
 			ret_val = VGA_COL_BLUE;
+			result = 1;
 			}
 			result = strcmp(color, bruin);
 			if (result == 0)
 			{
 			ret_val = VGA_COL_BROWN;
+			result = 1;
 			}
 			else
 			{
-				printf("foute kleur");
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
-	//	default: ret_val = VGA_COL_BLACK;
 		}
 
 	return ret_val;
