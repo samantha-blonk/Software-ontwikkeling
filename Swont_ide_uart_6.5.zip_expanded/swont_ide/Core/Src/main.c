@@ -25,6 +25,7 @@
 #include "gpio.h"
 #include "Frontlayer.h"
 #include "logic_layer.h"
+#include "bitmap.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -105,42 +106,7 @@ int main(void)
   UB_VGA_Screen_Init(); // Init VGA-Screen
 
   UB_VGA_FillScreen(VGA_COL_WHITE);
-//  UB_VGA_SetPixel(10,10,10);
-//  UB_VGA_SetPixel(0,0,0x00);
-//  UB_VGA_SetPixel(319,0,0x00);
-//
-////  UB_VGA_DrawBitmap(100, 100, 1);
-//
   int i;
-//  for(i=0; i < 26; i++)
-//  {
-//	  UB_VGA_DrawBitmap(0 + (i*9), 100, ('a' + i), VGA_COL_GREEN, 0);
-//  }
-//
-//  for(i=0; i < 26; i++)
-//  {
-//	  UB_VGA_DrawBitmap(0 + (i*9), 109, ('A' + i), VGA_COL_GREEN, 0);
-//  }
-//
-//  for(i=0; i < 26; i++)
-//  {
-//	  UB_VGA_DrawBitmap(0 + (i*9), 118, i, VGA_COL_GREEN, 0);
-//  }
-//  for(i=0; i < 26; i++)
-//  {
-//	  UB_VGA_DrawBitmap(0 + (i*9), 127, (i+26), VGA_COL_GREEN, 0);
-//  }
-//  for(i=0; i < 26; i++)
-//  {
-//	  UB_VGA_DrawBitmap(0 + (i*9), 136, (i+500), VGA_COL_GREEN, 0);
-//  }
-//  for(i=0; i < 26; i++)
-//  {
-//	  UB_VGA_DrawBitmap(0 + (i*9), 145, (i+526), VGA_COL_GREEN, 0);
-//  }
-
-//  	  UB_VGA_DrawBitmap(100, 100, 'a', 1, 1);
-
   for(i = 0; i < LINE_BUFLEN; i++)
 	  input.line_rx_buffer[i] = 0;
 

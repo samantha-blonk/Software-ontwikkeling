@@ -13,3 +13,5 @@
 //void logic (char);
 
 #endif /* INC_LOGIC_LAYER_H_ */
+
+void logic();

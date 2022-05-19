@@ -10,7 +10,7 @@
 #include "usart.h"
 
 
-char rood[4] = "rood";
+char rood[3] = "red";
 char blauw[5] = "blauw";
 char zwart[5] = "zwart";
 char lblauw[10] = "lichtblauw";
@@ -20,9 +20,8 @@ char cyaan[5] = "cyaan";
 char lcyaan[10] = "lichtcyaan";
 char lrood[9] = "lichtrood";
 char magenta[7] = "magenta";
-char lmagenta[12] = "lichtmagenta";
 char bruin[5] = "bruin";
-char geel[4] = "geel";
+char geel[6] = "yellow";
 char grijs[5] = "grijs";
 char wit[3] = "wit";
 
@@ -47,6 +46,7 @@ void logic()
 	switch(input.line_rx_buffer[firstCharacter])
 	{
 		case line:
+
 			 UB_VGA_SetLine(line_s.x1,
 							 line_s.y1,
 							 line_s.x2,
@@ -239,18 +239,6 @@ int color_check(char color[12])
 					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 				}
 				break;
-			case 'm':
-				result = strcmp(color, lmagenta);
-				if (result == 0)
-				{
-				ret_val = VGA_COL_LIGHTMAGENTA;
-				result = 1;
-				}
-				else
-				{
-					HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
-				}
-				break;
 			}
 			break;
 		case 'r':
@@ -344,6 +332,17 @@ int color_check(char color[12])
 				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
 			}
 			break;
+		case 'y':
+			result = strcmp(color, geel);
+			if (result == 0)
+			{
+			ret_val = VGA_COL_YELLOW;
+			result = 1;
+			}
+			else
+			{
+				HAL_UART_Transmit(&huart2, (uint8_t *)"wrong color\n\r", sizeof("wrong color"),100);
+			}
 		}
 
 	return ret_val;

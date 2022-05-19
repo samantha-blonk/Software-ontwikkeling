@@ -1,4 +1,4 @@
-../Core/Src/main.c:74:5:main	16	static
-../Core/Src/main.c:185:6:SystemClock_Config	88	static
-../Core/Src/main.c:233:1:__io_putchar	16	static
-../Core/Src/main.c:245:6:Error_Handler	4	static
+../Core/Src/main.c:75:5:main	16	static
+../Core/Src/main.c:151:6:SystemClock_Config	88	static
+../Core/Src/main.c:199:1:__io_putchar	16	static
+../Core/Src/main.c:211:6:Error_Handler	4	static

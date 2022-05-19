@@ -368,22 +368,22 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uin
 // @param[in] fontsize: The fontsize that the text is printed in
 // @param[in] fontstyle: The fontstyle that the text is printed in
 //--------------------------------------------------------------
-void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[20], char fontname, uint8_t fontsize, uint8_t fontstyle)
+void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[15], char fontname, uint8_t fontsize, uint8_t fontstyle)
 {
     uint16_t px = 0;
     uint8_t i = 0;
     uint8_t letterWidth = 0;
     if(fontsize == 1)	//normal fontsize is selected
     {
-        letterWidth = 16;
+        letterWidth = 18;
     }
     else if(fontsize == 2)	//large fontsize is selected
     {
-        letterWidth = 24;
+        letterWidth = 20;
     }
 
 
-    for(i=0; i < 20; i++)	//maximum text size of 20 letters
+    for(i=0; i < 15; i++)	//maximum text size of 20 letters
     {
         px = x_lup + (i * letterWidth);	//changes the position of x
         switch(text[i])
