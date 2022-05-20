@@ -1,12 +1,17 @@
-//--------------------------------------------------------------
-// @author Niels Vollebregt
-//
-// @brief Contains all bitmaps
-// @details This file contains all bitmaps and its infrastructure
-//
-// @version 1.0
-// @date 20/05/2022
-//--------------------------------------------------------------
+/**
+ *****************************************************************************
+ * @file   bitmap.c
+ * @author Niels Vollebregt
+ *
+ *
+ * @brief Contains all bitmaps
+ * @details This file contains all bitmaps and its infrastructure
+ *
+ * @version 1.0
+ * @date 20/05/2022
+ *
+ *****************************************************************************
+ */
 
 //--------------------------------------------------------------
 // Includes
@@ -1750,10 +1755,12 @@ const uint16_t bitmap_test[] =
 //--------------------------------------------------------------
 uint16_t bmLookup[BM_AMOUNT][4];
 
-//--------------------------------------------------------------
-// @brief Initializes bitmap
-// @details This function generates and initializes all the necessary memory and registers for the bitmaps to function
-//--------------------------------------------------------------
+/**
+ * @fn void Bitmap_init()
+ * @brief Initializes bitmap
+ *
+ * @details This function generates and initializes all the necessary memory and registers for the bitmaps to function
+ */
 void Bitmap_init()
 {
 	//----------------------------------------------------------

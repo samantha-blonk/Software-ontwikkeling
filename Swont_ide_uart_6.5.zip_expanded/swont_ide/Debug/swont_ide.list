@@ -422,10 +422,10 @@ Disassembly of section .text:
  8000592:	bf00      	nop
 
 08000594 <Bitmap_init>:
-//--------------------------------------------------------------
-// @brief Initializes bitmap
-// @details This function generates and initializes all the necessary memory and registers for the bitmaps to function
-//--------------------------------------------------------------
+ * @fn void Bitmap_init()
+ * @brief Initializes bitmap
+ * @details This function generates and initializes all the necessary memory and registers for the bitmaps to function
+ */
 void Bitmap_init()
 {
  8000594:	b480      	push	{r7}
@@ -699,10 +699,10 @@ void MX_DMA_Init(void)
  800074c:	40023800 	.word	0x40023800
 
 08000750 <FL_Input>:
-//--------------------------------------------------------------
-// @brief Function load input into structs
-// @details This function loads the different arguments into the assigned structs
-//--------------------------------------------------------------
+ * @fn void FL_Input()
+ * @brief Function load input into structs
+ * @details This function loads the different arguments into the assigned structs
+ */
 void FL_Input()
 {
  8000750:	b580      	push	{r7, lr}
@@ -1125,10 +1125,10 @@ void FL_Input()
  8000aa2:	bf00      	nop
 
 08000aa4 <arg>:
-// @param[in] a The variable that determines which argument has to be read
-// @param[in] *string_container A pointer where the string will be put into
-// @param[in] text_trigger A boolean that determines if the argument is a text or not
-//--------------------------------------------------------------
+ * @param a The variable that determines which argument has to be read
+ * @param string_container A pointer where the string will be put into
+ * @param text_trigger A boolean that determines if the argument is a text or not
+ */
 void arg(uint8_t a,char *string_container ,bool text_trigger)
 {
  8000aa4:	b480      	push	{r7}
@@ -1286,10 +1286,10 @@ void arg(uint8_t a,char *string_container ,bool text_trigger)
  8000ba0:	200008f4 	.word	0x200008f4
 
 08000ba4 <checkFunctionLen>:
-//
-// @retval TRUE amount of arguments doesn't match
-// @retval FALSE amount of arguments match
-//--------------------------------------------------------------
+ * @param functionLen The expected amount of arguments the function requires
+ * @retval TRUE amount of arguments doesn't match
+ * @retval FALSE amount of arguments match
+ */
 bool checkFunctionLen(uint8_t functionLen)
 {
  8000ba4:	b580      	push	{r7, lr}
@@ -1523,10 +1523,10 @@ void MX_GPIO_Init(void)
  8000d20:	40020400 	.word	0x40020400
 
 08000d24 <LL_Main>:
-// @param[in] x: The X-coordinate of the top left corner of the bitmap
-// @param[in] y: The Y-coordinate of the top left corner of the bitmap
-// @param[in] bmNr: The number ID of the bitmap to be loaded in
-//--------------------------------------------------------------
+ *
+ * @details Puts the correct structure in the correct function.
+ */
+
 void LL_Main()
 {
  8000d24:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
@@ -1563,7 +1563,6 @@ void LL_Main()
  8000d88:	08000e1d 	.word	0x08000e1d
 	{
 		case line:
-
 			 UB_VGA_SetLine(line_s.x1,
  8000d8c:	4b4d      	ldr	r3, [pc, #308]	; (8000ec4 <LL_Main+0x1a0>)
  8000d8e:	881c      	ldrh	r4, [r3, #0]
@@ -1601,6 +1600,7 @@ void LL_Main()
  8000dc4:	f006 fa0c 	bl	80071e0 <memset>
 			 break;
  8000dc8:	e076      	b.n	8000eb8 <LL_Main+0x194>
+
 		case rectangle:
 			UB_VGA_DrawRectangle(rectangle_s.xlup,
  8000dca:	4b40      	ldr	r3, [pc, #256]	; (8000ecc <LL_Main+0x1a8>)
@@ -1648,6 +1648,7 @@ void LL_Main()
  8000e16:	f006 f9e3 	bl	80071e0 <memset>
 			break;
  8000e1a:	e04d      	b.n	8000eb8 <LL_Main+0x194>
+
 		case text:
 			UB_VGA_writeText(text_s.xlup,
  8000e1c:	4b2e      	ldr	r3, [pc, #184]	; (8000ed8 <LL_Main+0x1b4>)
@@ -1692,6 +1693,7 @@ void LL_Main()
  8000e64:	f006 f9bc 	bl	80071e0 <memset>
 			break;
  8000e68:	e026      	b.n	8000eb8 <LL_Main+0x194>
+
 		case bitmap:
 			UB_VGA_DrawBitmap(bitmap_s.nr,
  8000e6a:	4b20      	ldr	r3, [pc, #128]	; (8000eec <LL_Main+0x1c8>)
@@ -1714,6 +1716,7 @@ void LL_Main()
  8000e88:	f006 f9aa 	bl	80071e0 <memset>
 			break;
  8000e8c:	e014      	b.n	8000eb8 <LL_Main+0x194>
+
 		case clearscreen:
 			UB_VGA_clearScreen(color_check(clearscreen_s.color));
  8000e8e:	4818      	ldr	r0, [pc, #96]	; (8000ef0 <LL_Main+0x1cc>)
@@ -1729,6 +1732,7 @@ void LL_Main()
  8000ea4:	f006 f99c 	bl	80071e0 <memset>
 			break;
  8000ea8:	e006      	b.n	8000eb8 <LL_Main+0x194>
+
 		default:
 			HAL_UART_Transmit(&huart2, (uint8_t *)"no comando\n\r", sizeof("no comando"),100);
  8000eaa:	2364      	movs	r3, #100	; 0x64
@@ -1760,10 +1764,10 @@ void LL_Main()
  8000ef8:	20000de8 	.word	0x20000de8
 
 08000efc <font_check>:
-// @param[in] fnt: char whit font type
-//
-// @return return font type as 1 or 2
-//--------------------------------------------------------------
+ *
+ * @retval 1 Font arial
+ * @retval 2 Font consolas
+ */
 int font_check(char fnt[8])
 {
  8000efc:	b580      	push	{r7, lr}
@@ -1822,8 +1826,6 @@ int font_check(char fnt[8])
  8000f4c:	f005 f8d3 	bl	80060f6 <HAL_UART_Transmit>
 	}
 
-
-
 	return font;
  8000f50:	68fb      	ldr	r3, [r7, #12]
 }
@@ -1838,10 +1840,10 @@ int font_check(char fnt[8])
  8000f68:	20000de8 	.word	0x20000de8
 
 08000f6c <style_check>:
-// @param[in] the char withe the fond style in it
-//
-// @return return the style code (1,2,3) 1 = normaal, 2 = vet, 3 = cursief
-//--------------------------------------------------------------
+ * @retval 1 Normal font
+ * @retval 2 Bolt font
+ * @retval 3 Italic font
+ */
 int style_check(char stl[7])
 {
  8000f6c:	b580      	push	{r7, lr}
@@ -1934,10 +1936,10 @@ int style_check(char stl[7])
  8000ffc:	20000de8 	.word	0x20000de8
 
 08001000 <color_check>:
-// @param[in] color: char with the color
-//
-// @return return the color code
-//--------------------------------------------------------------
+ *
+ * @param color char with the color
+ * @return Return the color code
+ */
 int color_check(char color[12])
 {
  8001000:	b580      	push	{r7, lr}
@@ -4305,10 +4307,10 @@ Infinite_Loop:
 	...
 
 08001d0c <UB_VGA_Screen_Init>:
-// @brief The initialisation of the VGA driver
-// @details The function initialises the timer registers of timer 1 & 2.
-//			It also initialises the DMA register.
-//--------------------------------------------------------------
+ * @brief The initialization of the VGA driver
+ *
+ * @details The function initializes the timer registers of timer 1 & 2. It also initializes the DMA register.
+ */
 void UB_VGA_Screen_Init(void)
 {
  8001d0c:	b580      	push	{r7, lr}
@@ -4402,10 +4404,10 @@ void UB_VGA_Screen_Init(void)
  8001dac:	40026488 	.word	0x40026488
 
 08001db0 <UB_VGA_FillScreen>:
-// @details This function writes for all pixels a single color to the ram.
-//
-// @param[in] color The 8-bit color-code to display
-//--------------------------------------------------------------
+ * @details This function writes for all pixels a single color to the ram.
+ *
+ * @param color The 8-bit color-code to display
+ */
 void UB_VGA_FillScreen(uint8_t color)
 {
  8001db0:	b580      	push	{r7, lr}
@@ -4454,10 +4456,10 @@ void UB_VGA_FillScreen(uint8_t color)
 	...
 
 08001df8 <UB_VGA_SetPixel>:
-// @param[in] xp The X-coordinate of the pixel
-// @param[in] yp The Y-coordinate of the pixel
-// @param[in] color The 8-bit color-code to display
-//--------------------------------------------------------------
+ * @param xp The X-coordinate of the pix
+ * @param yp The Y-coordinate of the pixe
+ * @param color The 8-bit color-code to display
+ */
 void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
 {
  8001df8:	b480      	push	{r7}
@@ -4533,13 +4535,13 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
   uint16_t amPerSide;
   float slope;
 
-  dx=x2-x1;      							//the horizontal distance of the line
+  dx=x2-x1;      							//The horizontal distance of the line
  8001e66:	887a      	ldrh	r2, [r7, #2]
  8001e68:	88fb      	ldrh	r3, [r7, #6]
  8001e6a:	1ad3      	subs	r3, r2, r3
  8001e6c:	b29b      	uxth	r3, r3
  8001e6e:	837b      	strh	r3, [r7, #26]
-  dy=y2-y1;      							//the vertical distance of the line
+  dy=y2-y1;      							//The vertical distance of the line
  8001e70:	883a      	ldrh	r2, [r7, #0]
  8001e72:	88bb      	ldrh	r3, [r7, #4]
  8001e74:	1ad3      	subs	r3, r2, r3
@@ -4567,7 +4569,7 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
  8001e9c:	f003 0301 	and.w	r3, r3, #1
  8001ea0:	747b      	strb	r3, [r7, #17]
 
-  if (dxabs>=dyabs) 						//the line is more horizontal than vertical
+  if (dxabs>=dyabs) 						//The line is more horizontal than vertical
  8001ea2:	8afa      	ldrh	r2, [r7, #22]
  8001ea4:	8abb      	ldrh	r3, [r7, #20]
  8001ea6:	429a      	cmp	r2, r3
@@ -5112,9 +5114,9 @@ void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t heigh
  80022e2:	bd90      	pop	{r4, r7, pc}
 
 080022e4 <UB_VGA_clearScreen>:
-//--------------------------------------------------------------
-// @brief Function to clear the whole screen.
-// @details This function writes for all pixels the color white to the ram.
+// @details This function writes for all pixels a customizable color to the ram.
+//
+// @param[in] color The 8-bit color-code to display
 //--------------------------------------------------------------
 void UB_VGA_clearScreen(uint8_t color)
 {
@@ -5164,9 +5166,9 @@ void UB_VGA_clearScreen(uint8_t color)
 	...
 
 0800232c <UB_VGA_DrawBitmap>:
-// @param[in] x The X-coordinate of the top left corner of the bitmap
-// @param[in] y The Y-coordinate of the top left corner of the bitmap
 // @param[in] bmNr The number ID of the bitmap to be loaded in
+// @param[in] color If given replaces all white pixels with designated color
+// @param[in] double_size When true doubles the size of the bitmap
 //--------------------------------------------------------------
 void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uint8_t double_size)
 {
@@ -5287,7 +5289,7 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uin
  80023ce:	d03c      	beq.n	800244a <UB_VGA_DrawBitmap+0x11e>
   						break;
 
-  					if (color)
+  					if (color) //When true replace all white pixels with color
  80023d0:	787b      	ldrb	r3, [r7, #1]
  80023d2:	2b00      	cmp	r3, #0
  80023d4:	d013      	beq.n	80023fe <UB_VGA_DrawBitmap+0xd2>
@@ -5428,9 +5430,9 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uin
  80024a0:	08008324 	.word	0x08008324
 
 080024a4 <UB_VGA_writeText>:
-// @param[in] fontname: The fontname that the text is printed in
-// @param[in] fontsize: The fontsize that the text is printed in
-// @param[in] fontstyle: The fontstyle that the text is printed in
+// @param[in] fontname The fontname that the text is printed in
+// @param[in] fontsize The fontsize that the text is printed in
+// @param[in] fontstyle The fontstyle that the text is printed in
 //--------------------------------------------------------------
 void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[15], char fontname, uint8_t fontsize, uint8_t fontstyle)
 {

@@ -1,12 +1,16 @@
-//--------------------------------------------------------------
-// @author Thijs van Ryn
-//
-// @brief Handles the logic
-// @details Translates front layer structures to API functions
-//
-// @version 1.0
-// @date 20/05/2022
-//--------------------------------------------------------------
+/**
+ *****************************************************************************
+ *  @file logic_layer.c
+ *  @author Thijs van Ryn
+ *
+ *  @brief Handles the logic
+ *  @details Translates front layer structures to API functions
+ *
+ *  @version 1.0
+ *  @date 20/05/2022
+ *****************************************************************************
+ */
+
 
 //--------------------------------------------------------------
 // Includes
@@ -44,10 +48,13 @@ int color_check(char color[12]);
 int style_check(char stl[7]);
 int font_check(char fnt[8]);
 
-//--------------------------------------------------------------
-// @brief Connects the front layer with the IO layer.
-// @details Puts the correct structure in the correct function.
-//--------------------------------------------------------------
+/**
+ * @fn void LL_Main()
+ * @brief Connects the front layer with the IO layer.
+ *
+ * @details Puts the correct structure in the correct function.
+ */
+
 void LL_Main()
 {
 
@@ -104,16 +111,17 @@ void LL_Main()
 	}
 }
 
-
-//--------------------------------------------------------------
-// @brief Function checks font type.
-// @details This function checks which font is asked.
-//
-// @param[in] fnt Font type
-//
-// @retval 1 Font arial
-// @retval 2 Font consolas
-//--------------------------------------------------------------
+/**
+ * @fn int font_check(char[])
+ * @brief Function checks font type
+ *
+ * @details This function checks which font is asked
+ *
+ * @param fnt Font type
+ *
+ * @retval 1 Font arial
+ * @retval 2 Font consolas
+ */
 int font_check(char fnt[8])
 {
 	int font;
@@ -137,16 +145,18 @@ int font_check(char fnt[8])
 	return font;
 }
 
-//--------------------------------------------------------------
-// @brief Function check font style.
-// @details This function looks which font style should be displayed (normaal, vet, cursief).
-//
-// @param[in] The char with the font style
-//
-// @retval 1 Normal font
-// @retval 2 Bolt font
-// @retval 3 Italic font
-//--------------------------------------------------------------
+/**
+ * @fn int style_check(char[])
+ * @brief Function check font style
+ *
+ * @details This function looks which font style should be displayed (normaal, vet, cursief)
+ *
+ * @param stl The char with the font style
+ *
+ * @retval 1 Normal font
+ * @retval 2 Bolt font
+ * @retval 3 Italic font
+ */
 int style_check(char stl[7])
 {
 	int style;
@@ -175,14 +185,15 @@ int style_check(char stl[7])
 	return style;
 }
 
-//--------------------------------------------------------------
-// @brief Function checks color.
-// @details This functions checks which color code belongs to which hex value.
-//
-// @param[in] Color char with the color
-//
-// @return Return the color code
-//--------------------------------------------------------------
+/**
+ * @fn int color_check(char[])
+ * @brief Function checks color
+ *
+ * @details This functions checks which color code belongs to which hex value
+ *
+ * @param color char with the color
+ * @return ret_val the color code
+ */
 int color_check(char color[12])
 {
 		int ret_val = 0;

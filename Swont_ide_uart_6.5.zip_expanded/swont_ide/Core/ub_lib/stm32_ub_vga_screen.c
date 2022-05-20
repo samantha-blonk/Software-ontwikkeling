@@ -1,12 +1,16 @@
-//--------------------------------------------------------------
-// @author Franc van der Bent & Niels Vollebregt
-//
-// @brief The API to drive the VGA-output
-// @details The API can draw a single pixel, line, rectangle, text and a bitmap and can clear the screen
-//
-// @version 1.0
-// @date 20/05/2022
-//--------------------------------------------------------------
+/**
+ *****************************************************************************
+ * @file stm32_ub_vga_screen.c
+ * @author Franc van der Bent & Niels Vollebregt
+ *
+ * @brief The API to drive the VGA-output
+ * @details The API can draw a single pixel, line, rectangle, text and a bitmap and can clear the screen
+ *
+ * @version 1.0
+ * @date 20/05/2022
+ *****************************************************************************
+ */
+
 
 
 //--------------------------------------------------------------
@@ -23,11 +27,12 @@ extern DMA_HandleTypeDef hdma_tim1_up;
 uint8_t VGA_RAM1[(VGA_DISPLAY_X+1)*VGA_DISPLAY_Y];
 VGA_t VGA;
 
-//--------------------------------------------------------------
-// @brief The initialization of the VGA driver
-// @details The function initializes the timer registers of timer 1 & 2.
-//			It also initializes the DMA register.
-//--------------------------------------------------------------
+/**
+ * @fn void UB_VGA_Screen_Init(void)
+ * @brief The initialization of the VGA driver
+ *
+ * @details The function initializes the timer registers of timer 1 & 2. It also initializes the DMA register.
+ */
 void UB_VGA_Screen_Init(void)
 {
   VGA.hsync_cnt = 0;
@@ -56,13 +61,14 @@ void UB_VGA_Screen_Init(void)
   VGA.dma2_cr_reg = DMA2_Stream5->CR;
 }
 
-
-//--------------------------------------------------------------
-// @brief Function to fill the whole screen with a single color.
-// @details This function writes for all pixels a single color to the ram.
-//
-// @param[in] color The 8-bit color-code to display
-//--------------------------------------------------------------
+/**
+ * @fn void UB_VGA_FillScreen(uint8_t)
+ * @brief Function to fill the whole screen with a single color.
+ *
+ * @details This function writes for all pixels a single color to the ram.
+ *
+ * @param color The 8-bit color-code to display
+ */
 void UB_VGA_FillScreen(uint8_t color)
 {
   uint16_t xp,yp;
@@ -74,15 +80,16 @@ void UB_VGA_FillScreen(uint8_t color)
   }
 }
 
-
-//--------------------------------------------------------------
-// @brief Function to color a single pixel
-// @details This function writes a single color of a single pixel to the ram.
-//
-// @param[in] xp The X-coordinate of the pixel
-// @param[in] yp The Y-coordinate of the pixel
-// @param[in] color The 8-bit color-code to display
-//--------------------------------------------------------------
+/**
+ * @fn void UB_VGA_SetPixel(uint16_t, uint16_t, uint8_t)
+ * @brief Function to color a single pixel
+ *
+ * @details This function writes a single color of a single pixel to the ram.
+ *
+ * @param xp The X-coordinate of the pix
+ * @param yp The Y-coordinate of the pixe
+ * @param color The 8-bit color-code to display
+ */
 void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
 {
   if(xp >= VGA_DISPLAY_X)
@@ -94,19 +101,20 @@ void UB_VGA_SetPixel(uint16_t xp, uint16_t yp, uint8_t color)
   VGA_RAM1[(yp * (VGA_DISPLAY_X + 1)) + xp] = color;
 }
 
-
-//--------------------------------------------------------------
-// @brief Function to draw a line.
-// @details This function draws a single color to a line with a customizable width from a
-//			custom coordinate (point 1) to another custom coordinate (point 2).
-//
-// @param[in] x1 The X-coordinate of point 1 of the line
-// @param[in] y1 The Y-coordinate of point 1 of the line
-// @param[in] x2 The X-coordinate of point 2 of the line
-// @param[in] y2 The Y-coordinate of point 2 of the line
-// @param[in] color The 8-bit color-code to display
-// @param[in] width The width of the line in pixels
-//--------------------------------------------------------------
+/**
+ * @fn void UB_VGA_SetLine(uint16_t, uint16_t, uint16_t, uint16_t, uint8_t, uint16_t)
+ * @brief Function to draw a line
+ *
+ * @details This function draws a single color to a line with a customizable width from a
+ * custom coordinate (point 1) to another custom coordinate (point 2).
+ *
+ * @param x1 The X-coordinate of point 1 of the line
+ * @param y1 The Y-coordinate of point 1 of the line
+ * @param x2 The X-coordinate of point 2 of the line
+ * @param y2 The Y-coordinate of point 2 of the line
+ * @param color The 8-bit color-code to display
+ * @param width The width of the line in pixels
+ */
 void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t color, uint16_t width)
 {
   int16_t dx;
@@ -175,21 +183,22 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
   }
 }
 
-//--------------------------------------------------------------
-// @brief Function to draw a rectangle.
-// @details This function draws a rectangle starting with the coördinates of the top left
-//			corner of the rectangle. It also has the potential to fill the rectangle with a color.
-//
-// @param[in] xp The X-coordinate of the top left corner of the rectangle
-// @param[in] yp The Y-coordinate of the top left corner of the rectangle
-// @param[in] width The width of the entire rectangle
-// @param[in] height The height of the entire rectangle
-// @param[in] color The 8-bit color-code to display as filling of the rectangle
-// @param[in] filled The value that determines if the rectangle is filled or not
-// @param[in] bordercolor The 8-bit color-code to display as the border of the rectangle
-// @param[in] lineWidth The width of the line that determines the border of the rectangle
-//--------------------------------------------------------------
-
+/**
+ * @fn void UB_VGA_DrawRectangle(uint16_t, uint16_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t)
+ * @brief Function to draw a rectangle
+ *
+ * @details This function draws a rectangle starting with the coördinates of the top left
+ * corner of the rectangle. It also has the potential to fill the rectangle with a color.
+ *
+ * @param xp The X-coordinate of the top left corner of the rectangle
+ * @param yp The Y-coordinate of the top left corner of the rectangle
+ * @param width The width of the entire rectangle
+ * @param height The height of the entire rectangle
+ * @param color The 8-bit color-code to display as filling of the rectangle
+ * @param filled The value that determines if the rectangle is filled or not
+ * @param bordercolor The 8-bit color-code to display as the border of the rectangle
+ * @param lineWidth The width of the line that determines the border of the rectangle
+ */
 void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t height, uint8_t color, uint8_t filled,
 		uint8_t bordercolor, uint8_t lineWidth)
 {
@@ -254,12 +263,14 @@ void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t heigh
 
 }
 
-//--------------------------------------------------------------
-// @brief Function to clear the whole screen.
-// @details This function writes for all pixels a customizable color to the ram.
-//
-// @param[in] color The 8-bit color-code to display
-//--------------------------------------------------------------
+/**
+ * @fn void UB_VGA_clearScreen(uint8_t)
+ * @brief Function to clear the whole screen
+ *
+ * @details This function writes for all pixels a customizable color to the ram
+ *
+ * @param color The 8-bit color-code to display
+ */
 void UB_VGA_clearScreen(uint8_t color)
 {
   uint16_t xp,yp;
@@ -271,16 +282,18 @@ void UB_VGA_clearScreen(uint8_t color)
   }
 }
 
-//--------------------------------------------------------------
-// @brief Function load in a bitmap.
-// @details This function loads a designated bitmap on designated coordinates.
-//
-// @param[in] x The X-coordinate of the top left corner of the bitmap
-// @param[in] y The Y-coordinate of the top left corner of the bitmap
-// @param[in] bmNr The number ID of the bitmap to be loaded in
-// @param[in] color If given replaces all white pixels with designated color
-// @param[in] double_size When true doubles the size of the bitmap
-//--------------------------------------------------------------
+/**
+ * @fn void UB_VGA_DrawBitmap(uint16_t, uint16_t, uint16_t, uint8_t, uint8_t)
+ * @brief Function load in a bitmap
+ *
+ * @details This function loads a designated bitmap on designated coordinates
+ *
+ * @param x The X-coordinate of the top left corner of the bitmap
+ * @param y The Y-coordinate of the top left corner of the bitmap
+ * @param bmNr The number ID of the bitmap to be loaded in
+ * @param color If given replaces all white pixels with designated color
+ * @param double_size When true doubles the size of the bitmap
+ */
 void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uint8_t double_size)
 {
   	uint16_t i; //Counts y coordinate VGA
@@ -360,19 +373,21 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uin
     }
 }
 
-//--------------------------------------------------------------
-// @brief Function write text on screen
-// @details This function checks the fontname, fontsize and fontstyle and prints the appropriate
-//			letter that fits the given parameters
-//
-// @param[in] x_lup The X-coordinate of the top left corner of the printed letter
-// @param[in] y_lup The Y-coordinate of the top left corner of the printed letter
-// @param[in] color The color code which the letter is printed in
-// @param[in] text The text that has the be written on the screen
-// @param[in] fontname The fontname that the text is printed in
-// @param[in] fontsize The fontsize that the text is printed in
-// @param[in] fontstyle The fontstyle that the text is printed in
-//--------------------------------------------------------------
+/**
+ * @fn void UB_VGA_writeText(uint16_t, uint16_t, uint8_t, char[], char, uint8_t, uint8_t)
+ * @brief Function write text on screen
+ *
+ * @details This function checks the fontname, fontsize and fontstyle and prints the appropriate
+ * letter that fits the given parameters
+ *
+ * @param x_lup The X-coordinate of the top left corner of the printed letter
+ * @param y_lup The Y-coordinate of the top left corner of the printed letter
+ * @param color The color code which the letter is printed in
+ * @param text The text that has the be written on the screen
+ * @param fontname The fontname that the text is printed in
+ * @param fontsize The fontsize that the text is printed in
+ * @param fontstyle The fontstyle that the text is printed in
+ */
 void UB_VGA_writeText(uint16_t x_lup, uint16_t y_lup, uint8_t color, char text[15], char fontname, uint8_t fontsize, uint8_t fontstyle)
 {
     uint16_t px = 0;

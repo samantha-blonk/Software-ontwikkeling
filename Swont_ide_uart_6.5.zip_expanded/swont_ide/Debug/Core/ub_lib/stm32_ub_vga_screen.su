@@ -1,8 +1,8 @@
-../Core/ub_lib/stm32_ub_vga_screen.c:31:6:UB_VGA_Screen_Init	8	static
-../Core/ub_lib/stm32_ub_vga_screen.c:66:6:UB_VGA_FillScreen	24	static
-../Core/ub_lib/stm32_ub_vga_screen.c:86:6:UB_VGA_SetPixel	16	static
-../Core/ub_lib/stm32_ub_vga_screen.c:110:6:UB_VGA_SetLine	48	static
-../Core/ub_lib/stm32_ub_vga_screen.c:193:6:UB_VGA_DrawRectangle	32	static
-../Core/ub_lib/stm32_ub_vga_screen.c:261:6:UB_VGA_clearScreen	24	static
-../Core/ub_lib/stm32_ub_vga_screen.c:280:6:UB_VGA_DrawBitmap	40	static
-../Core/ub_lib/stm32_ub_vga_screen.c:371:6:UB_VGA_writeText	40	static
+../Core/ub_lib/stm32_ub_vga_screen.c:33:6:UB_VGA_Screen_Init	8	static
+../Core/ub_lib/stm32_ub_vga_screen.c:69:6:UB_VGA_FillScreen	24	static
+../Core/ub_lib/stm32_ub_vga_screen.c:90:6:UB_VGA_SetPixel	16	static
+../Core/ub_lib/stm32_ub_vga_screen.c:127:6:UB_VGA_SetLine	48	static
+../Core/ub_lib/stm32_ub_vga_screen.c:210:6:UB_VGA_DrawRectangle	32	static
+../Core/ub_lib/stm32_ub_vga_screen.c:280:6:UB_VGA_clearScreen	24	static
+../Core/ub_lib/stm32_ub_vga_screen.c:301:6:UB_VGA_DrawBitmap	40	static
+../Core/ub_lib/stm32_ub_vga_screen.c:393:6:UB_VGA_writeText	40	static
