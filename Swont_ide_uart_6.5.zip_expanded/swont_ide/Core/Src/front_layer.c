@@ -1,25 +1,38 @@
-/*
- * Frontlayer.c
- *
- *  Created on: 29 Apr 2022
- *      Author: Samantha
- */
-#include "Frontlayer.h"
+//--------------------------------------------------------------
+// @author Samantha van der Blonk
+//
+// @brief Reads out UART
+// @details This file reads UART and organizes it in structs
+//
+// @version 1.0
+// @date 20/05/2022
+//--------------------------------------------------------------
+
+//--------------------------------------------------------------
+// Includes
+//--------------------------------------------------------------
+#include "front_layer.h"
 #include "usart.h"
 #include "main.h"
-#include <stdbool.h>
+#include "stdbool.h"
 
-void arg(uint8_t, char*, bool);
-bool checkFunctionLen(uint8_t);
-
-char string_container[128];
-
+//--------------------------------------------------------------
+// Global structs
+//--------------------------------------------------------------
 LINE_S line_s;
 BITMAP_S bitmap_s;
 CLEARSCREEN_S clearscreen_s;
 LINE_S line_s;
 RECTANGLE_S rectangle_s;
 TEXT_S text_s;
+
+//--------------------------------------------------------------
+// Local variables
+//--------------------------------------------------------------
+void arg(uint8_t, char*, bool);
+bool checkFunctionLen(uint8_t);
+
+char string_container[128];
 
 
 //--------------------------------------------------------------
@@ -121,9 +134,9 @@ void FL_Input()
 // @brief Function reads argument from UART
 // @details This function reads a certain argument from the UART and puts this in a string
 //
-// @param[in] a: The variable that determines which argument has to be read
-// @param[in] *string_container: A pointer where the string will be put into
-// @param[in] text_trigger: A boolean that determines if the argument is a text or not
+// @param[in] a The variable that determines which argument has to be read
+// @param[in] *string_container A pointer where the string will be put into
+// @param[in] text_trigger A boolean that determines if the argument is a text or not
 //--------------------------------------------------------------
 void arg(uint8_t a,char *string_container ,bool text_trigger)
 {
@@ -156,6 +169,15 @@ void arg(uint8_t a,char *string_container ,bool text_trigger)
 			}
 }
 
+//--------------------------------------------------------------
+// @brief Function checks argument length
+// @details This function checks how many arguments have been put into the UART and compares this with the expected function length
+//
+// @param[in] functionLen The expected amount of arguments the function requires
+//
+// @retval TRUE amount of arguments doesn't match
+// @retval FALSE amount of arguments match
+//--------------------------------------------------------------
 bool checkFunctionLen(uint8_t functionLen)
 {
 	uint8_t i = 0;

@@ -1,15 +1,24 @@
-/*
- * logic_layer.c
- *
- *  Created on: 12 mei 2022
- *      Author: thrij
- */
-#include "Frontlayer.h"
+//--------------------------------------------------------------
+// @author Thijs van Ryn
+//
+// @brief Handles the logic
+// @details Translates front layer structures to API functions
+//
+// @version 1.0
+// @date 20/05/2022
+//--------------------------------------------------------------
+
+//--------------------------------------------------------------
+// Includes
+//--------------------------------------------------------------
+#include "front_layer.h"
 #include "logic_layer.h"
 #include "main.h"
 #include "usart.h"
 
-
+//--------------------------------------------------------------
+// Local variables
+//--------------------------------------------------------------
 char rood[3] = "red";
 char blauw[5] = "blauw";
 char zwart[5] = "zwart";
@@ -28,25 +37,23 @@ char wit[3] = "wit";
 char consolas[] = "consolas", arial[] = "arial";
 char normaal[] = "normaal" , vet[] = "vet", cursief[] = "cursief";
 
+//--------------------------------------------------------------
+// Local functions
+//--------------------------------------------------------------
 int color_check(char color[12]);
 int style_check(char stl[7]);
 int font_check(char fnt[8]);
 
 //--------------------------------------------------------------
-// @brief Logic function.
-// @details This function conects the frond layer with the io layer.
-//
-// @param[in] x: The X-coordinate of the top left corner of the bitmap
-// @param[in] y: The Y-coordinate of the top left corner of the bitmap
-// @param[in] bmNr: The number ID of the bitmap to be loaded in
+// @brief Connects the front layer with the IO layer.
+// @details Puts the correct structure in the correct function.
 //--------------------------------------------------------------
-void logic()
+void LL_Main()
 {
 
 	switch(input.line_rx_buffer[firstCharacter])
 	{
 		case line:
-
 			 UB_VGA_SetLine(line_s.x1,
 							 line_s.y1,
 							 line_s.x2,
@@ -55,6 +62,7 @@ void logic()
 							 line_s.weight);
 			 memset(&line_s, 0, sizeof(LINE_S));
 			 break;
+
 		case rectangle:
 			UB_VGA_DrawRectangle(rectangle_s.xlup,
 					rectangle_s.ylup,
@@ -66,6 +74,7 @@ void logic()
 					rectangle_s.linewidth);
 			 memset(&rectangle_s, 0, sizeof(RECTANGLE_S));
 			break;
+
 		case text:
 			UB_VGA_writeText(text_s.xlup,
 					text_s.ylup,
@@ -76,16 +85,19 @@ void logic()
 					style_check(text_s.fontstyle));
 			 memset(&text_s, 0, sizeof(TEXT_S));
 			break;
+
 		case bitmap:
 			UB_VGA_DrawBitmap(bitmap_s.nr,
 					bitmap_s.xlup,
 					bitmap_s.ylup, 0, 0);
 			 memset(&bitmap_s, 0, sizeof(BITMAP_S));
 			break;
+
 		case clearscreen:
 			UB_VGA_clearScreen(color_check(clearscreen_s.color));
 			 memset(&clearscreen_s, 0, sizeof(CLEARSCREEN_S));
 			break;
+
 		default:
 			HAL_UART_Transmit(&huart2, (uint8_t *)"no comando\n\r", sizeof("no comando"),100);
 			break;
@@ -94,12 +106,13 @@ void logic()
 
 
 //--------------------------------------------------------------
-// @brief Function check font type.
-// @details This function checks which font is askt.
+// @brief Function checks font type.
+// @details This function checks which font is asked.
 //
-// @param[in] fnt: char whit font type
+// @param[in] fnt Font type
 //
-// @return return font type as 1 or 2
+// @retval 1 Font arial
+// @retval 2 Font consolas
 //--------------------------------------------------------------
 int font_check(char fnt[8])
 {
@@ -121,18 +134,18 @@ int font_check(char fnt[8])
 		HAL_UART_Transmit(&huart2, (uint8_t *)"wrong font\n\r", sizeof("wrong font"),100);
 	}
 
-
-
 	return font;
 }
 
 //--------------------------------------------------------------
 // @brief Function check font style.
-// @details This function looks which font style should be displayd (normaal, vet, cursief).
+// @details This function looks which font style should be displayed (normaal, vet, cursief).
 //
-// @param[in] the char withe the fond style in it
+// @param[in] The char with the font style
 //
-// @return return the style code (1,2,3) 1 = normaal, 2 = vet, 3 = cursief
+// @retval 1 Normal font
+// @retval 2 Bolt font
+// @retval 3 Italic font
 //--------------------------------------------------------------
 int style_check(char stl[7])
 {
@@ -164,11 +177,11 @@ int style_check(char stl[7])
 
 //--------------------------------------------------------------
 // @brief Function checks color.
-// @details this functions checks which color code belongs to which hex value.
+// @details This functions checks which color code belongs to which hex value.
 //
-// @param[in] color: char with the color
+// @param[in] Color char with the color
 //
-// @return return the color code
+// @return Return the color code
 //--------------------------------------------------------------
 int color_check(char color[12])
 {

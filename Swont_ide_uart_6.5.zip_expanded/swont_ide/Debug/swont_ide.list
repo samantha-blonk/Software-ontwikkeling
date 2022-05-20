@@ -35,15 +35,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_ranges 00000c60  00000000  00000000  000325e8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00024085  00000000  00000000  00033248  2**0
+ 16 .debug_macro  00023fe7  00000000  00000000  00033248  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00012487  00000000  00000000  000572cd  2**0
+ 17 .debug_line   0001243e  00000000  00000000  0005722f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000cba99  00000000  00000000  00069754  2**0
+ 18 .debug_str    000cba96  00000000  00000000  0006966d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  001351ed  2**0
+ 19 .comment      00000050  00000000  00000000  00135103  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00003fe0  00000000  00000000  00135240  2**2
+ 20 .debug_frame  00003fe0  00000000  00000000  00135154  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -421,964 +421,967 @@ Disassembly of section .text:
  8000590:	4770      	bx	lr
  8000592:	bf00      	nop
 
-08000594 <FL_Input>:
-//--------------------------------------------------------------
-// @brief Function load input into structs
-// @details This function loads the different arguments into the assigned structs
-//--------------------------------------------------------------
-void FL_Input()
-{
- 8000594:	b580      	push	{r7, lr}
- 8000596:	af00      	add	r7, sp, #0
-	switch(input.line_rx_buffer[firstCharacter])
- 8000598:	4bbe      	ldr	r3, [pc, #760]	; (8000894 <FL_Input+0x300>)
- 800059a:	785b      	ldrb	r3, [r3, #1]
- 800059c:	3b62      	subs	r3, #98	; 0x62
- 800059e:	2b12      	cmp	r3, #18
- 80005a0:	f200 8174 	bhi.w	800088c <FL_Input+0x2f8>
- 80005a4:	a201      	add	r2, pc, #4	; (adr r2, 80005ac <FL_Input+0x18>)
- 80005a6:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 80005aa:	bf00      	nop
- 80005ac:	0800080b 	.word	0x0800080b
- 80005b0:	08000867 	.word	0x08000867
- 80005b4:	0800088d 	.word	0x0800088d
- 80005b8:	0800088d 	.word	0x0800088d
- 80005bc:	0800088d 	.word	0x0800088d
- 80005c0:	0800088d 	.word	0x0800088d
- 80005c4:	0800088d 	.word	0x0800088d
- 80005c8:	0800088d 	.word	0x0800088d
- 80005cc:	0800088d 	.word	0x0800088d
- 80005d0:	0800088d 	.word	0x0800088d
- 80005d4:	080005f9 	.word	0x080005f9
- 80005d8:	0800088d 	.word	0x0800088d
- 80005dc:	0800088d 	.word	0x0800088d
- 80005e0:	0800088d 	.word	0x0800088d
- 80005e4:	0800088d 	.word	0x0800088d
- 80005e8:	0800088d 	.word	0x0800088d
- 80005ec:	08000741 	.word	0x08000741
- 80005f0:	0800088d 	.word	0x0800088d
- 80005f4:	08000699 	.word	0x08000699
-	{
-		case line:	//if the function line is called
-			if(checkFunctionLen(lineLen) == false)
- 80005f8:	2006      	movs	r0, #6
- 80005fa:	f000 f9f5 	bl	80009e8 <checkFunctionLen>
- 80005fe:	4603      	mov	r3, r0
- 8000600:	f083 0301 	eor.w	r3, r3, #1
- 8000604:	b2db      	uxtb	r3, r3
- 8000606:	2b00      	cmp	r3, #0
- 8000608:	f000 8162 	beq.w	80008d0 <FL_Input+0x33c>
-			{
-				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
- 800060c:	2200      	movs	r2, #0
- 800060e:	49a2      	ldr	r1, [pc, #648]	; (8000898 <FL_Input+0x304>)
- 8000610:	2001      	movs	r0, #1
- 8000612:	f000 f969 	bl	80008e8 <arg>
-				line_s.x1 = atoi(string_container);	//stores the information from argument 1 into line struct
- 8000616:	48a0      	ldr	r0, [pc, #640]	; (8000898 <FL_Input+0x304>)
- 8000618:	f006 fdb4 	bl	8007184 <atoi>
- 800061c:	4603      	mov	r3, r0
- 800061e:	b29a      	uxth	r2, r3
- 8000620:	4b9e      	ldr	r3, [pc, #632]	; (800089c <FL_Input+0x308>)
- 8000622:	801a      	strh	r2, [r3, #0]
-				arg(argumentTWO, string_container, NOTEXT);	//etc
- 8000624:	2200      	movs	r2, #0
- 8000626:	499c      	ldr	r1, [pc, #624]	; (8000898 <FL_Input+0x304>)
- 8000628:	2002      	movs	r0, #2
- 800062a:	f000 f95d 	bl	80008e8 <arg>
-				line_s.y1 = atoi(string_container);
- 800062e:	489a      	ldr	r0, [pc, #616]	; (8000898 <FL_Input+0x304>)
- 8000630:	f006 fda8 	bl	8007184 <atoi>
- 8000634:	4603      	mov	r3, r0
- 8000636:	b29a      	uxth	r2, r3
- 8000638:	4b98      	ldr	r3, [pc, #608]	; (800089c <FL_Input+0x308>)
- 800063a:	805a      	strh	r2, [r3, #2]
-				arg(argumentTHREE, string_container, NOTEXT);
- 800063c:	2200      	movs	r2, #0
- 800063e:	4996      	ldr	r1, [pc, #600]	; (8000898 <FL_Input+0x304>)
- 8000640:	2003      	movs	r0, #3
- 8000642:	f000 f951 	bl	80008e8 <arg>
-				line_s.x2 = atoi(string_container);
- 8000646:	4894      	ldr	r0, [pc, #592]	; (8000898 <FL_Input+0x304>)
- 8000648:	f006 fd9c 	bl	8007184 <atoi>
- 800064c:	4603      	mov	r3, r0
- 800064e:	b29a      	uxth	r2, r3
- 8000650:	4b92      	ldr	r3, [pc, #584]	; (800089c <FL_Input+0x308>)
- 8000652:	809a      	strh	r2, [r3, #4]
-				arg(argumentFOUR, string_container, NOTEXT);
- 8000654:	2200      	movs	r2, #0
- 8000656:	4990      	ldr	r1, [pc, #576]	; (8000898 <FL_Input+0x304>)
- 8000658:	2004      	movs	r0, #4
- 800065a:	f000 f945 	bl	80008e8 <arg>
-				line_s.y2 = atoi(string_container);
- 800065e:	488e      	ldr	r0, [pc, #568]	; (8000898 <FL_Input+0x304>)
- 8000660:	f006 fd90 	bl	8007184 <atoi>
- 8000664:	4603      	mov	r3, r0
- 8000666:	b29a      	uxth	r2, r3
- 8000668:	4b8c      	ldr	r3, [pc, #560]	; (800089c <FL_Input+0x308>)
- 800066a:	80da      	strh	r2, [r3, #6]
-				arg(argumentFIVE, string_container, NOTEXT);
- 800066c:	2200      	movs	r2, #0
- 800066e:	498a      	ldr	r1, [pc, #552]	; (8000898 <FL_Input+0x304>)
- 8000670:	2005      	movs	r0, #5
- 8000672:	f000 f939 	bl	80008e8 <arg>
-				strcpy(line_s.color, string_container);
- 8000676:	4988      	ldr	r1, [pc, #544]	; (8000898 <FL_Input+0x304>)
- 8000678:	4889      	ldr	r0, [pc, #548]	; (80008a0 <FL_Input+0x30c>)
- 800067a:	f006 fdd1 	bl	8007220 <strcpy>
-				arg(argumentSIX, string_container, NOTEXT);
- 800067e:	2200      	movs	r2, #0
- 8000680:	4985      	ldr	r1, [pc, #532]	; (8000898 <FL_Input+0x304>)
- 8000682:	2006      	movs	r0, #6
- 8000684:	f000 f930 	bl	80008e8 <arg>
-				line_s.weight = atoi(string_container);
- 8000688:	4883      	ldr	r0, [pc, #524]	; (8000898 <FL_Input+0x304>)
- 800068a:	f006 fd7b 	bl	8007184 <atoi>
- 800068e:	4603      	mov	r3, r0
- 8000690:	b2da      	uxtb	r2, r3
- 8000692:	4b82      	ldr	r3, [pc, #520]	; (800089c <FL_Input+0x308>)
- 8000694:	751a      	strb	r2, [r3, #20]
-				break;
- 8000696:	e124      	b.n	80008e2 <FL_Input+0x34e>
-			}
-			else break;
-		case text:	//if the function text is called
-			if(checkFunctionLen(textLen) == false)
- 8000698:	2007      	movs	r0, #7
- 800069a:	f000 f9a5 	bl	80009e8 <checkFunctionLen>
- 800069e:	4603      	mov	r3, r0
- 80006a0:	f083 0301 	eor.w	r3, r3, #1
- 80006a4:	b2db      	uxtb	r3, r3
- 80006a6:	2b00      	cmp	r3, #0
- 80006a8:	f000 8114 	beq.w	80008d4 <FL_Input+0x340>
-			{
-				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
- 80006ac:	2200      	movs	r2, #0
- 80006ae:	497a      	ldr	r1, [pc, #488]	; (8000898 <FL_Input+0x304>)
- 80006b0:	2001      	movs	r0, #1
- 80006b2:	f000 f919 	bl	80008e8 <arg>
-				text_s.xlup = atoi(string_container);	//stores the information from argument 1 into text struct
- 80006b6:	4878      	ldr	r0, [pc, #480]	; (8000898 <FL_Input+0x304>)
- 80006b8:	f006 fd64 	bl	8007184 <atoi>
- 80006bc:	4603      	mov	r3, r0
- 80006be:	b29a      	uxth	r2, r3
- 80006c0:	4b78      	ldr	r3, [pc, #480]	; (80008a4 <FL_Input+0x310>)
- 80006c2:	801a      	strh	r2, [r3, #0]
-				arg(argumentTWO, string_container, NOTEXT);	//etc
- 80006c4:	2200      	movs	r2, #0
- 80006c6:	4974      	ldr	r1, [pc, #464]	; (8000898 <FL_Input+0x304>)
- 80006c8:	2002      	movs	r0, #2
- 80006ca:	f000 f90d 	bl	80008e8 <arg>
-				text_s.ylup = atoi(string_container);
- 80006ce:	4872      	ldr	r0, [pc, #456]	; (8000898 <FL_Input+0x304>)
- 80006d0:	f006 fd58 	bl	8007184 <atoi>
- 80006d4:	4603      	mov	r3, r0
- 80006d6:	b29a      	uxth	r2, r3
- 80006d8:	4b72      	ldr	r3, [pc, #456]	; (80008a4 <FL_Input+0x310>)
- 80006da:	805a      	strh	r2, [r3, #2]
-				arg(argumentTHREE, string_container, NOTEXT);
- 80006dc:	2200      	movs	r2, #0
- 80006de:	496e      	ldr	r1, [pc, #440]	; (8000898 <FL_Input+0x304>)
- 80006e0:	2003      	movs	r0, #3
- 80006e2:	f000 f901 	bl	80008e8 <arg>
-				strcpy(text_s.color, string_container);
- 80006e6:	496c      	ldr	r1, [pc, #432]	; (8000898 <FL_Input+0x304>)
- 80006e8:	486f      	ldr	r0, [pc, #444]	; (80008a8 <FL_Input+0x314>)
- 80006ea:	f006 fd99 	bl	8007220 <strcpy>
-				arg(argumentFOUR, string_container, YESTEXT);
- 80006ee:	2201      	movs	r2, #1
- 80006f0:	4969      	ldr	r1, [pc, #420]	; (8000898 <FL_Input+0x304>)
- 80006f2:	2004      	movs	r0, #4
- 80006f4:	f000 f8f8 	bl	80008e8 <arg>
-				strcpy(text_s.textin, string_container);
- 80006f8:	4967      	ldr	r1, [pc, #412]	; (8000898 <FL_Input+0x304>)
- 80006fa:	486c      	ldr	r0, [pc, #432]	; (80008ac <FL_Input+0x318>)
- 80006fc:	f006 fd90 	bl	8007220 <strcpy>
-				arg(argumentFIVE, string_container, NOTEXT);
- 8000700:	2200      	movs	r2, #0
- 8000702:	4965      	ldr	r1, [pc, #404]	; (8000898 <FL_Input+0x304>)
- 8000704:	2005      	movs	r0, #5
- 8000706:	f000 f8ef 	bl	80008e8 <arg>
-				strcpy(text_s.fontname, string_container);
- 800070a:	4963      	ldr	r1, [pc, #396]	; (8000898 <FL_Input+0x304>)
- 800070c:	4868      	ldr	r0, [pc, #416]	; (80008b0 <FL_Input+0x31c>)
- 800070e:	f006 fd87 	bl	8007220 <strcpy>
-				arg(argumentSIX, string_container, NOTEXT);
- 8000712:	2200      	movs	r2, #0
- 8000714:	4960      	ldr	r1, [pc, #384]	; (8000898 <FL_Input+0x304>)
- 8000716:	2006      	movs	r0, #6
- 8000718:	f000 f8e6 	bl	80008e8 <arg>
-				text_s.fontsize = atoi(string_container);
- 800071c:	485e      	ldr	r0, [pc, #376]	; (8000898 <FL_Input+0x304>)
- 800071e:	f006 fd31 	bl	8007184 <atoi>
- 8000722:	4603      	mov	r3, r0
- 8000724:	b2da      	uxtb	r2, r3
- 8000726:	4b5f      	ldr	r3, [pc, #380]	; (80008a4 <FL_Input+0x310>)
- 8000728:	f883 20ae 	strb.w	r2, [r3, #174]	; 0xae
-				arg(argumentSEVEN, string_container, NOTEXT);
- 800072c:	2200      	movs	r2, #0
- 800072e:	495a      	ldr	r1, [pc, #360]	; (8000898 <FL_Input+0x304>)
- 8000730:	2007      	movs	r0, #7
- 8000732:	f000 f8d9 	bl	80008e8 <arg>
-				strcpy(text_s.fontstyle, string_container);
- 8000736:	4958      	ldr	r1, [pc, #352]	; (8000898 <FL_Input+0x304>)
- 8000738:	485e      	ldr	r0, [pc, #376]	; (80008b4 <FL_Input+0x320>)
- 800073a:	f006 fd71 	bl	8007220 <strcpy>
-				break;
- 800073e:	e0d0      	b.n	80008e2 <FL_Input+0x34e>
-			}
-			else break;
-		case rectangle:	//if the function rectangle is called
-			if(checkFunctionLen(rectangleLen) == false)
- 8000740:	2008      	movs	r0, #8
- 8000742:	f000 f951 	bl	80009e8 <checkFunctionLen>
- 8000746:	4603      	mov	r3, r0
- 8000748:	f083 0301 	eor.w	r3, r3, #1
- 800074c:	b2db      	uxtb	r3, r3
- 800074e:	2b00      	cmp	r3, #0
- 8000750:	f000 80c2 	beq.w	80008d8 <FL_Input+0x344>
-			{
-				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
- 8000754:	2200      	movs	r2, #0
- 8000756:	4950      	ldr	r1, [pc, #320]	; (8000898 <FL_Input+0x304>)
- 8000758:	2001      	movs	r0, #1
- 800075a:	f000 f8c5 	bl	80008e8 <arg>
-				rectangle_s.xlup = atoi(string_container);	//stores the information from argument 1 into rectangle struct
- 800075e:	484e      	ldr	r0, [pc, #312]	; (8000898 <FL_Input+0x304>)
- 8000760:	f006 fd10 	bl	8007184 <atoi>
- 8000764:	4603      	mov	r3, r0
- 8000766:	b29a      	uxth	r2, r3
- 8000768:	4b53      	ldr	r3, [pc, #332]	; (80008b8 <FL_Input+0x324>)
- 800076a:	801a      	strh	r2, [r3, #0]
-				arg(argumentTWO, string_container, NOTEXT);
- 800076c:	2200      	movs	r2, #0
- 800076e:	494a      	ldr	r1, [pc, #296]	; (8000898 <FL_Input+0x304>)
- 8000770:	2002      	movs	r0, #2
- 8000772:	f000 f8b9 	bl	80008e8 <arg>
-				rectangle_s.ylup = atoi(string_container);
- 8000776:	4848      	ldr	r0, [pc, #288]	; (8000898 <FL_Input+0x304>)
- 8000778:	f006 fd04 	bl	8007184 <atoi>
- 800077c:	4603      	mov	r3, r0
- 800077e:	b29a      	uxth	r2, r3
- 8000780:	4b4d      	ldr	r3, [pc, #308]	; (80008b8 <FL_Input+0x324>)
- 8000782:	805a      	strh	r2, [r3, #2]
-				arg(argumentTHREE, string_container, NOTEXT);
- 8000784:	2200      	movs	r2, #0
- 8000786:	4944      	ldr	r1, [pc, #272]	; (8000898 <FL_Input+0x304>)
- 8000788:	2003      	movs	r0, #3
- 800078a:	f000 f8ad 	bl	80008e8 <arg>
-				rectangle_s.width = atoi(string_container);
- 800078e:	4842      	ldr	r0, [pc, #264]	; (8000898 <FL_Input+0x304>)
- 8000790:	f006 fcf8 	bl	8007184 <atoi>
- 8000794:	4603      	mov	r3, r0
- 8000796:	b2da      	uxtb	r2, r3
- 8000798:	4b47      	ldr	r3, [pc, #284]	; (80008b8 <FL_Input+0x324>)
- 800079a:	711a      	strb	r2, [r3, #4]
-				arg(argumentFOUR, string_container, NOTEXT);
- 800079c:	2200      	movs	r2, #0
- 800079e:	493e      	ldr	r1, [pc, #248]	; (8000898 <FL_Input+0x304>)
- 80007a0:	2004      	movs	r0, #4
- 80007a2:	f000 f8a1 	bl	80008e8 <arg>
-				rectangle_s.height = atoi(string_container);
- 80007a6:	483c      	ldr	r0, [pc, #240]	; (8000898 <FL_Input+0x304>)
- 80007a8:	f006 fcec 	bl	8007184 <atoi>
- 80007ac:	4603      	mov	r3, r0
- 80007ae:	b2da      	uxtb	r2, r3
- 80007b0:	4b41      	ldr	r3, [pc, #260]	; (80008b8 <FL_Input+0x324>)
- 80007b2:	715a      	strb	r2, [r3, #5]
-				arg(argumentFIVE, string_container, NOTEXT);
- 80007b4:	2200      	movs	r2, #0
- 80007b6:	4938      	ldr	r1, [pc, #224]	; (8000898 <FL_Input+0x304>)
- 80007b8:	2005      	movs	r0, #5
- 80007ba:	f000 f895 	bl	80008e8 <arg>
-				strcpy(rectangle_s.color, string_container);
- 80007be:	4936      	ldr	r1, [pc, #216]	; (8000898 <FL_Input+0x304>)
- 80007c0:	483e      	ldr	r0, [pc, #248]	; (80008bc <FL_Input+0x328>)
- 80007c2:	f006 fd2d 	bl	8007220 <strcpy>
-				arg(argumentSIX, string_container, NOTEXT);
- 80007c6:	2200      	movs	r2, #0
- 80007c8:	4933      	ldr	r1, [pc, #204]	; (8000898 <FL_Input+0x304>)
- 80007ca:	2006      	movs	r0, #6
- 80007cc:	f000 f88c 	bl	80008e8 <arg>
-				rectangle_s.filled = atoi(string_container);
- 80007d0:	4831      	ldr	r0, [pc, #196]	; (8000898 <FL_Input+0x304>)
- 80007d2:	f006 fcd7 	bl	8007184 <atoi>
- 80007d6:	4603      	mov	r3, r0
- 80007d8:	b2da      	uxtb	r2, r3
- 80007da:	4b37      	ldr	r3, [pc, #220]	; (80008b8 <FL_Input+0x324>)
- 80007dc:	749a      	strb	r2, [r3, #18]
-				arg(argumentSEVEN, string_container, NOTEXT);
- 80007de:	2200      	movs	r2, #0
- 80007e0:	492d      	ldr	r1, [pc, #180]	; (8000898 <FL_Input+0x304>)
- 80007e2:	2007      	movs	r0, #7
- 80007e4:	f000 f880 	bl	80008e8 <arg>
-				strcpy(rectangle_s.bordercolor, string_container);
- 80007e8:	492b      	ldr	r1, [pc, #172]	; (8000898 <FL_Input+0x304>)
- 80007ea:	4835      	ldr	r0, [pc, #212]	; (80008c0 <FL_Input+0x32c>)
- 80007ec:	f006 fd18 	bl	8007220 <strcpy>
-				arg(argumentEIGHT, string_container, NOTEXT);
- 80007f0:	2200      	movs	r2, #0
- 80007f2:	4929      	ldr	r1, [pc, #164]	; (8000898 <FL_Input+0x304>)
- 80007f4:	2008      	movs	r0, #8
- 80007f6:	f000 f877 	bl	80008e8 <arg>
-				rectangle_s.linewidth = atoi(string_container);
- 80007fa:	4827      	ldr	r0, [pc, #156]	; (8000898 <FL_Input+0x304>)
- 80007fc:	f006 fcc2 	bl	8007184 <atoi>
- 8000800:	4603      	mov	r3, r0
- 8000802:	b2da      	uxtb	r2, r3
- 8000804:	4b2c      	ldr	r3, [pc, #176]	; (80008b8 <FL_Input+0x324>)
- 8000806:	77da      	strb	r2, [r3, #31]
-				break;
- 8000808:	e06b      	b.n	80008e2 <FL_Input+0x34e>
-			}
-			else break;
-		case bitmap:	//if the function bitmap is called
-			if(checkFunctionLen(bitmapLen) == false)
- 800080a:	2003      	movs	r0, #3
- 800080c:	f000 f8ec 	bl	80009e8 <checkFunctionLen>
- 8000810:	4603      	mov	r3, r0
- 8000812:	f083 0301 	eor.w	r3, r3, #1
- 8000816:	b2db      	uxtb	r3, r3
- 8000818:	2b00      	cmp	r3, #0
- 800081a:	d05f      	beq.n	80008dc <FL_Input+0x348>
-			{
-				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
- 800081c:	2200      	movs	r2, #0
- 800081e:	491e      	ldr	r1, [pc, #120]	; (8000898 <FL_Input+0x304>)
- 8000820:	2001      	movs	r0, #1
- 8000822:	f000 f861 	bl	80008e8 <arg>
-				bitmap_s.nr = atoi(string_container);	//stores the information from argument 1 into bitmap struct
- 8000826:	481c      	ldr	r0, [pc, #112]	; (8000898 <FL_Input+0x304>)
- 8000828:	f006 fcac 	bl	8007184 <atoi>
- 800082c:	4603      	mov	r3, r0
- 800082e:	b2da      	uxtb	r2, r3
- 8000830:	4b24      	ldr	r3, [pc, #144]	; (80008c4 <FL_Input+0x330>)
- 8000832:	701a      	strb	r2, [r3, #0]
-				arg(argumentTWO, string_container, NOTEXT);
- 8000834:	2200      	movs	r2, #0
- 8000836:	4918      	ldr	r1, [pc, #96]	; (8000898 <FL_Input+0x304>)
- 8000838:	2002      	movs	r0, #2
- 800083a:	f000 f855 	bl	80008e8 <arg>
-				bitmap_s.xlup = atoi(string_container);
- 800083e:	4816      	ldr	r0, [pc, #88]	; (8000898 <FL_Input+0x304>)
- 8000840:	f006 fca0 	bl	8007184 <atoi>
- 8000844:	4603      	mov	r3, r0
- 8000846:	b29a      	uxth	r2, r3
- 8000848:	4b1e      	ldr	r3, [pc, #120]	; (80008c4 <FL_Input+0x330>)
- 800084a:	805a      	strh	r2, [r3, #2]
-				arg(argumentTHREE, string_container, NOTEXT);
- 800084c:	2200      	movs	r2, #0
- 800084e:	4912      	ldr	r1, [pc, #72]	; (8000898 <FL_Input+0x304>)
- 8000850:	2003      	movs	r0, #3
- 8000852:	f000 f849 	bl	80008e8 <arg>
-				bitmap_s.ylup = atoi(string_container);
- 8000856:	4810      	ldr	r0, [pc, #64]	; (8000898 <FL_Input+0x304>)
- 8000858:	f006 fc94 	bl	8007184 <atoi>
- 800085c:	4603      	mov	r3, r0
- 800085e:	b29a      	uxth	r2, r3
- 8000860:	4b18      	ldr	r3, [pc, #96]	; (80008c4 <FL_Input+0x330>)
- 8000862:	809a      	strh	r2, [r3, #4]
-				break;
- 8000864:	e03d      	b.n	80008e2 <FL_Input+0x34e>
-			}
-			else break;
-		case clearscreen:	//if the function clearscreen is called
-			if(checkFunctionLen(clearscreenLen) == false)
- 8000866:	2001      	movs	r0, #1
- 8000868:	f000 f8be 	bl	80009e8 <checkFunctionLen>
- 800086c:	4603      	mov	r3, r0
- 800086e:	f083 0301 	eor.w	r3, r3, #1
- 8000872:	b2db      	uxtb	r3, r3
- 8000874:	2b00      	cmp	r3, #0
- 8000876:	d033      	beq.n	80008e0 <FL_Input+0x34c>
-			{
-				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
- 8000878:	2200      	movs	r2, #0
- 800087a:	4907      	ldr	r1, [pc, #28]	; (8000898 <FL_Input+0x304>)
- 800087c:	2001      	movs	r0, #1
- 800087e:	f000 f833 	bl	80008e8 <arg>
-				strcpy(clearscreen_s.color, string_container);	//stores the information from argument 1 into line struct
- 8000882:	4905      	ldr	r1, [pc, #20]	; (8000898 <FL_Input+0x304>)
- 8000884:	4810      	ldr	r0, [pc, #64]	; (80008c8 <FL_Input+0x334>)
- 8000886:	f006 fccb 	bl	8007220 <strcpy>
-				break;
- 800088a:	e02a      	b.n	80008e2 <FL_Input+0x34e>
-			}
-			else break;
-		default:
-			printf("The function name is not correct");
- 800088c:	480f      	ldr	r0, [pc, #60]	; (80008cc <FL_Input+0x338>)
- 800088e:	f006 fcaf 	bl	80071f0 <iprintf>
-			break;
- 8000892:	e026      	b.n	80008e2 <FL_Input+0x34e>
- 8000894:	200008f4 	.word	0x200008f4
- 8000898:	2000012c 	.word	0x2000012c
- 800089c:	200001ac 	.word	0x200001ac
- 80008a0:	200001b4 	.word	0x200001b4
- 80008a4:	200001f8 	.word	0x200001f8
- 80008a8:	200001fc 	.word	0x200001fc
- 80008ac:	20000208 	.word	0x20000208
- 80008b0:	20000288 	.word	0x20000288
- 80008b4:	200002a7 	.word	0x200002a7
- 80008b8:	200001d8 	.word	0x200001d8
- 80008bc:	200001de 	.word	0x200001de
- 80008c0:	200001eb 	.word	0x200001eb
- 80008c4:	200001c4 	.word	0x200001c4
- 80008c8:	200001cc 	.word	0x200001cc
- 80008cc:	0800824c 	.word	0x0800824c
-			else break;
- 80008d0:	bf00      	nop
- 80008d2:	e006      	b.n	80008e2 <FL_Input+0x34e>
-			else break;
- 80008d4:	bf00      	nop
- 80008d6:	e004      	b.n	80008e2 <FL_Input+0x34e>
-			else break;
- 80008d8:	bf00      	nop
- 80008da:	e002      	b.n	80008e2 <FL_Input+0x34e>
-			else break;
- 80008dc:	bf00      	nop
- 80008de:	e000      	b.n	80008e2 <FL_Input+0x34e>
-			else break;
- 80008e0:	bf00      	nop
-	}
-
-}
- 80008e2:	bf00      	nop
- 80008e4:	bd80      	pop	{r7, pc}
- 80008e6:	bf00      	nop
-
-080008e8 <arg>:
-// @param[in] a: The variable that determines which argument has to be read
-// @param[in] *string_container: A pointer where the string will be put into
-// @param[in] text_trigger: A boolean that determines if the argument is a text or not
-//--------------------------------------------------------------
-void arg(uint8_t a,char *string_container ,bool text_trigger)
-{
- 80008e8:	b480      	push	{r7}
- 80008ea:	b085      	sub	sp, #20
- 80008ec:	af00      	add	r7, sp, #0
- 80008ee:	4603      	mov	r3, r0
- 80008f0:	6039      	str	r1, [r7, #0]
- 80008f2:	71fb      	strb	r3, [r7, #7]
- 80008f4:	4613      	mov	r3, r2
- 80008f6:	71bb      	strb	r3, [r7, #6]
-	uint8_t i = 0;	//counter
- 80008f8:	2300      	movs	r3, #0
- 80008fa:	73fb      	strb	r3, [r7, #15]
-	uint8_t j = 0;	//counter
- 80008fc:	2300      	movs	r3, #0
- 80008fe:	73bb      	strb	r3, [r7, #14]
-	uint8_t arg_counter = 0;	//is needed to check what argument is currently beeing read
- 8000900:	2300      	movs	r3, #0
- 8000902:	737b      	strb	r3, [r7, #13]
-	uint8_t arg_character_counter = 0;	//checks what the current character from the argument is
- 8000904:	2300      	movs	r3, #0
- 8000906:	733b      	strb	r3, [r7, #12]
-	for (j=0; j<=input.msglen; j++)	//cleans string container
- 8000908:	2300      	movs	r3, #0
- 800090a:	73bb      	strb	r3, [r7, #14]
- 800090c:	e007      	b.n	800091e <arg+0x36>
-	string_container[j] = 0;
- 800090e:	7bbb      	ldrb	r3, [r7, #14]
- 8000910:	683a      	ldr	r2, [r7, #0]
- 8000912:	4413      	add	r3, r2
- 8000914:	2200      	movs	r2, #0
- 8000916:	701a      	strb	r2, [r3, #0]
-	for (j=0; j<=input.msglen; j++)	//cleans string container
- 8000918:	7bbb      	ldrb	r3, [r7, #14]
- 800091a:	3301      	adds	r3, #1
- 800091c:	73bb      	strb	r3, [r7, #14]
- 800091e:	7bba      	ldrb	r2, [r7, #14]
- 8000920:	4b30      	ldr	r3, [pc, #192]	; (80009e4 <arg+0xfc>)
- 8000922:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
- 8000926:	429a      	cmp	r2, r3
- 8000928:	ddf1      	ble.n	800090e <arg+0x26>
-	while(i < input.msglen)
- 800092a:	e04e      	b.n	80009ca <arg+0xe2>
-			{
-				if(input.line_rx_buffer[i] == ',')	//if current character is a ',' the argument counter goes up
- 800092c:	7bfb      	ldrb	r3, [r7, #15]
- 800092e:	4a2d      	ldr	r2, [pc, #180]	; (80009e4 <arg+0xfc>)
- 8000930:	4413      	add	r3, r2
- 8000932:	785b      	ldrb	r3, [r3, #1]
- 8000934:	2b2c      	cmp	r3, #44	; 0x2c
- 8000936:	d106      	bne.n	8000946 <arg+0x5e>
-				{
-					arg_counter++;
- 8000938:	7b7b      	ldrb	r3, [r7, #13]
- 800093a:	3301      	adds	r3, #1
- 800093c:	737b      	strb	r3, [r7, #13]
-					i++;
- 800093e:	7bfb      	ldrb	r3, [r7, #15]
- 8000940:	3301      	adds	r3, #1
- 8000942:	73fb      	strb	r3, [r7, #15]
- 8000944:	e041      	b.n	80009ca <arg+0xe2>
-				}
-				else if(input.line_rx_buffer[i] == ' ' && text_trigger == false)	//if its a space it doesnt get read
- 8000946:	7bfb      	ldrb	r3, [r7, #15]
- 8000948:	4a26      	ldr	r2, [pc, #152]	; (80009e4 <arg+0xfc>)
- 800094a:	4413      	add	r3, r2
- 800094c:	785b      	ldrb	r3, [r3, #1]
- 800094e:	2b20      	cmp	r3, #32
- 8000950:	d109      	bne.n	8000966 <arg+0x7e>
- 8000952:	79bb      	ldrb	r3, [r7, #6]
- 8000954:	f083 0301 	eor.w	r3, r3, #1
- 8000958:	b2db      	uxtb	r3, r3
- 800095a:	2b00      	cmp	r3, #0
- 800095c:	d003      	beq.n	8000966 <arg+0x7e>
-				i++;
- 800095e:	7bfb      	ldrb	r3, [r7, #15]
- 8000960:	3301      	adds	r3, #1
- 8000962:	73fb      	strb	r3, [r7, #15]
- 8000964:	e031      	b.n	80009ca <arg+0xe2>
-				else if(input.line_rx_buffer[i] == ' ' && text_trigger == true && arg_counter == a)	//if its a space but its in a text argument, it gets read
- 8000966:	7bfb      	ldrb	r3, [r7, #15]
- 8000968:	4a1e      	ldr	r2, [pc, #120]	; (80009e4 <arg+0xfc>)
- 800096a:	4413      	add	r3, r2
- 800096c:	785b      	ldrb	r3, [r3, #1]
- 800096e:	2b20      	cmp	r3, #32
- 8000970:	d115      	bne.n	800099e <arg+0xb6>
- 8000972:	79bb      	ldrb	r3, [r7, #6]
- 8000974:	2b00      	cmp	r3, #0
- 8000976:	d012      	beq.n	800099e <arg+0xb6>
- 8000978:	7b7a      	ldrb	r2, [r7, #13]
- 800097a:	79fb      	ldrb	r3, [r7, #7]
- 800097c:	429a      	cmp	r2, r3
- 800097e:	d10e      	bne.n	800099e <arg+0xb6>
-				{
-					string_container[arg_character_counter++] = input.line_rx_buffer[i++];
- 8000980:	7bfb      	ldrb	r3, [r7, #15]
- 8000982:	1c5a      	adds	r2, r3, #1
- 8000984:	73fa      	strb	r2, [r7, #15]
- 8000986:	4619      	mov	r1, r3
- 8000988:	7b3b      	ldrb	r3, [r7, #12]
- 800098a:	1c5a      	adds	r2, r3, #1
- 800098c:	733a      	strb	r2, [r7, #12]
- 800098e:	461a      	mov	r2, r3
- 8000990:	683b      	ldr	r3, [r7, #0]
- 8000992:	4413      	add	r3, r2
- 8000994:	4a13      	ldr	r2, [pc, #76]	; (80009e4 <arg+0xfc>)
- 8000996:	440a      	add	r2, r1
- 8000998:	7852      	ldrb	r2, [r2, #1]
- 800099a:	701a      	strb	r2, [r3, #0]
- 800099c:	e015      	b.n	80009ca <arg+0xe2>
-				}
-				else if(arg_counter == a)	//if its a character in the correct argument it gets read
- 800099e:	7b7a      	ldrb	r2, [r7, #13]
- 80009a0:	79fb      	ldrb	r3, [r7, #7]
- 80009a2:	429a      	cmp	r2, r3
- 80009a4:	d10e      	bne.n	80009c4 <arg+0xdc>
-				{
-				string_container[arg_character_counter] = input.line_rx_buffer[i];
- 80009a6:	7bfa      	ldrb	r2, [r7, #15]
- 80009a8:	7b3b      	ldrb	r3, [r7, #12]
- 80009aa:	6839      	ldr	r1, [r7, #0]
- 80009ac:	440b      	add	r3, r1
- 80009ae:	490d      	ldr	r1, [pc, #52]	; (80009e4 <arg+0xfc>)
- 80009b0:	440a      	add	r2, r1
- 80009b2:	7852      	ldrb	r2, [r2, #1]
- 80009b4:	701a      	strb	r2, [r3, #0]
-				arg_character_counter++;
- 80009b6:	7b3b      	ldrb	r3, [r7, #12]
- 80009b8:	3301      	adds	r3, #1
- 80009ba:	733b      	strb	r3, [r7, #12]
-				i++;
- 80009bc:	7bfb      	ldrb	r3, [r7, #15]
- 80009be:	3301      	adds	r3, #1
- 80009c0:	73fb      	strb	r3, [r7, #15]
- 80009c2:	e002      	b.n	80009ca <arg+0xe2>
-				}
-				else i++;	//else skips
- 80009c4:	7bfb      	ldrb	r3, [r7, #15]
- 80009c6:	3301      	adds	r3, #1
- 80009c8:	73fb      	strb	r3, [r7, #15]
-	while(i < input.msglen)
- 80009ca:	7bfa      	ldrb	r2, [r7, #15]
- 80009cc:	4b05      	ldr	r3, [pc, #20]	; (80009e4 <arg+0xfc>)
- 80009ce:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
- 80009d2:	429a      	cmp	r2, r3
- 80009d4:	dbaa      	blt.n	800092c <arg+0x44>
-			}
-}
- 80009d6:	bf00      	nop
- 80009d8:	bf00      	nop
- 80009da:	3714      	adds	r7, #20
- 80009dc:	46bd      	mov	sp, r7
- 80009de:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80009e2:	4770      	bx	lr
- 80009e4:	200008f4 	.word	0x200008f4
-
-080009e8 <checkFunctionLen>:
-
-bool checkFunctionLen(uint8_t functionLen)
-{
- 80009e8:	b580      	push	{r7, lr}
- 80009ea:	b084      	sub	sp, #16
- 80009ec:	af00      	add	r7, sp, #0
- 80009ee:	4603      	mov	r3, r0
- 80009f0:	71fb      	strb	r3, [r7, #7]
-	uint8_t i = 0;
- 80009f2:	2300      	movs	r3, #0
- 80009f4:	73fb      	strb	r3, [r7, #15]
-	uint8_t arg_counter = 0;
- 80009f6:	2300      	movs	r3, #0
- 80009f8:	73bb      	strb	r3, [r7, #14]
-	bool error = 0;
- 80009fa:	2300      	movs	r3, #0
- 80009fc:	737b      	strb	r3, [r7, #13]
-	while(i <= input.msglen)
- 80009fe:	e00f      	b.n	8000a20 <checkFunctionLen+0x38>
-	{
-		if(input.line_rx_buffer[i] == ',')	//if current character is a ',' the argument counter goes up
- 8000a00:	7bfb      	ldrb	r3, [r7, #15]
- 8000a02:	4a19      	ldr	r2, [pc, #100]	; (8000a68 <checkFunctionLen+0x80>)
- 8000a04:	4413      	add	r3, r2
- 8000a06:	785b      	ldrb	r3, [r3, #1]
- 8000a08:	2b2c      	cmp	r3, #44	; 0x2c
- 8000a0a:	d106      	bne.n	8000a1a <checkFunctionLen+0x32>
-			{
-				arg_counter++;
- 8000a0c:	7bbb      	ldrb	r3, [r7, #14]
- 8000a0e:	3301      	adds	r3, #1
- 8000a10:	73bb      	strb	r3, [r7, #14]
-				i++;
- 8000a12:	7bfb      	ldrb	r3, [r7, #15]
- 8000a14:	3301      	adds	r3, #1
- 8000a16:	73fb      	strb	r3, [r7, #15]
- 8000a18:	e002      	b.n	8000a20 <checkFunctionLen+0x38>
-			}
-		else i++;
- 8000a1a:	7bfb      	ldrb	r3, [r7, #15]
- 8000a1c:	3301      	adds	r3, #1
- 8000a1e:	73fb      	strb	r3, [r7, #15]
-	while(i <= input.msglen)
- 8000a20:	7bfa      	ldrb	r2, [r7, #15]
- 8000a22:	4b11      	ldr	r3, [pc, #68]	; (8000a68 <checkFunctionLen+0x80>)
- 8000a24:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
- 8000a28:	429a      	cmp	r2, r3
- 8000a2a:	dde9      	ble.n	8000a00 <checkFunctionLen+0x18>
-	}
-	if(arg_counter > functionLen)
- 8000a2c:	7bba      	ldrb	r2, [r7, #14]
- 8000a2e:	79fb      	ldrb	r3, [r7, #7]
- 8000a30:	429a      	cmp	r2, r3
- 8000a32:	d908      	bls.n	8000a46 <checkFunctionLen+0x5e>
-	{
-		HAL_UART_Transmit(&huart2, (uint8_t *)"Warning: the input exceeds the maximum length of this function\n\r", sizeof("Warning: the input exceeds the maximum length of this function"),100);
- 8000a34:	2364      	movs	r3, #100	; 0x64
- 8000a36:	223f      	movs	r2, #63	; 0x3f
- 8000a38:	490c      	ldr	r1, [pc, #48]	; (8000a6c <checkFunctionLen+0x84>)
- 8000a3a:	480d      	ldr	r0, [pc, #52]	; (8000a70 <checkFunctionLen+0x88>)
- 8000a3c:	f005 fb5b 	bl	80060f6 <HAL_UART_Transmit>
-		error = false;
- 8000a40:	2300      	movs	r3, #0
- 8000a42:	737b      	strb	r3, [r7, #13]
- 8000a44:	e00b      	b.n	8000a5e <checkFunctionLen+0x76>
-	}
-	else if(arg_counter < functionLen)
- 8000a46:	7bba      	ldrb	r2, [r7, #14]
- 8000a48:	79fb      	ldrb	r3, [r7, #7]
- 8000a4a:	429a      	cmp	r2, r3
- 8000a4c:	d207      	bcs.n	8000a5e <checkFunctionLen+0x76>
-	{
-		HAL_UART_Transmit(&huart2, (uint8_t *)"Error: not enough arguments for this function\n\r", sizeof("Error: not enough arguments for this function"),100);
- 8000a4e:	2364      	movs	r3, #100	; 0x64
- 8000a50:	222e      	movs	r2, #46	; 0x2e
- 8000a52:	4908      	ldr	r1, [pc, #32]	; (8000a74 <checkFunctionLen+0x8c>)
- 8000a54:	4806      	ldr	r0, [pc, #24]	; (8000a70 <checkFunctionLen+0x88>)
- 8000a56:	f005 fb4e 	bl	80060f6 <HAL_UART_Transmit>
-		error = true;
- 8000a5a:	2301      	movs	r3, #1
- 8000a5c:	737b      	strb	r3, [r7, #13]
-	}
-	return error;
- 8000a5e:	7b7b      	ldrb	r3, [r7, #13]
-}
- 8000a60:	4618      	mov	r0, r3
- 8000a62:	3710      	adds	r7, #16
- 8000a64:	46bd      	mov	sp, r7
- 8000a66:	bd80      	pop	{r7, pc}
- 8000a68:	200008f4 	.word	0x200008f4
- 8000a6c:	08008270 	.word	0x08008270
- 8000a70:	20000de8 	.word	0x20000de8
- 8000a74:	080082b4 	.word	0x080082b4
-
-08000a78 <Bitmap_init>:
+08000594 <Bitmap_init>:
 //--------------------------------------------------------------
 // @brief Initializes bitmap
 // @details This function generates and initializes all the necessary memory and registers for the bitmaps to function
 //--------------------------------------------------------------
 void Bitmap_init()
 {
- 8000a78:	b480      	push	{r7}
- 8000a7a:	b083      	sub	sp, #12
- 8000a7c:	af00      	add	r7, sp, #0
+ 8000594:	b480      	push	{r7}
+ 8000596:	b083      	sub	sp, #12
+ 8000598:	af00      	add	r7, sp, #0
 	//----------------------------------------------------------
 	// Generate lookup table
 	//----------------------------------------------------------
 	uint16_t i;
 
 	for(i = 0; i < BM_AMOUNT; i++)
- 8000a7e:	2300      	movs	r3, #0
- 8000a80:	80fb      	strh	r3, [r7, #6]
- 8000a82:	e0aa      	b.n	8000bda <Bitmap_init+0x162>
+ 800059a:	2300      	movs	r3, #0
+ 800059c:	80fb      	strh	r3, [r7, #6]
+ 800059e:	e0aa      	b.n	80006f6 <Bitmap_init+0x162>
 	{	if(i < ALPHABET_SIZE)
- 8000a84:	88fb      	ldrh	r3, [r7, #6]
- 8000a86:	2b19      	cmp	r3, #25
- 8000a88:	d81c      	bhi.n	8000ac4 <Bitmap_init+0x4c>
+ 80005a0:	88fb      	ldrh	r3, [r7, #6]
+ 80005a2:	2b19      	cmp	r3, #25
+ 80005a4:	d81c      	bhi.n	80005e0 <Bitmap_init+0x4c>
 		{
 			bmLookup[i][ID] = ('a' + i);
- 8000a8a:	88fb      	ldrh	r3, [r7, #6]
- 8000a8c:	88fa      	ldrh	r2, [r7, #6]
- 8000a8e:	3261      	adds	r2, #97	; 0x61
- 8000a90:	b291      	uxth	r1, r2
- 8000a92:	4a57      	ldr	r2, [pc, #348]	; (8000bf0 <Bitmap_init+0x178>)
- 8000a94:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
+ 80005a6:	88fb      	ldrh	r3, [r7, #6]
+ 80005a8:	88fa      	ldrh	r2, [r7, #6]
+ 80005aa:	3261      	adds	r2, #97	; 0x61
+ 80005ac:	b291      	uxth	r1, r2
+ 80005ae:	4a57      	ldr	r2, [pc, #348]	; (800070c <Bitmap_init+0x178>)
+ 80005b0:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
 			bmLookup[i][X_LEN] = 8;
- 8000a98:	88fb      	ldrh	r3, [r7, #6]
- 8000a9a:	4a55      	ldr	r2, [pc, #340]	; (8000bf0 <Bitmap_init+0x178>)
- 8000a9c:	00db      	lsls	r3, r3, #3
- 8000a9e:	4413      	add	r3, r2
- 8000aa0:	2208      	movs	r2, #8
- 8000aa2:	805a      	strh	r2, [r3, #2]
+ 80005b4:	88fb      	ldrh	r3, [r7, #6]
+ 80005b6:	4a55      	ldr	r2, [pc, #340]	; (800070c <Bitmap_init+0x178>)
+ 80005b8:	00db      	lsls	r3, r3, #3
+ 80005ba:	4413      	add	r3, r2
+ 80005bc:	2208      	movs	r2, #8
+ 80005be:	805a      	strh	r2, [r3, #2]
 			bmLookup[i][Y_LEN] = 8;
- 8000aa4:	88fb      	ldrh	r3, [r7, #6]
- 8000aa6:	4a52      	ldr	r2, [pc, #328]	; (8000bf0 <Bitmap_init+0x178>)
- 8000aa8:	00db      	lsls	r3, r3, #3
- 8000aaa:	4413      	add	r3, r2
- 8000aac:	2208      	movs	r2, #8
- 8000aae:	809a      	strh	r2, [r3, #4]
+ 80005c0:	88fb      	ldrh	r3, [r7, #6]
+ 80005c2:	4a52      	ldr	r2, [pc, #328]	; (800070c <Bitmap_init+0x178>)
+ 80005c4:	00db      	lsls	r3, r3, #3
+ 80005c6:	4413      	add	r3, r2
+ 80005c8:	2208      	movs	r2, #8
+ 80005ca:	809a      	strh	r2, [r3, #4]
 			bmLookup[i][OFFSET] = (TEXT_SIZE * TEXT_SIZE * i);
- 8000ab0:	88fb      	ldrh	r3, [r7, #6]
- 8000ab2:	88fa      	ldrh	r2, [r7, #6]
- 8000ab4:	0192      	lsls	r2, r2, #6
- 8000ab6:	b291      	uxth	r1, r2
- 8000ab8:	4a4d      	ldr	r2, [pc, #308]	; (8000bf0 <Bitmap_init+0x178>)
- 8000aba:	00db      	lsls	r3, r3, #3
- 8000abc:	4413      	add	r3, r2
- 8000abe:	460a      	mov	r2, r1
- 8000ac0:	80da      	strh	r2, [r3, #6]
- 8000ac2:	e087      	b.n	8000bd4 <Bitmap_init+0x15c>
+ 80005cc:	88fb      	ldrh	r3, [r7, #6]
+ 80005ce:	88fa      	ldrh	r2, [r7, #6]
+ 80005d0:	0192      	lsls	r2, r2, #6
+ 80005d2:	b291      	uxth	r1, r2
+ 80005d4:	4a4d      	ldr	r2, [pc, #308]	; (800070c <Bitmap_init+0x178>)
+ 80005d6:	00db      	lsls	r3, r3, #3
+ 80005d8:	4413      	add	r3, r2
+ 80005da:	460a      	mov	r2, r1
+ 80005dc:	80da      	strh	r2, [r3, #6]
+ 80005de:	e087      	b.n	80006f0 <Bitmap_init+0x15c>
 		}
 		else if((i >= ALPHABET_SIZE) && (i < (ALPHABET_SIZE*2)))
- 8000ac4:	88fb      	ldrh	r3, [r7, #6]
- 8000ac6:	2b19      	cmp	r3, #25
- 8000ac8:	d91f      	bls.n	8000b0a <Bitmap_init+0x92>
- 8000aca:	88fb      	ldrh	r3, [r7, #6]
- 8000acc:	2b33      	cmp	r3, #51	; 0x33
- 8000ace:	d81c      	bhi.n	8000b0a <Bitmap_init+0x92>
+ 80005e0:	88fb      	ldrh	r3, [r7, #6]
+ 80005e2:	2b19      	cmp	r3, #25
+ 80005e4:	d91f      	bls.n	8000626 <Bitmap_init+0x92>
+ 80005e6:	88fb      	ldrh	r3, [r7, #6]
+ 80005e8:	2b33      	cmp	r3, #51	; 0x33
+ 80005ea:	d81c      	bhi.n	8000626 <Bitmap_init+0x92>
 		{
 			bmLookup[i][ID] = ('A' + (i - 26));
- 8000ad0:	88fb      	ldrh	r3, [r7, #6]
- 8000ad2:	88fa      	ldrh	r2, [r7, #6]
- 8000ad4:	3227      	adds	r2, #39	; 0x27
- 8000ad6:	b291      	uxth	r1, r2
- 8000ad8:	4a45      	ldr	r2, [pc, #276]	; (8000bf0 <Bitmap_init+0x178>)
- 8000ada:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
+ 80005ec:	88fb      	ldrh	r3, [r7, #6]
+ 80005ee:	88fa      	ldrh	r2, [r7, #6]
+ 80005f0:	3227      	adds	r2, #39	; 0x27
+ 80005f2:	b291      	uxth	r1, r2
+ 80005f4:	4a45      	ldr	r2, [pc, #276]	; (800070c <Bitmap_init+0x178>)
+ 80005f6:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
 			bmLookup[i][X_LEN] = 8;
- 8000ade:	88fb      	ldrh	r3, [r7, #6]
- 8000ae0:	4a43      	ldr	r2, [pc, #268]	; (8000bf0 <Bitmap_init+0x178>)
- 8000ae2:	00db      	lsls	r3, r3, #3
- 8000ae4:	4413      	add	r3, r2
- 8000ae6:	2208      	movs	r2, #8
- 8000ae8:	805a      	strh	r2, [r3, #2]
+ 80005fa:	88fb      	ldrh	r3, [r7, #6]
+ 80005fc:	4a43      	ldr	r2, [pc, #268]	; (800070c <Bitmap_init+0x178>)
+ 80005fe:	00db      	lsls	r3, r3, #3
+ 8000600:	4413      	add	r3, r2
+ 8000602:	2208      	movs	r2, #8
+ 8000604:	805a      	strh	r2, [r3, #2]
 			bmLookup[i][Y_LEN] = 8;
- 8000aea:	88fb      	ldrh	r3, [r7, #6]
- 8000aec:	4a40      	ldr	r2, [pc, #256]	; (8000bf0 <Bitmap_init+0x178>)
- 8000aee:	00db      	lsls	r3, r3, #3
- 8000af0:	4413      	add	r3, r2
- 8000af2:	2208      	movs	r2, #8
- 8000af4:	809a      	strh	r2, [r3, #4]
+ 8000606:	88fb      	ldrh	r3, [r7, #6]
+ 8000608:	4a40      	ldr	r2, [pc, #256]	; (800070c <Bitmap_init+0x178>)
+ 800060a:	00db      	lsls	r3, r3, #3
+ 800060c:	4413      	add	r3, r2
+ 800060e:	2208      	movs	r2, #8
+ 8000610:	809a      	strh	r2, [r3, #4]
 			bmLookup[i][OFFSET] = (TEXT_SIZE * TEXT_SIZE * i);
- 8000af6:	88fb      	ldrh	r3, [r7, #6]
- 8000af8:	88fa      	ldrh	r2, [r7, #6]
- 8000afa:	0192      	lsls	r2, r2, #6
- 8000afc:	b291      	uxth	r1, r2
- 8000afe:	4a3c      	ldr	r2, [pc, #240]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b00:	00db      	lsls	r3, r3, #3
- 8000b02:	4413      	add	r3, r2
- 8000b04:	460a      	mov	r2, r1
- 8000b06:	80da      	strh	r2, [r3, #6]
- 8000b08:	e064      	b.n	8000bd4 <Bitmap_init+0x15c>
+ 8000612:	88fb      	ldrh	r3, [r7, #6]
+ 8000614:	88fa      	ldrh	r2, [r7, #6]
+ 8000616:	0192      	lsls	r2, r2, #6
+ 8000618:	b291      	uxth	r1, r2
+ 800061a:	4a3c      	ldr	r2, [pc, #240]	; (800070c <Bitmap_init+0x178>)
+ 800061c:	00db      	lsls	r3, r3, #3
+ 800061e:	4413      	add	r3, r2
+ 8000620:	460a      	mov	r2, r1
+ 8000622:	80da      	strh	r2, [r3, #6]
+ 8000624:	e064      	b.n	80006f0 <Bitmap_init+0x15c>
 		}
 		else if((i >= (ALPHABET_SIZE*2)) && (i < (ALPHABET_SIZE*4)))
- 8000b0a:	88fb      	ldrh	r3, [r7, #6]
- 8000b0c:	2b33      	cmp	r3, #51	; 0x33
- 8000b0e:	d91f      	bls.n	8000b50 <Bitmap_init+0xd8>
- 8000b10:	88fb      	ldrh	r3, [r7, #6]
- 8000b12:	2b67      	cmp	r3, #103	; 0x67
- 8000b14:	d81c      	bhi.n	8000b50 <Bitmap_init+0xd8>
+ 8000626:	88fb      	ldrh	r3, [r7, #6]
+ 8000628:	2b33      	cmp	r3, #51	; 0x33
+ 800062a:	d91f      	bls.n	800066c <Bitmap_init+0xd8>
+ 800062c:	88fb      	ldrh	r3, [r7, #6]
+ 800062e:	2b67      	cmp	r3, #103	; 0x67
+ 8000630:	d81c      	bhi.n	800066c <Bitmap_init+0xd8>
 		{
 			bmLookup[i][ID] = (i-(ALPHABET_SIZE*2));
- 8000b16:	88fb      	ldrh	r3, [r7, #6]
- 8000b18:	88fa      	ldrh	r2, [r7, #6]
- 8000b1a:	3a34      	subs	r2, #52	; 0x34
- 8000b1c:	b291      	uxth	r1, r2
- 8000b1e:	4a34      	ldr	r2, [pc, #208]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b20:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
+ 8000632:	88fb      	ldrh	r3, [r7, #6]
+ 8000634:	88fa      	ldrh	r2, [r7, #6]
+ 8000636:	3a34      	subs	r2, #52	; 0x34
+ 8000638:	b291      	uxth	r1, r2
+ 800063a:	4a34      	ldr	r2, [pc, #208]	; (800070c <Bitmap_init+0x178>)
+ 800063c:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
 			bmLookup[i][X_LEN] = 8;
- 8000b24:	88fb      	ldrh	r3, [r7, #6]
- 8000b26:	4a32      	ldr	r2, [pc, #200]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b28:	00db      	lsls	r3, r3, #3
- 8000b2a:	4413      	add	r3, r2
- 8000b2c:	2208      	movs	r2, #8
- 8000b2e:	805a      	strh	r2, [r3, #2]
+ 8000640:	88fb      	ldrh	r3, [r7, #6]
+ 8000642:	4a32      	ldr	r2, [pc, #200]	; (800070c <Bitmap_init+0x178>)
+ 8000644:	00db      	lsls	r3, r3, #3
+ 8000646:	4413      	add	r3, r2
+ 8000648:	2208      	movs	r2, #8
+ 800064a:	805a      	strh	r2, [r3, #2]
 			bmLookup[i][Y_LEN] = 8;
- 8000b30:	88fb      	ldrh	r3, [r7, #6]
- 8000b32:	4a2f      	ldr	r2, [pc, #188]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b34:	00db      	lsls	r3, r3, #3
- 8000b36:	4413      	add	r3, r2
- 8000b38:	2208      	movs	r2, #8
- 8000b3a:	809a      	strh	r2, [r3, #4]
+ 800064c:	88fb      	ldrh	r3, [r7, #6]
+ 800064e:	4a2f      	ldr	r2, [pc, #188]	; (800070c <Bitmap_init+0x178>)
+ 8000650:	00db      	lsls	r3, r3, #3
+ 8000652:	4413      	add	r3, r2
+ 8000654:	2208      	movs	r2, #8
+ 8000656:	809a      	strh	r2, [r3, #4]
 			bmLookup[i][OFFSET] = (TEXT_SIZE * TEXT_SIZE * i);
- 8000b3c:	88fb      	ldrh	r3, [r7, #6]
- 8000b3e:	88fa      	ldrh	r2, [r7, #6]
- 8000b40:	0192      	lsls	r2, r2, #6
- 8000b42:	b291      	uxth	r1, r2
- 8000b44:	4a2a      	ldr	r2, [pc, #168]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b46:	00db      	lsls	r3, r3, #3
- 8000b48:	4413      	add	r3, r2
- 8000b4a:	460a      	mov	r2, r1
- 8000b4c:	80da      	strh	r2, [r3, #6]
- 8000b4e:	e041      	b.n	8000bd4 <Bitmap_init+0x15c>
+ 8000658:	88fb      	ldrh	r3, [r7, #6]
+ 800065a:	88fa      	ldrh	r2, [r7, #6]
+ 800065c:	0192      	lsls	r2, r2, #6
+ 800065e:	b291      	uxth	r1, r2
+ 8000660:	4a2a      	ldr	r2, [pc, #168]	; (800070c <Bitmap_init+0x178>)
+ 8000662:	00db      	lsls	r3, r3, #3
+ 8000664:	4413      	add	r3, r2
+ 8000666:	460a      	mov	r2, r1
+ 8000668:	80da      	strh	r2, [r3, #6]
+ 800066a:	e041      	b.n	80006f0 <Bitmap_init+0x15c>
 		}
 		else if((i >= (ALPHABET_SIZE*4)) && (i < (ALPHABET_SIZE*6)))
- 8000b50:	88fb      	ldrh	r3, [r7, #6]
- 8000b52:	2b67      	cmp	r3, #103	; 0x67
- 8000b54:	d920      	bls.n	8000b98 <Bitmap_init+0x120>
- 8000b56:	88fb      	ldrh	r3, [r7, #6]
- 8000b58:	2b9b      	cmp	r3, #155	; 0x9b
- 8000b5a:	d81d      	bhi.n	8000b98 <Bitmap_init+0x120>
+ 800066c:	88fb      	ldrh	r3, [r7, #6]
+ 800066e:	2b67      	cmp	r3, #103	; 0x67
+ 8000670:	d920      	bls.n	80006b4 <Bitmap_init+0x120>
+ 8000672:	88fb      	ldrh	r3, [r7, #6]
+ 8000674:	2b9b      	cmp	r3, #155	; 0x9b
+ 8000676:	d81d      	bhi.n	80006b4 <Bitmap_init+0x120>
 		{
 			bmLookup[i][ID] = ((i-(ALPHABET_SIZE*4))+500);
- 8000b5c:	88fb      	ldrh	r3, [r7, #6]
- 8000b5e:	88fa      	ldrh	r2, [r7, #6]
- 8000b60:	f502 72c6 	add.w	r2, r2, #396	; 0x18c
- 8000b64:	b291      	uxth	r1, r2
- 8000b66:	4a22      	ldr	r2, [pc, #136]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b68:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
+ 8000678:	88fb      	ldrh	r3, [r7, #6]
+ 800067a:	88fa      	ldrh	r2, [r7, #6]
+ 800067c:	f502 72c6 	add.w	r2, r2, #396	; 0x18c
+ 8000680:	b291      	uxth	r1, r2
+ 8000682:	4a22      	ldr	r2, [pc, #136]	; (800070c <Bitmap_init+0x178>)
+ 8000684:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
 			bmLookup[i][X_LEN] = 8;
- 8000b6c:	88fb      	ldrh	r3, [r7, #6]
- 8000b6e:	4a20      	ldr	r2, [pc, #128]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b70:	00db      	lsls	r3, r3, #3
- 8000b72:	4413      	add	r3, r2
- 8000b74:	2208      	movs	r2, #8
- 8000b76:	805a      	strh	r2, [r3, #2]
+ 8000688:	88fb      	ldrh	r3, [r7, #6]
+ 800068a:	4a20      	ldr	r2, [pc, #128]	; (800070c <Bitmap_init+0x178>)
+ 800068c:	00db      	lsls	r3, r3, #3
+ 800068e:	4413      	add	r3, r2
+ 8000690:	2208      	movs	r2, #8
+ 8000692:	805a      	strh	r2, [r3, #2]
 			bmLookup[i][Y_LEN] = 8;
- 8000b78:	88fb      	ldrh	r3, [r7, #6]
- 8000b7a:	4a1d      	ldr	r2, [pc, #116]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b7c:	00db      	lsls	r3, r3, #3
- 8000b7e:	4413      	add	r3, r2
- 8000b80:	2208      	movs	r2, #8
- 8000b82:	809a      	strh	r2, [r3, #4]
+ 8000694:	88fb      	ldrh	r3, [r7, #6]
+ 8000696:	4a1d      	ldr	r2, [pc, #116]	; (800070c <Bitmap_init+0x178>)
+ 8000698:	00db      	lsls	r3, r3, #3
+ 800069a:	4413      	add	r3, r2
+ 800069c:	2208      	movs	r2, #8
+ 800069e:	809a      	strh	r2, [r3, #4]
 			bmLookup[i][OFFSET] = (TEXT_SIZE * TEXT_SIZE * i);
- 8000b84:	88fb      	ldrh	r3, [r7, #6]
- 8000b86:	88fa      	ldrh	r2, [r7, #6]
- 8000b88:	0192      	lsls	r2, r2, #6
- 8000b8a:	b291      	uxth	r1, r2
- 8000b8c:	4a18      	ldr	r2, [pc, #96]	; (8000bf0 <Bitmap_init+0x178>)
- 8000b8e:	00db      	lsls	r3, r3, #3
- 8000b90:	4413      	add	r3, r2
- 8000b92:	460a      	mov	r2, r1
- 8000b94:	80da      	strh	r2, [r3, #6]
- 8000b96:	e01d      	b.n	8000bd4 <Bitmap_init+0x15c>
+ 80006a0:	88fb      	ldrh	r3, [r7, #6]
+ 80006a2:	88fa      	ldrh	r2, [r7, #6]
+ 80006a4:	0192      	lsls	r2, r2, #6
+ 80006a6:	b291      	uxth	r1, r2
+ 80006a8:	4a18      	ldr	r2, [pc, #96]	; (800070c <Bitmap_init+0x178>)
+ 80006aa:	00db      	lsls	r3, r3, #3
+ 80006ac:	4413      	add	r3, r2
+ 80006ae:	460a      	mov	r2, r1
+ 80006b0:	80da      	strh	r2, [r3, #6]
+ 80006b2:	e01d      	b.n	80006f0 <Bitmap_init+0x15c>
 		}
 		else if(i==(ALPHABET_SIZE*6))
- 8000b98:	88fb      	ldrh	r3, [r7, #6]
- 8000b9a:	2b9c      	cmp	r3, #156	; 0x9c
- 8000b9c:	d11a      	bne.n	8000bd4 <Bitmap_init+0x15c>
+ 80006b4:	88fb      	ldrh	r3, [r7, #6]
+ 80006b6:	2b9c      	cmp	r3, #156	; 0x9c
+ 80006b8:	d11a      	bne.n	80006f0 <Bitmap_init+0x15c>
 		{
 			bmLookup[i][ID] = 690;
- 8000b9e:	88fb      	ldrh	r3, [r7, #6]
- 8000ba0:	4a13      	ldr	r2, [pc, #76]	; (8000bf0 <Bitmap_init+0x178>)
- 8000ba2:	f240 21b2 	movw	r1, #690	; 0x2b2
- 8000ba6:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
+ 80006ba:	88fb      	ldrh	r3, [r7, #6]
+ 80006bc:	4a13      	ldr	r2, [pc, #76]	; (800070c <Bitmap_init+0x178>)
+ 80006be:	f240 21b2 	movw	r1, #690	; 0x2b2
+ 80006c2:	f822 1033 	strh.w	r1, [r2, r3, lsl #3]
 			bmLookup[i][X_LEN] = 13;
- 8000baa:	88fb      	ldrh	r3, [r7, #6]
- 8000bac:	4a10      	ldr	r2, [pc, #64]	; (8000bf0 <Bitmap_init+0x178>)
- 8000bae:	00db      	lsls	r3, r3, #3
- 8000bb0:	4413      	add	r3, r2
- 8000bb2:	220d      	movs	r2, #13
- 8000bb4:	805a      	strh	r2, [r3, #2]
+ 80006c6:	88fb      	ldrh	r3, [r7, #6]
+ 80006c8:	4a10      	ldr	r2, [pc, #64]	; (800070c <Bitmap_init+0x178>)
+ 80006ca:	00db      	lsls	r3, r3, #3
+ 80006cc:	4413      	add	r3, r2
+ 80006ce:	220d      	movs	r2, #13
+ 80006d0:	805a      	strh	r2, [r3, #2]
 			bmLookup[i][Y_LEN] = 13;
- 8000bb6:	88fb      	ldrh	r3, [r7, #6]
- 8000bb8:	4a0d      	ldr	r2, [pc, #52]	; (8000bf0 <Bitmap_init+0x178>)
- 8000bba:	00db      	lsls	r3, r3, #3
- 8000bbc:	4413      	add	r3, r2
- 8000bbe:	220d      	movs	r2, #13
- 8000bc0:	809a      	strh	r2, [r3, #4]
+ 80006d2:	88fb      	ldrh	r3, [r7, #6]
+ 80006d4:	4a0d      	ldr	r2, [pc, #52]	; (800070c <Bitmap_init+0x178>)
+ 80006d6:	00db      	lsls	r3, r3, #3
+ 80006d8:	4413      	add	r3, r2
+ 80006da:	220d      	movs	r2, #13
+ 80006dc:	809a      	strh	r2, [r3, #4]
 			bmLookup[i][OFFSET] = (TEXT_SIZE * TEXT_SIZE * i);
- 8000bc2:	88fb      	ldrh	r3, [r7, #6]
- 8000bc4:	88fa      	ldrh	r2, [r7, #6]
- 8000bc6:	0192      	lsls	r2, r2, #6
- 8000bc8:	b291      	uxth	r1, r2
- 8000bca:	4a09      	ldr	r2, [pc, #36]	; (8000bf0 <Bitmap_init+0x178>)
- 8000bcc:	00db      	lsls	r3, r3, #3
- 8000bce:	4413      	add	r3, r2
- 8000bd0:	460a      	mov	r2, r1
- 8000bd2:	80da      	strh	r2, [r3, #6]
+ 80006de:	88fb      	ldrh	r3, [r7, #6]
+ 80006e0:	88fa      	ldrh	r2, [r7, #6]
+ 80006e2:	0192      	lsls	r2, r2, #6
+ 80006e4:	b291      	uxth	r1, r2
+ 80006e6:	4a09      	ldr	r2, [pc, #36]	; (800070c <Bitmap_init+0x178>)
+ 80006e8:	00db      	lsls	r3, r3, #3
+ 80006ea:	4413      	add	r3, r2
+ 80006ec:	460a      	mov	r2, r1
+ 80006ee:	80da      	strh	r2, [r3, #6]
 	for(i = 0; i < BM_AMOUNT; i++)
- 8000bd4:	88fb      	ldrh	r3, [r7, #6]
- 8000bd6:	3301      	adds	r3, #1
- 8000bd8:	80fb      	strh	r3, [r7, #6]
- 8000bda:	88fb      	ldrh	r3, [r7, #6]
- 8000bdc:	2bc7      	cmp	r3, #199	; 0xc7
- 8000bde:	f67f af51 	bls.w	8000a84 <Bitmap_init+0xc>
+ 80006f0:	88fb      	ldrh	r3, [r7, #6]
+ 80006f2:	3301      	adds	r3, #1
+ 80006f4:	80fb      	strh	r3, [r7, #6]
+ 80006f6:	88fb      	ldrh	r3, [r7, #6]
+ 80006f8:	2bc7      	cmp	r3, #199	; 0xc7
+ 80006fa:	f67f af51 	bls.w	80005a0 <Bitmap_init+0xc>
 		}
 	}
 }
- 8000be2:	bf00      	nop
- 8000be4:	bf00      	nop
- 8000be6:	370c      	adds	r7, #12
- 8000be8:	46bd      	mov	sp, r7
- 8000bea:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000bee:	4770      	bx	lr
- 8000bf0:	200002b4 	.word	0x200002b4
+ 80006fe:	bf00      	nop
+ 8000700:	bf00      	nop
+ 8000702:	370c      	adds	r7, #12
+ 8000704:	46bd      	mov	sp, r7
+ 8000706:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800070a:	4770      	bx	lr
+ 800070c:	2000012c 	.word	0x2000012c
 
-08000bf4 <MX_DMA_Init>:
+08000710 <MX_DMA_Init>:
 
 /**
   * Enable DMA controller clock
   */
 void MX_DMA_Init(void)
 {
- 8000bf4:	b580      	push	{r7, lr}
- 8000bf6:	b082      	sub	sp, #8
- 8000bf8:	af00      	add	r7, sp, #0
+ 8000710:	b580      	push	{r7, lr}
+ 8000712:	b082      	sub	sp, #8
+ 8000714:	af00      	add	r7, sp, #0
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
- 8000bfa:	2300      	movs	r3, #0
- 8000bfc:	607b      	str	r3, [r7, #4]
- 8000bfe:	4b0c      	ldr	r3, [pc, #48]	; (8000c30 <MX_DMA_Init+0x3c>)
- 8000c00:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000c02:	4a0b      	ldr	r2, [pc, #44]	; (8000c30 <MX_DMA_Init+0x3c>)
- 8000c04:	f443 0380 	orr.w	r3, r3, #4194304	; 0x400000
- 8000c08:	6313      	str	r3, [r2, #48]	; 0x30
- 8000c0a:	4b09      	ldr	r3, [pc, #36]	; (8000c30 <MX_DMA_Init+0x3c>)
- 8000c0c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000c0e:	f403 0380 	and.w	r3, r3, #4194304	; 0x400000
- 8000c12:	607b      	str	r3, [r7, #4]
- 8000c14:	687b      	ldr	r3, [r7, #4]
+ 8000716:	2300      	movs	r3, #0
+ 8000718:	607b      	str	r3, [r7, #4]
+ 800071a:	4b0c      	ldr	r3, [pc, #48]	; (800074c <MX_DMA_Init+0x3c>)
+ 800071c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800071e:	4a0b      	ldr	r2, [pc, #44]	; (800074c <MX_DMA_Init+0x3c>)
+ 8000720:	f443 0380 	orr.w	r3, r3, #4194304	; 0x400000
+ 8000724:	6313      	str	r3, [r2, #48]	; 0x30
+ 8000726:	4b09      	ldr	r3, [pc, #36]	; (800074c <MX_DMA_Init+0x3c>)
+ 8000728:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800072a:	f403 0380 	and.w	r3, r3, #4194304	; 0x400000
+ 800072e:	607b      	str	r3, [r7, #4]
+ 8000730:	687b      	ldr	r3, [r7, #4]
 
   /* DMA interrupt init */
   /* DMA2_Stream5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream5_IRQn, 0, 0);
- 8000c16:	2200      	movs	r2, #0
- 8000c18:	2100      	movs	r1, #0
- 8000c1a:	2044      	movs	r0, #68	; 0x44
- 8000c1c:	f003 f871 	bl	8003d02 <HAL_NVIC_SetPriority>
+ 8000732:	2200      	movs	r2, #0
+ 8000734:	2100      	movs	r1, #0
+ 8000736:	2044      	movs	r0, #68	; 0x44
+ 8000738:	f003 fae3 	bl	8003d02 <HAL_NVIC_SetPriority>
   HAL_NVIC_EnableIRQ(DMA2_Stream5_IRQn);
- 8000c20:	2044      	movs	r0, #68	; 0x44
- 8000c22:	f003 f88a 	bl	8003d3a <HAL_NVIC_EnableIRQ>
+ 800073c:	2044      	movs	r0, #68	; 0x44
+ 800073e:	f003 fafc 	bl	8003d3a <HAL_NVIC_EnableIRQ>
 
 }
- 8000c26:	bf00      	nop
- 8000c28:	3708      	adds	r7, #8
- 8000c2a:	46bd      	mov	sp, r7
- 8000c2c:	bd80      	pop	{r7, pc}
- 8000c2e:	bf00      	nop
- 8000c30:	40023800 	.word	0x40023800
+ 8000742:	bf00      	nop
+ 8000744:	3708      	adds	r7, #8
+ 8000746:	46bd      	mov	sp, r7
+ 8000748:	bd80      	pop	{r7, pc}
+ 800074a:	bf00      	nop
+ 800074c:	40023800 	.word	0x40023800
+
+08000750 <FL_Input>:
+//--------------------------------------------------------------
+// @brief Function load input into structs
+// @details This function loads the different arguments into the assigned structs
+//--------------------------------------------------------------
+void FL_Input()
+{
+ 8000750:	b580      	push	{r7, lr}
+ 8000752:	af00      	add	r7, sp, #0
+	switch(input.line_rx_buffer[firstCharacter])
+ 8000754:	4bbe      	ldr	r3, [pc, #760]	; (8000a50 <FL_Input+0x300>)
+ 8000756:	785b      	ldrb	r3, [r3, #1]
+ 8000758:	3b62      	subs	r3, #98	; 0x62
+ 800075a:	2b12      	cmp	r3, #18
+ 800075c:	f200 8174 	bhi.w	8000a48 <FL_Input+0x2f8>
+ 8000760:	a201      	add	r2, pc, #4	; (adr r2, 8000768 <FL_Input+0x18>)
+ 8000762:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8000766:	bf00      	nop
+ 8000768:	080009c7 	.word	0x080009c7
+ 800076c:	08000a23 	.word	0x08000a23
+ 8000770:	08000a49 	.word	0x08000a49
+ 8000774:	08000a49 	.word	0x08000a49
+ 8000778:	08000a49 	.word	0x08000a49
+ 800077c:	08000a49 	.word	0x08000a49
+ 8000780:	08000a49 	.word	0x08000a49
+ 8000784:	08000a49 	.word	0x08000a49
+ 8000788:	08000a49 	.word	0x08000a49
+ 800078c:	08000a49 	.word	0x08000a49
+ 8000790:	080007b5 	.word	0x080007b5
+ 8000794:	08000a49 	.word	0x08000a49
+ 8000798:	08000a49 	.word	0x08000a49
+ 800079c:	08000a49 	.word	0x08000a49
+ 80007a0:	08000a49 	.word	0x08000a49
+ 80007a4:	08000a49 	.word	0x08000a49
+ 80007a8:	080008fd 	.word	0x080008fd
+ 80007ac:	08000a49 	.word	0x08000a49
+ 80007b0:	08000855 	.word	0x08000855
+	{
+		case line:	//if the function line is called
+			if(checkFunctionLen(lineLen) == false)
+ 80007b4:	2006      	movs	r0, #6
+ 80007b6:	f000 f9f5 	bl	8000ba4 <checkFunctionLen>
+ 80007ba:	4603      	mov	r3, r0
+ 80007bc:	f083 0301 	eor.w	r3, r3, #1
+ 80007c0:	b2db      	uxtb	r3, r3
+ 80007c2:	2b00      	cmp	r3, #0
+ 80007c4:	f000 8162 	beq.w	8000a8c <FL_Input+0x33c>
+			{
+				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
+ 80007c8:	2200      	movs	r2, #0
+ 80007ca:	49a2      	ldr	r1, [pc, #648]	; (8000a54 <FL_Input+0x304>)
+ 80007cc:	2001      	movs	r0, #1
+ 80007ce:	f000 f969 	bl	8000aa4 <arg>
+				line_s.x1 = atoi(string_container);	//stores the information from argument 1 into line struct
+ 80007d2:	48a0      	ldr	r0, [pc, #640]	; (8000a54 <FL_Input+0x304>)
+ 80007d4:	f006 fcd6 	bl	8007184 <atoi>
+ 80007d8:	4603      	mov	r3, r0
+ 80007da:	b29a      	uxth	r2, r3
+ 80007dc:	4b9e      	ldr	r3, [pc, #632]	; (8000a58 <FL_Input+0x308>)
+ 80007de:	801a      	strh	r2, [r3, #0]
+				arg(argumentTWO, string_container, NOTEXT);	//etc
+ 80007e0:	2200      	movs	r2, #0
+ 80007e2:	499c      	ldr	r1, [pc, #624]	; (8000a54 <FL_Input+0x304>)
+ 80007e4:	2002      	movs	r0, #2
+ 80007e6:	f000 f95d 	bl	8000aa4 <arg>
+				line_s.y1 = atoi(string_container);
+ 80007ea:	489a      	ldr	r0, [pc, #616]	; (8000a54 <FL_Input+0x304>)
+ 80007ec:	f006 fcca 	bl	8007184 <atoi>
+ 80007f0:	4603      	mov	r3, r0
+ 80007f2:	b29a      	uxth	r2, r3
+ 80007f4:	4b98      	ldr	r3, [pc, #608]	; (8000a58 <FL_Input+0x308>)
+ 80007f6:	805a      	strh	r2, [r3, #2]
+				arg(argumentTHREE, string_container, NOTEXT);
+ 80007f8:	2200      	movs	r2, #0
+ 80007fa:	4996      	ldr	r1, [pc, #600]	; (8000a54 <FL_Input+0x304>)
+ 80007fc:	2003      	movs	r0, #3
+ 80007fe:	f000 f951 	bl	8000aa4 <arg>
+				line_s.x2 = atoi(string_container);
+ 8000802:	4894      	ldr	r0, [pc, #592]	; (8000a54 <FL_Input+0x304>)
+ 8000804:	f006 fcbe 	bl	8007184 <atoi>
+ 8000808:	4603      	mov	r3, r0
+ 800080a:	b29a      	uxth	r2, r3
+ 800080c:	4b92      	ldr	r3, [pc, #584]	; (8000a58 <FL_Input+0x308>)
+ 800080e:	809a      	strh	r2, [r3, #4]
+				arg(argumentFOUR, string_container, NOTEXT);
+ 8000810:	2200      	movs	r2, #0
+ 8000812:	4990      	ldr	r1, [pc, #576]	; (8000a54 <FL_Input+0x304>)
+ 8000814:	2004      	movs	r0, #4
+ 8000816:	f000 f945 	bl	8000aa4 <arg>
+				line_s.y2 = atoi(string_container);
+ 800081a:	488e      	ldr	r0, [pc, #568]	; (8000a54 <FL_Input+0x304>)
+ 800081c:	f006 fcb2 	bl	8007184 <atoi>
+ 8000820:	4603      	mov	r3, r0
+ 8000822:	b29a      	uxth	r2, r3
+ 8000824:	4b8c      	ldr	r3, [pc, #560]	; (8000a58 <FL_Input+0x308>)
+ 8000826:	80da      	strh	r2, [r3, #6]
+				arg(argumentFIVE, string_container, NOTEXT);
+ 8000828:	2200      	movs	r2, #0
+ 800082a:	498a      	ldr	r1, [pc, #552]	; (8000a54 <FL_Input+0x304>)
+ 800082c:	2005      	movs	r0, #5
+ 800082e:	f000 f939 	bl	8000aa4 <arg>
+				strcpy(line_s.color, string_container);
+ 8000832:	4988      	ldr	r1, [pc, #544]	; (8000a54 <FL_Input+0x304>)
+ 8000834:	4889      	ldr	r0, [pc, #548]	; (8000a5c <FL_Input+0x30c>)
+ 8000836:	f006 fcf3 	bl	8007220 <strcpy>
+				arg(argumentSIX, string_container, NOTEXT);
+ 800083a:	2200      	movs	r2, #0
+ 800083c:	4985      	ldr	r1, [pc, #532]	; (8000a54 <FL_Input+0x304>)
+ 800083e:	2006      	movs	r0, #6
+ 8000840:	f000 f930 	bl	8000aa4 <arg>
+				line_s.weight = atoi(string_container);
+ 8000844:	4883      	ldr	r0, [pc, #524]	; (8000a54 <FL_Input+0x304>)
+ 8000846:	f006 fc9d 	bl	8007184 <atoi>
+ 800084a:	4603      	mov	r3, r0
+ 800084c:	b2da      	uxtb	r2, r3
+ 800084e:	4b82      	ldr	r3, [pc, #520]	; (8000a58 <FL_Input+0x308>)
+ 8000850:	751a      	strb	r2, [r3, #20]
+				break;
+ 8000852:	e124      	b.n	8000a9e <FL_Input+0x34e>
+			}
+			else break;
+		case text:	//if the function text is called
+			if(checkFunctionLen(textLen) == false)
+ 8000854:	2007      	movs	r0, #7
+ 8000856:	f000 f9a5 	bl	8000ba4 <checkFunctionLen>
+ 800085a:	4603      	mov	r3, r0
+ 800085c:	f083 0301 	eor.w	r3, r3, #1
+ 8000860:	b2db      	uxtb	r3, r3
+ 8000862:	2b00      	cmp	r3, #0
+ 8000864:	f000 8114 	beq.w	8000a90 <FL_Input+0x340>
+			{
+				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
+ 8000868:	2200      	movs	r2, #0
+ 800086a:	497a      	ldr	r1, [pc, #488]	; (8000a54 <FL_Input+0x304>)
+ 800086c:	2001      	movs	r0, #1
+ 800086e:	f000 f919 	bl	8000aa4 <arg>
+				text_s.xlup = atoi(string_container);	//stores the information from argument 1 into text struct
+ 8000872:	4878      	ldr	r0, [pc, #480]	; (8000a54 <FL_Input+0x304>)
+ 8000874:	f006 fc86 	bl	8007184 <atoi>
+ 8000878:	4603      	mov	r3, r0
+ 800087a:	b29a      	uxth	r2, r3
+ 800087c:	4b78      	ldr	r3, [pc, #480]	; (8000a60 <FL_Input+0x310>)
+ 800087e:	801a      	strh	r2, [r3, #0]
+				arg(argumentTWO, string_container, NOTEXT);	//etc
+ 8000880:	2200      	movs	r2, #0
+ 8000882:	4974      	ldr	r1, [pc, #464]	; (8000a54 <FL_Input+0x304>)
+ 8000884:	2002      	movs	r0, #2
+ 8000886:	f000 f90d 	bl	8000aa4 <arg>
+				text_s.ylup = atoi(string_container);
+ 800088a:	4872      	ldr	r0, [pc, #456]	; (8000a54 <FL_Input+0x304>)
+ 800088c:	f006 fc7a 	bl	8007184 <atoi>
+ 8000890:	4603      	mov	r3, r0
+ 8000892:	b29a      	uxth	r2, r3
+ 8000894:	4b72      	ldr	r3, [pc, #456]	; (8000a60 <FL_Input+0x310>)
+ 8000896:	805a      	strh	r2, [r3, #2]
+				arg(argumentTHREE, string_container, NOTEXT);
+ 8000898:	2200      	movs	r2, #0
+ 800089a:	496e      	ldr	r1, [pc, #440]	; (8000a54 <FL_Input+0x304>)
+ 800089c:	2003      	movs	r0, #3
+ 800089e:	f000 f901 	bl	8000aa4 <arg>
+				strcpy(text_s.color, string_container);
+ 80008a2:	496c      	ldr	r1, [pc, #432]	; (8000a54 <FL_Input+0x304>)
+ 80008a4:	486f      	ldr	r0, [pc, #444]	; (8000a64 <FL_Input+0x314>)
+ 80008a6:	f006 fcbb 	bl	8007220 <strcpy>
+				arg(argumentFOUR, string_container, YESTEXT);
+ 80008aa:	2201      	movs	r2, #1
+ 80008ac:	4969      	ldr	r1, [pc, #420]	; (8000a54 <FL_Input+0x304>)
+ 80008ae:	2004      	movs	r0, #4
+ 80008b0:	f000 f8f8 	bl	8000aa4 <arg>
+				strcpy(text_s.textin, string_container);
+ 80008b4:	4967      	ldr	r1, [pc, #412]	; (8000a54 <FL_Input+0x304>)
+ 80008b6:	486c      	ldr	r0, [pc, #432]	; (8000a68 <FL_Input+0x318>)
+ 80008b8:	f006 fcb2 	bl	8007220 <strcpy>
+				arg(argumentFIVE, string_container, NOTEXT);
+ 80008bc:	2200      	movs	r2, #0
+ 80008be:	4965      	ldr	r1, [pc, #404]	; (8000a54 <FL_Input+0x304>)
+ 80008c0:	2005      	movs	r0, #5
+ 80008c2:	f000 f8ef 	bl	8000aa4 <arg>
+				strcpy(text_s.fontname, string_container);
+ 80008c6:	4963      	ldr	r1, [pc, #396]	; (8000a54 <FL_Input+0x304>)
+ 80008c8:	4868      	ldr	r0, [pc, #416]	; (8000a6c <FL_Input+0x31c>)
+ 80008ca:	f006 fca9 	bl	8007220 <strcpy>
+				arg(argumentSIX, string_container, NOTEXT);
+ 80008ce:	2200      	movs	r2, #0
+ 80008d0:	4960      	ldr	r1, [pc, #384]	; (8000a54 <FL_Input+0x304>)
+ 80008d2:	2006      	movs	r0, #6
+ 80008d4:	f000 f8e6 	bl	8000aa4 <arg>
+				text_s.fontsize = atoi(string_container);
+ 80008d8:	485e      	ldr	r0, [pc, #376]	; (8000a54 <FL_Input+0x304>)
+ 80008da:	f006 fc53 	bl	8007184 <atoi>
+ 80008de:	4603      	mov	r3, r0
+ 80008e0:	b2da      	uxtb	r2, r3
+ 80008e2:	4b5f      	ldr	r3, [pc, #380]	; (8000a60 <FL_Input+0x310>)
+ 80008e4:	f883 20ae 	strb.w	r2, [r3, #174]	; 0xae
+				arg(argumentSEVEN, string_container, NOTEXT);
+ 80008e8:	2200      	movs	r2, #0
+ 80008ea:	495a      	ldr	r1, [pc, #360]	; (8000a54 <FL_Input+0x304>)
+ 80008ec:	2007      	movs	r0, #7
+ 80008ee:	f000 f8d9 	bl	8000aa4 <arg>
+				strcpy(text_s.fontstyle, string_container);
+ 80008f2:	4958      	ldr	r1, [pc, #352]	; (8000a54 <FL_Input+0x304>)
+ 80008f4:	485e      	ldr	r0, [pc, #376]	; (8000a70 <FL_Input+0x320>)
+ 80008f6:	f006 fc93 	bl	8007220 <strcpy>
+				break;
+ 80008fa:	e0d0      	b.n	8000a9e <FL_Input+0x34e>
+			}
+			else break;
+		case rectangle:	//if the function rectangle is called
+			if(checkFunctionLen(rectangleLen) == false)
+ 80008fc:	2008      	movs	r0, #8
+ 80008fe:	f000 f951 	bl	8000ba4 <checkFunctionLen>
+ 8000902:	4603      	mov	r3, r0
+ 8000904:	f083 0301 	eor.w	r3, r3, #1
+ 8000908:	b2db      	uxtb	r3, r3
+ 800090a:	2b00      	cmp	r3, #0
+ 800090c:	f000 80c2 	beq.w	8000a94 <FL_Input+0x344>
+			{
+				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
+ 8000910:	2200      	movs	r2, #0
+ 8000912:	4950      	ldr	r1, [pc, #320]	; (8000a54 <FL_Input+0x304>)
+ 8000914:	2001      	movs	r0, #1
+ 8000916:	f000 f8c5 	bl	8000aa4 <arg>
+				rectangle_s.xlup = atoi(string_container);	//stores the information from argument 1 into rectangle struct
+ 800091a:	484e      	ldr	r0, [pc, #312]	; (8000a54 <FL_Input+0x304>)
+ 800091c:	f006 fc32 	bl	8007184 <atoi>
+ 8000920:	4603      	mov	r3, r0
+ 8000922:	b29a      	uxth	r2, r3
+ 8000924:	4b53      	ldr	r3, [pc, #332]	; (8000a74 <FL_Input+0x324>)
+ 8000926:	801a      	strh	r2, [r3, #0]
+				arg(argumentTWO, string_container, NOTEXT);
+ 8000928:	2200      	movs	r2, #0
+ 800092a:	494a      	ldr	r1, [pc, #296]	; (8000a54 <FL_Input+0x304>)
+ 800092c:	2002      	movs	r0, #2
+ 800092e:	f000 f8b9 	bl	8000aa4 <arg>
+				rectangle_s.ylup = atoi(string_container);
+ 8000932:	4848      	ldr	r0, [pc, #288]	; (8000a54 <FL_Input+0x304>)
+ 8000934:	f006 fc26 	bl	8007184 <atoi>
+ 8000938:	4603      	mov	r3, r0
+ 800093a:	b29a      	uxth	r2, r3
+ 800093c:	4b4d      	ldr	r3, [pc, #308]	; (8000a74 <FL_Input+0x324>)
+ 800093e:	805a      	strh	r2, [r3, #2]
+				arg(argumentTHREE, string_container, NOTEXT);
+ 8000940:	2200      	movs	r2, #0
+ 8000942:	4944      	ldr	r1, [pc, #272]	; (8000a54 <FL_Input+0x304>)
+ 8000944:	2003      	movs	r0, #3
+ 8000946:	f000 f8ad 	bl	8000aa4 <arg>
+				rectangle_s.width = atoi(string_container);
+ 800094a:	4842      	ldr	r0, [pc, #264]	; (8000a54 <FL_Input+0x304>)
+ 800094c:	f006 fc1a 	bl	8007184 <atoi>
+ 8000950:	4603      	mov	r3, r0
+ 8000952:	b2da      	uxtb	r2, r3
+ 8000954:	4b47      	ldr	r3, [pc, #284]	; (8000a74 <FL_Input+0x324>)
+ 8000956:	711a      	strb	r2, [r3, #4]
+				arg(argumentFOUR, string_container, NOTEXT);
+ 8000958:	2200      	movs	r2, #0
+ 800095a:	493e      	ldr	r1, [pc, #248]	; (8000a54 <FL_Input+0x304>)
+ 800095c:	2004      	movs	r0, #4
+ 800095e:	f000 f8a1 	bl	8000aa4 <arg>
+				rectangle_s.height = atoi(string_container);
+ 8000962:	483c      	ldr	r0, [pc, #240]	; (8000a54 <FL_Input+0x304>)
+ 8000964:	f006 fc0e 	bl	8007184 <atoi>
+ 8000968:	4603      	mov	r3, r0
+ 800096a:	b2da      	uxtb	r2, r3
+ 800096c:	4b41      	ldr	r3, [pc, #260]	; (8000a74 <FL_Input+0x324>)
+ 800096e:	715a      	strb	r2, [r3, #5]
+				arg(argumentFIVE, string_container, NOTEXT);
+ 8000970:	2200      	movs	r2, #0
+ 8000972:	4938      	ldr	r1, [pc, #224]	; (8000a54 <FL_Input+0x304>)
+ 8000974:	2005      	movs	r0, #5
+ 8000976:	f000 f895 	bl	8000aa4 <arg>
+				strcpy(rectangle_s.color, string_container);
+ 800097a:	4936      	ldr	r1, [pc, #216]	; (8000a54 <FL_Input+0x304>)
+ 800097c:	483e      	ldr	r0, [pc, #248]	; (8000a78 <FL_Input+0x328>)
+ 800097e:	f006 fc4f 	bl	8007220 <strcpy>
+				arg(argumentSIX, string_container, NOTEXT);
+ 8000982:	2200      	movs	r2, #0
+ 8000984:	4933      	ldr	r1, [pc, #204]	; (8000a54 <FL_Input+0x304>)
+ 8000986:	2006      	movs	r0, #6
+ 8000988:	f000 f88c 	bl	8000aa4 <arg>
+				rectangle_s.filled = atoi(string_container);
+ 800098c:	4831      	ldr	r0, [pc, #196]	; (8000a54 <FL_Input+0x304>)
+ 800098e:	f006 fbf9 	bl	8007184 <atoi>
+ 8000992:	4603      	mov	r3, r0
+ 8000994:	b2da      	uxtb	r2, r3
+ 8000996:	4b37      	ldr	r3, [pc, #220]	; (8000a74 <FL_Input+0x324>)
+ 8000998:	749a      	strb	r2, [r3, #18]
+				arg(argumentSEVEN, string_container, NOTEXT);
+ 800099a:	2200      	movs	r2, #0
+ 800099c:	492d      	ldr	r1, [pc, #180]	; (8000a54 <FL_Input+0x304>)
+ 800099e:	2007      	movs	r0, #7
+ 80009a0:	f000 f880 	bl	8000aa4 <arg>
+				strcpy(rectangle_s.bordercolor, string_container);
+ 80009a4:	492b      	ldr	r1, [pc, #172]	; (8000a54 <FL_Input+0x304>)
+ 80009a6:	4835      	ldr	r0, [pc, #212]	; (8000a7c <FL_Input+0x32c>)
+ 80009a8:	f006 fc3a 	bl	8007220 <strcpy>
+				arg(argumentEIGHT, string_container, NOTEXT);
+ 80009ac:	2200      	movs	r2, #0
+ 80009ae:	4929      	ldr	r1, [pc, #164]	; (8000a54 <FL_Input+0x304>)
+ 80009b0:	2008      	movs	r0, #8
+ 80009b2:	f000 f877 	bl	8000aa4 <arg>
+				rectangle_s.linewidth = atoi(string_container);
+ 80009b6:	4827      	ldr	r0, [pc, #156]	; (8000a54 <FL_Input+0x304>)
+ 80009b8:	f006 fbe4 	bl	8007184 <atoi>
+ 80009bc:	4603      	mov	r3, r0
+ 80009be:	b2da      	uxtb	r2, r3
+ 80009c0:	4b2c      	ldr	r3, [pc, #176]	; (8000a74 <FL_Input+0x324>)
+ 80009c2:	77da      	strb	r2, [r3, #31]
+				break;
+ 80009c4:	e06b      	b.n	8000a9e <FL_Input+0x34e>
+			}
+			else break;
+		case bitmap:	//if the function bitmap is called
+			if(checkFunctionLen(bitmapLen) == false)
+ 80009c6:	2003      	movs	r0, #3
+ 80009c8:	f000 f8ec 	bl	8000ba4 <checkFunctionLen>
+ 80009cc:	4603      	mov	r3, r0
+ 80009ce:	f083 0301 	eor.w	r3, r3, #1
+ 80009d2:	b2db      	uxtb	r3, r3
+ 80009d4:	2b00      	cmp	r3, #0
+ 80009d6:	d05f      	beq.n	8000a98 <FL_Input+0x348>
+			{
+				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
+ 80009d8:	2200      	movs	r2, #0
+ 80009da:	491e      	ldr	r1, [pc, #120]	; (8000a54 <FL_Input+0x304>)
+ 80009dc:	2001      	movs	r0, #1
+ 80009de:	f000 f861 	bl	8000aa4 <arg>
+				bitmap_s.nr = atoi(string_container);	//stores the information from argument 1 into bitmap struct
+ 80009e2:	481c      	ldr	r0, [pc, #112]	; (8000a54 <FL_Input+0x304>)
+ 80009e4:	f006 fbce 	bl	8007184 <atoi>
+ 80009e8:	4603      	mov	r3, r0
+ 80009ea:	b2da      	uxtb	r2, r3
+ 80009ec:	4b24      	ldr	r3, [pc, #144]	; (8000a80 <FL_Input+0x330>)
+ 80009ee:	701a      	strb	r2, [r3, #0]
+				arg(argumentTWO, string_container, NOTEXT);
+ 80009f0:	2200      	movs	r2, #0
+ 80009f2:	4918      	ldr	r1, [pc, #96]	; (8000a54 <FL_Input+0x304>)
+ 80009f4:	2002      	movs	r0, #2
+ 80009f6:	f000 f855 	bl	8000aa4 <arg>
+				bitmap_s.xlup = atoi(string_container);
+ 80009fa:	4816      	ldr	r0, [pc, #88]	; (8000a54 <FL_Input+0x304>)
+ 80009fc:	f006 fbc2 	bl	8007184 <atoi>
+ 8000a00:	4603      	mov	r3, r0
+ 8000a02:	b29a      	uxth	r2, r3
+ 8000a04:	4b1e      	ldr	r3, [pc, #120]	; (8000a80 <FL_Input+0x330>)
+ 8000a06:	805a      	strh	r2, [r3, #2]
+				arg(argumentTHREE, string_container, NOTEXT);
+ 8000a08:	2200      	movs	r2, #0
+ 8000a0a:	4912      	ldr	r1, [pc, #72]	; (8000a54 <FL_Input+0x304>)
+ 8000a0c:	2003      	movs	r0, #3
+ 8000a0e:	f000 f849 	bl	8000aa4 <arg>
+				bitmap_s.ylup = atoi(string_container);
+ 8000a12:	4810      	ldr	r0, [pc, #64]	; (8000a54 <FL_Input+0x304>)
+ 8000a14:	f006 fbb6 	bl	8007184 <atoi>
+ 8000a18:	4603      	mov	r3, r0
+ 8000a1a:	b29a      	uxth	r2, r3
+ 8000a1c:	4b18      	ldr	r3, [pc, #96]	; (8000a80 <FL_Input+0x330>)
+ 8000a1e:	809a      	strh	r2, [r3, #4]
+				break;
+ 8000a20:	e03d      	b.n	8000a9e <FL_Input+0x34e>
+			}
+			else break;
+		case clearscreen:	//if the function clearscreen is called
+			if(checkFunctionLen(clearscreenLen) == false)
+ 8000a22:	2001      	movs	r0, #1
+ 8000a24:	f000 f8be 	bl	8000ba4 <checkFunctionLen>
+ 8000a28:	4603      	mov	r3, r0
+ 8000a2a:	f083 0301 	eor.w	r3, r3, #1
+ 8000a2e:	b2db      	uxtb	r3, r3
+ 8000a30:	2b00      	cmp	r3, #0
+ 8000a32:	d033      	beq.n	8000a9c <FL_Input+0x34c>
+			{
+				arg(argumentONE, string_container, NOTEXT);	//collects the information from argument 1
+ 8000a34:	2200      	movs	r2, #0
+ 8000a36:	4907      	ldr	r1, [pc, #28]	; (8000a54 <FL_Input+0x304>)
+ 8000a38:	2001      	movs	r0, #1
+ 8000a3a:	f000 f833 	bl	8000aa4 <arg>
+				strcpy(clearscreen_s.color, string_container);	//stores the information from argument 1 into line struct
+ 8000a3e:	4905      	ldr	r1, [pc, #20]	; (8000a54 <FL_Input+0x304>)
+ 8000a40:	4810      	ldr	r0, [pc, #64]	; (8000a84 <FL_Input+0x334>)
+ 8000a42:	f006 fbed 	bl	8007220 <strcpy>
+				break;
+ 8000a46:	e02a      	b.n	8000a9e <FL_Input+0x34e>
+			}
+			else break;
+		default:
+			printf("The function name is not correct");
+ 8000a48:	480f      	ldr	r0, [pc, #60]	; (8000a88 <FL_Input+0x338>)
+ 8000a4a:	f006 fbd1 	bl	80071f0 <iprintf>
+			break;
+ 8000a4e:	e026      	b.n	8000a9e <FL_Input+0x34e>
+ 8000a50:	200008f4 	.word	0x200008f4
+ 8000a54:	20000874 	.word	0x20000874
+ 8000a58:	2000076c 	.word	0x2000076c
+ 8000a5c:	20000774 	.word	0x20000774
+ 8000a60:	200007b8 	.word	0x200007b8
+ 8000a64:	200007bc 	.word	0x200007bc
+ 8000a68:	200007c8 	.word	0x200007c8
+ 8000a6c:	20000848 	.word	0x20000848
+ 8000a70:	20000867 	.word	0x20000867
+ 8000a74:	20000798 	.word	0x20000798
+ 8000a78:	2000079e 	.word	0x2000079e
+ 8000a7c:	200007ab 	.word	0x200007ab
+ 8000a80:	20000784 	.word	0x20000784
+ 8000a84:	2000078c 	.word	0x2000078c
+ 8000a88:	0800824c 	.word	0x0800824c
+			else break;
+ 8000a8c:	bf00      	nop
+ 8000a8e:	e006      	b.n	8000a9e <FL_Input+0x34e>
+			else break;
+ 8000a90:	bf00      	nop
+ 8000a92:	e004      	b.n	8000a9e <FL_Input+0x34e>
+			else break;
+ 8000a94:	bf00      	nop
+ 8000a96:	e002      	b.n	8000a9e <FL_Input+0x34e>
+			else break;
+ 8000a98:	bf00      	nop
+ 8000a9a:	e000      	b.n	8000a9e <FL_Input+0x34e>
+			else break;
+ 8000a9c:	bf00      	nop
+	}
+
+}
+ 8000a9e:	bf00      	nop
+ 8000aa0:	bd80      	pop	{r7, pc}
+ 8000aa2:	bf00      	nop
+
+08000aa4 <arg>:
+// @param[in] a The variable that determines which argument has to be read
+// @param[in] *string_container A pointer where the string will be put into
+// @param[in] text_trigger A boolean that determines if the argument is a text or not
+//--------------------------------------------------------------
+void arg(uint8_t a,char *string_container ,bool text_trigger)
+{
+ 8000aa4:	b480      	push	{r7}
+ 8000aa6:	b085      	sub	sp, #20
+ 8000aa8:	af00      	add	r7, sp, #0
+ 8000aaa:	4603      	mov	r3, r0
+ 8000aac:	6039      	str	r1, [r7, #0]
+ 8000aae:	71fb      	strb	r3, [r7, #7]
+ 8000ab0:	4613      	mov	r3, r2
+ 8000ab2:	71bb      	strb	r3, [r7, #6]
+	uint8_t i = 0;	//counter
+ 8000ab4:	2300      	movs	r3, #0
+ 8000ab6:	73fb      	strb	r3, [r7, #15]
+	uint8_t j = 0;	//counter
+ 8000ab8:	2300      	movs	r3, #0
+ 8000aba:	73bb      	strb	r3, [r7, #14]
+	uint8_t arg_counter = 0;	//is needed to check what argument is currently beeing read
+ 8000abc:	2300      	movs	r3, #0
+ 8000abe:	737b      	strb	r3, [r7, #13]
+	uint8_t arg_character_counter = 0;	//checks what the current character from the argument is
+ 8000ac0:	2300      	movs	r3, #0
+ 8000ac2:	733b      	strb	r3, [r7, #12]
+	for (j=0; j<=input.msglen; j++)	//cleans string container
+ 8000ac4:	2300      	movs	r3, #0
+ 8000ac6:	73bb      	strb	r3, [r7, #14]
+ 8000ac8:	e007      	b.n	8000ada <arg+0x36>
+	string_container[j] = 0;
+ 8000aca:	7bbb      	ldrb	r3, [r7, #14]
+ 8000acc:	683a      	ldr	r2, [r7, #0]
+ 8000ace:	4413      	add	r3, r2
+ 8000ad0:	2200      	movs	r2, #0
+ 8000ad2:	701a      	strb	r2, [r3, #0]
+	for (j=0; j<=input.msglen; j++)	//cleans string container
+ 8000ad4:	7bbb      	ldrb	r3, [r7, #14]
+ 8000ad6:	3301      	adds	r3, #1
+ 8000ad8:	73bb      	strb	r3, [r7, #14]
+ 8000ada:	7bba      	ldrb	r2, [r7, #14]
+ 8000adc:	4b30      	ldr	r3, [pc, #192]	; (8000ba0 <arg+0xfc>)
+ 8000ade:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
+ 8000ae2:	429a      	cmp	r2, r3
+ 8000ae4:	ddf1      	ble.n	8000aca <arg+0x26>
+	while(i < input.msglen)
+ 8000ae6:	e04e      	b.n	8000b86 <arg+0xe2>
+			{
+				if(input.line_rx_buffer[i] == ',')	//if current character is a ',' the argument counter goes up
+ 8000ae8:	7bfb      	ldrb	r3, [r7, #15]
+ 8000aea:	4a2d      	ldr	r2, [pc, #180]	; (8000ba0 <arg+0xfc>)
+ 8000aec:	4413      	add	r3, r2
+ 8000aee:	785b      	ldrb	r3, [r3, #1]
+ 8000af0:	2b2c      	cmp	r3, #44	; 0x2c
+ 8000af2:	d106      	bne.n	8000b02 <arg+0x5e>
+				{
+					arg_counter++;
+ 8000af4:	7b7b      	ldrb	r3, [r7, #13]
+ 8000af6:	3301      	adds	r3, #1
+ 8000af8:	737b      	strb	r3, [r7, #13]
+					i++;
+ 8000afa:	7bfb      	ldrb	r3, [r7, #15]
+ 8000afc:	3301      	adds	r3, #1
+ 8000afe:	73fb      	strb	r3, [r7, #15]
+ 8000b00:	e041      	b.n	8000b86 <arg+0xe2>
+				}
+				else if(input.line_rx_buffer[i] == ' ' && text_trigger == false)	//if its a space it doesnt get read
+ 8000b02:	7bfb      	ldrb	r3, [r7, #15]
+ 8000b04:	4a26      	ldr	r2, [pc, #152]	; (8000ba0 <arg+0xfc>)
+ 8000b06:	4413      	add	r3, r2
+ 8000b08:	785b      	ldrb	r3, [r3, #1]
+ 8000b0a:	2b20      	cmp	r3, #32
+ 8000b0c:	d109      	bne.n	8000b22 <arg+0x7e>
+ 8000b0e:	79bb      	ldrb	r3, [r7, #6]
+ 8000b10:	f083 0301 	eor.w	r3, r3, #1
+ 8000b14:	b2db      	uxtb	r3, r3
+ 8000b16:	2b00      	cmp	r3, #0
+ 8000b18:	d003      	beq.n	8000b22 <arg+0x7e>
+				i++;
+ 8000b1a:	7bfb      	ldrb	r3, [r7, #15]
+ 8000b1c:	3301      	adds	r3, #1
+ 8000b1e:	73fb      	strb	r3, [r7, #15]
+ 8000b20:	e031      	b.n	8000b86 <arg+0xe2>
+				else if(input.line_rx_buffer[i] == ' ' && text_trigger == true && arg_counter == a)	//if its a space but its in a text argument, it gets read
+ 8000b22:	7bfb      	ldrb	r3, [r7, #15]
+ 8000b24:	4a1e      	ldr	r2, [pc, #120]	; (8000ba0 <arg+0xfc>)
+ 8000b26:	4413      	add	r3, r2
+ 8000b28:	785b      	ldrb	r3, [r3, #1]
+ 8000b2a:	2b20      	cmp	r3, #32
+ 8000b2c:	d115      	bne.n	8000b5a <arg+0xb6>
+ 8000b2e:	79bb      	ldrb	r3, [r7, #6]
+ 8000b30:	2b00      	cmp	r3, #0
+ 8000b32:	d012      	beq.n	8000b5a <arg+0xb6>
+ 8000b34:	7b7a      	ldrb	r2, [r7, #13]
+ 8000b36:	79fb      	ldrb	r3, [r7, #7]
+ 8000b38:	429a      	cmp	r2, r3
+ 8000b3a:	d10e      	bne.n	8000b5a <arg+0xb6>
+				{
+					string_container[arg_character_counter++] = input.line_rx_buffer[i++];
+ 8000b3c:	7bfb      	ldrb	r3, [r7, #15]
+ 8000b3e:	1c5a      	adds	r2, r3, #1
+ 8000b40:	73fa      	strb	r2, [r7, #15]
+ 8000b42:	4619      	mov	r1, r3
+ 8000b44:	7b3b      	ldrb	r3, [r7, #12]
+ 8000b46:	1c5a      	adds	r2, r3, #1
+ 8000b48:	733a      	strb	r2, [r7, #12]
+ 8000b4a:	461a      	mov	r2, r3
+ 8000b4c:	683b      	ldr	r3, [r7, #0]
+ 8000b4e:	4413      	add	r3, r2
+ 8000b50:	4a13      	ldr	r2, [pc, #76]	; (8000ba0 <arg+0xfc>)
+ 8000b52:	440a      	add	r2, r1
+ 8000b54:	7852      	ldrb	r2, [r2, #1]
+ 8000b56:	701a      	strb	r2, [r3, #0]
+ 8000b58:	e015      	b.n	8000b86 <arg+0xe2>
+				}
+				else if(arg_counter == a)	//if its a character in the correct argument it gets read
+ 8000b5a:	7b7a      	ldrb	r2, [r7, #13]
+ 8000b5c:	79fb      	ldrb	r3, [r7, #7]
+ 8000b5e:	429a      	cmp	r2, r3
+ 8000b60:	d10e      	bne.n	8000b80 <arg+0xdc>
+				{
+				string_container[arg_character_counter] = input.line_rx_buffer[i];
+ 8000b62:	7bfa      	ldrb	r2, [r7, #15]
+ 8000b64:	7b3b      	ldrb	r3, [r7, #12]
+ 8000b66:	6839      	ldr	r1, [r7, #0]
+ 8000b68:	440b      	add	r3, r1
+ 8000b6a:	490d      	ldr	r1, [pc, #52]	; (8000ba0 <arg+0xfc>)
+ 8000b6c:	440a      	add	r2, r1
+ 8000b6e:	7852      	ldrb	r2, [r2, #1]
+ 8000b70:	701a      	strb	r2, [r3, #0]
+				arg_character_counter++;
+ 8000b72:	7b3b      	ldrb	r3, [r7, #12]
+ 8000b74:	3301      	adds	r3, #1
+ 8000b76:	733b      	strb	r3, [r7, #12]
+				i++;
+ 8000b78:	7bfb      	ldrb	r3, [r7, #15]
+ 8000b7a:	3301      	adds	r3, #1
+ 8000b7c:	73fb      	strb	r3, [r7, #15]
+ 8000b7e:	e002      	b.n	8000b86 <arg+0xe2>
+				}
+				else i++;	//else skips
+ 8000b80:	7bfb      	ldrb	r3, [r7, #15]
+ 8000b82:	3301      	adds	r3, #1
+ 8000b84:	73fb      	strb	r3, [r7, #15]
+	while(i < input.msglen)
+ 8000b86:	7bfa      	ldrb	r2, [r7, #15]
+ 8000b88:	4b05      	ldr	r3, [pc, #20]	; (8000ba0 <arg+0xfc>)
+ 8000b8a:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
+ 8000b8e:	429a      	cmp	r2, r3
+ 8000b90:	dbaa      	blt.n	8000ae8 <arg+0x44>
+			}
+}
+ 8000b92:	bf00      	nop
+ 8000b94:	bf00      	nop
+ 8000b96:	3714      	adds	r7, #20
+ 8000b98:	46bd      	mov	sp, r7
+ 8000b9a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000b9e:	4770      	bx	lr
+ 8000ba0:	200008f4 	.word	0x200008f4
+
+08000ba4 <checkFunctionLen>:
+//
+// @retval TRUE amount of arguments doesn't match
+// @retval FALSE amount of arguments match
+//--------------------------------------------------------------
+bool checkFunctionLen(uint8_t functionLen)
+{
+ 8000ba4:	b580      	push	{r7, lr}
+ 8000ba6:	b084      	sub	sp, #16
+ 8000ba8:	af00      	add	r7, sp, #0
+ 8000baa:	4603      	mov	r3, r0
+ 8000bac:	71fb      	strb	r3, [r7, #7]
+	uint8_t i = 0;
+ 8000bae:	2300      	movs	r3, #0
+ 8000bb0:	73fb      	strb	r3, [r7, #15]
+	uint8_t arg_counter = 0;
+ 8000bb2:	2300      	movs	r3, #0
+ 8000bb4:	73bb      	strb	r3, [r7, #14]
+	bool error = 0;
+ 8000bb6:	2300      	movs	r3, #0
+ 8000bb8:	737b      	strb	r3, [r7, #13]
+	while(i <= input.msglen)
+ 8000bba:	e00f      	b.n	8000bdc <checkFunctionLen+0x38>
+	{
+		if(input.line_rx_buffer[i] == ',')	//if current character is a ',' the argument counter goes up
+ 8000bbc:	7bfb      	ldrb	r3, [r7, #15]
+ 8000bbe:	4a19      	ldr	r2, [pc, #100]	; (8000c24 <checkFunctionLen+0x80>)
+ 8000bc0:	4413      	add	r3, r2
+ 8000bc2:	785b      	ldrb	r3, [r3, #1]
+ 8000bc4:	2b2c      	cmp	r3, #44	; 0x2c
+ 8000bc6:	d106      	bne.n	8000bd6 <checkFunctionLen+0x32>
+			{
+				arg_counter++;
+ 8000bc8:	7bbb      	ldrb	r3, [r7, #14]
+ 8000bca:	3301      	adds	r3, #1
+ 8000bcc:	73bb      	strb	r3, [r7, #14]
+				i++;
+ 8000bce:	7bfb      	ldrb	r3, [r7, #15]
+ 8000bd0:	3301      	adds	r3, #1
+ 8000bd2:	73fb      	strb	r3, [r7, #15]
+ 8000bd4:	e002      	b.n	8000bdc <checkFunctionLen+0x38>
+			}
+		else i++;
+ 8000bd6:	7bfb      	ldrb	r3, [r7, #15]
+ 8000bd8:	3301      	adds	r3, #1
+ 8000bda:	73fb      	strb	r3, [r7, #15]
+	while(i <= input.msglen)
+ 8000bdc:	7bfa      	ldrb	r2, [r7, #15]
+ 8000bde:	4b11      	ldr	r3, [pc, #68]	; (8000c24 <checkFunctionLen+0x80>)
+ 8000be0:	f8d3 3404 	ldr.w	r3, [r3, #1028]	; 0x404
+ 8000be4:	429a      	cmp	r2, r3
+ 8000be6:	dde9      	ble.n	8000bbc <checkFunctionLen+0x18>
+	}
+	if(arg_counter > functionLen)
+ 8000be8:	7bba      	ldrb	r2, [r7, #14]
+ 8000bea:	79fb      	ldrb	r3, [r7, #7]
+ 8000bec:	429a      	cmp	r2, r3
+ 8000bee:	d908      	bls.n	8000c02 <checkFunctionLen+0x5e>
+	{
+		HAL_UART_Transmit(&huart2, (uint8_t *)"Warning: the input exceeds the maximum length of this function\n\r", sizeof("Warning: the input exceeds the maximum length of this function"),100);
+ 8000bf0:	2364      	movs	r3, #100	; 0x64
+ 8000bf2:	223f      	movs	r2, #63	; 0x3f
+ 8000bf4:	490c      	ldr	r1, [pc, #48]	; (8000c28 <checkFunctionLen+0x84>)
+ 8000bf6:	480d      	ldr	r0, [pc, #52]	; (8000c2c <checkFunctionLen+0x88>)
+ 8000bf8:	f005 fa7d 	bl	80060f6 <HAL_UART_Transmit>
+		error = false;
+ 8000bfc:	2300      	movs	r3, #0
+ 8000bfe:	737b      	strb	r3, [r7, #13]
+ 8000c00:	e00b      	b.n	8000c1a <checkFunctionLen+0x76>
+	}
+	else if(arg_counter < functionLen)
+ 8000c02:	7bba      	ldrb	r2, [r7, #14]
+ 8000c04:	79fb      	ldrb	r3, [r7, #7]
+ 8000c06:	429a      	cmp	r2, r3
+ 8000c08:	d207      	bcs.n	8000c1a <checkFunctionLen+0x76>
+	{
+		HAL_UART_Transmit(&huart2, (uint8_t *)"Error: not enough arguments for this function\n\r", sizeof("Error: not enough arguments for this function"),100);
+ 8000c0a:	2364      	movs	r3, #100	; 0x64
+ 8000c0c:	222e      	movs	r2, #46	; 0x2e
+ 8000c0e:	4908      	ldr	r1, [pc, #32]	; (8000c30 <checkFunctionLen+0x8c>)
+ 8000c10:	4806      	ldr	r0, [pc, #24]	; (8000c2c <checkFunctionLen+0x88>)
+ 8000c12:	f005 fa70 	bl	80060f6 <HAL_UART_Transmit>
+		error = true;
+ 8000c16:	2301      	movs	r3, #1
+ 8000c18:	737b      	strb	r3, [r7, #13]
+	}
+	return error;
+ 8000c1a:	7b7b      	ldrb	r3, [r7, #13]
+}
+ 8000c1c:	4618      	mov	r0, r3
+ 8000c1e:	3710      	adds	r7, #16
+ 8000c20:	46bd      	mov	sp, r7
+ 8000c22:	bd80      	pop	{r7, pc}
+ 8000c24:	200008f4 	.word	0x200008f4
+ 8000c28:	08008270 	.word	0x08008270
+ 8000c2c:	20000de8 	.word	0x20000de8
+ 8000c30:	080082b4 	.word	0x080082b4
 
 08000c34 <MX_GPIO_Init>:
         * Output
@@ -1519,24 +1522,24 @@ void MX_GPIO_Init(void)
  8000d1c:	40021000 	.word	0x40021000
  8000d20:	40020400 	.word	0x40020400
 
-08000d24 <logic>:
+08000d24 <LL_Main>:
 // @param[in] x: The X-coordinate of the top left corner of the bitmap
 // @param[in] y: The Y-coordinate of the top left corner of the bitmap
 // @param[in] bmNr: The number ID of the bitmap to be loaded in
 //--------------------------------------------------------------
-void logic()
+void LL_Main()
 {
  8000d24:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
  8000d28:	b084      	sub	sp, #16
  8000d2a:	af04      	add	r7, sp, #16
 
 	switch(input.line_rx_buffer[firstCharacter])
- 8000d2c:	4b64      	ldr	r3, [pc, #400]	; (8000ec0 <logic+0x19c>)
+ 8000d2c:	4b64      	ldr	r3, [pc, #400]	; (8000ec0 <LL_Main+0x19c>)
  8000d2e:	785b      	ldrb	r3, [r3, #1]
  8000d30:	3b62      	subs	r3, #98	; 0x62
  8000d32:	2b12      	cmp	r3, #18
- 8000d34:	f200 80b9 	bhi.w	8000eaa <logic+0x186>
- 8000d38:	a201      	add	r2, pc, #4	; (adr r2, 8000d40 <logic+0x1c>)
+ 8000d34:	f200 80b9 	bhi.w	8000eaa <LL_Main+0x186>
+ 8000d38:	a201      	add	r2, pc, #4	; (adr r2, 8000d40 <LL_Main+0x1c>)
  8000d3a:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
  8000d3e:	bf00      	nop
  8000d40:	08000e6b 	.word	0x08000e6b
@@ -1562,25 +1565,25 @@ void logic()
 		case line:
 
 			 UB_VGA_SetLine(line_s.x1,
- 8000d8c:	4b4d      	ldr	r3, [pc, #308]	; (8000ec4 <logic+0x1a0>)
+ 8000d8c:	4b4d      	ldr	r3, [pc, #308]	; (8000ec4 <LL_Main+0x1a0>)
  8000d8e:	881c      	ldrh	r4, [r3, #0]
- 8000d90:	4b4c      	ldr	r3, [pc, #304]	; (8000ec4 <logic+0x1a0>)
+ 8000d90:	4b4c      	ldr	r3, [pc, #304]	; (8000ec4 <LL_Main+0x1a0>)
  8000d92:	885d      	ldrh	r5, [r3, #2]
- 8000d94:	4b4b      	ldr	r3, [pc, #300]	; (8000ec4 <logic+0x1a0>)
+ 8000d94:	4b4b      	ldr	r3, [pc, #300]	; (8000ec4 <LL_Main+0x1a0>)
  8000d96:	889e      	ldrh	r6, [r3, #4]
- 8000d98:	4b4a      	ldr	r3, [pc, #296]	; (8000ec4 <logic+0x1a0>)
+ 8000d98:	4b4a      	ldr	r3, [pc, #296]	; (8000ec4 <LL_Main+0x1a0>)
  8000d9a:	f8b3 8006 	ldrh.w	r8, [r3, #6]
 							 line_s.y1,
 							 line_s.x2,
 							 line_s.y2,
 							 color_check(line_s.color),
- 8000d9e:	484a      	ldr	r0, [pc, #296]	; (8000ec8 <logic+0x1a4>)
+ 8000d9e:	484a      	ldr	r0, [pc, #296]	; (8000ec8 <LL_Main+0x1a4>)
  8000da0:	f000 f92e 	bl	8001000 <color_check>
  8000da4:	4603      	mov	r3, r0
 			 UB_VGA_SetLine(line_s.x1,
  8000da6:	b2db      	uxtb	r3, r3
 							 line_s.weight);
- 8000da8:	4a46      	ldr	r2, [pc, #280]	; (8000ec4 <logic+0x1a0>)
+ 8000da8:	4a46      	ldr	r2, [pc, #280]	; (8000ec4 <LL_Main+0x1a0>)
  8000daa:	7d12      	ldrb	r2, [r2, #20]
 			 UB_VGA_SetLine(line_s.x1,
  8000dac:	b292      	uxth	r2, r2
@@ -1594,39 +1597,39 @@ void logic()
 			 memset(&line_s, 0, sizeof(LINE_S));
  8000dbe:	2216      	movs	r2, #22
  8000dc0:	2100      	movs	r1, #0
- 8000dc2:	4840      	ldr	r0, [pc, #256]	; (8000ec4 <logic+0x1a0>)
+ 8000dc2:	4840      	ldr	r0, [pc, #256]	; (8000ec4 <LL_Main+0x1a0>)
  8000dc4:	f006 fa0c 	bl	80071e0 <memset>
 			 break;
- 8000dc8:	e076      	b.n	8000eb8 <logic+0x194>
+ 8000dc8:	e076      	b.n	8000eb8 <LL_Main+0x194>
 		case rectangle:
 			UB_VGA_DrawRectangle(rectangle_s.xlup,
- 8000dca:	4b40      	ldr	r3, [pc, #256]	; (8000ecc <logic+0x1a8>)
+ 8000dca:	4b40      	ldr	r3, [pc, #256]	; (8000ecc <LL_Main+0x1a8>)
  8000dcc:	881e      	ldrh	r6, [r3, #0]
- 8000dce:	4b3f      	ldr	r3, [pc, #252]	; (8000ecc <logic+0x1a8>)
+ 8000dce:	4b3f      	ldr	r3, [pc, #252]	; (8000ecc <LL_Main+0x1a8>)
  8000dd0:	f8b3 8002 	ldrh.w	r8, [r3, #2]
- 8000dd4:	4b3d      	ldr	r3, [pc, #244]	; (8000ecc <logic+0x1a8>)
+ 8000dd4:	4b3d      	ldr	r3, [pc, #244]	; (8000ecc <LL_Main+0x1a8>)
  8000dd6:	f893 9004 	ldrb.w	r9, [r3, #4]
- 8000dda:	4b3c      	ldr	r3, [pc, #240]	; (8000ecc <logic+0x1a8>)
+ 8000dda:	4b3c      	ldr	r3, [pc, #240]	; (8000ecc <LL_Main+0x1a8>)
  8000ddc:	f893 a005 	ldrb.w	sl, [r3, #5]
 					rectangle_s.ylup,
 					rectangle_s.width,
 					rectangle_s.height,
 					color_check(rectangle_s.color),
- 8000de0:	483b      	ldr	r0, [pc, #236]	; (8000ed0 <logic+0x1ac>)
+ 8000de0:	483b      	ldr	r0, [pc, #236]	; (8000ed0 <LL_Main+0x1ac>)
  8000de2:	f000 f90d 	bl	8001000 <color_check>
  8000de6:	4603      	mov	r3, r0
 			UB_VGA_DrawRectangle(rectangle_s.xlup,
  8000de8:	b2dc      	uxtb	r4, r3
- 8000dea:	4b38      	ldr	r3, [pc, #224]	; (8000ecc <logic+0x1a8>)
+ 8000dea:	4b38      	ldr	r3, [pc, #224]	; (8000ecc <LL_Main+0x1a8>)
  8000dec:	7c9d      	ldrb	r5, [r3, #18]
 					rectangle_s.filled,
 					color_check(rectangle_s.bordercolor),
- 8000dee:	4839      	ldr	r0, [pc, #228]	; (8000ed4 <logic+0x1b0>)
+ 8000dee:	4839      	ldr	r0, [pc, #228]	; (8000ed4 <LL_Main+0x1b0>)
  8000df0:	f000 f906 	bl	8001000 <color_check>
  8000df4:	4603      	mov	r3, r0
 			UB_VGA_DrawRectangle(rectangle_s.xlup,
  8000df6:	b2db      	uxtb	r3, r3
- 8000df8:	4a34      	ldr	r2, [pc, #208]	; (8000ecc <logic+0x1a8>)
+ 8000df8:	4a34      	ldr	r2, [pc, #208]	; (8000ecc <LL_Main+0x1a8>)
  8000dfa:	7fd2      	ldrb	r2, [r2, #31]
  8000dfc:	9203      	str	r2, [sp, #12]
  8000dfe:	9302      	str	r3, [sp, #8]
@@ -1641,35 +1644,35 @@ void logic()
 			 memset(&rectangle_s, 0, sizeof(RECTANGLE_S));
  8000e10:	2220      	movs	r2, #32
  8000e12:	2100      	movs	r1, #0
- 8000e14:	482d      	ldr	r0, [pc, #180]	; (8000ecc <logic+0x1a8>)
+ 8000e14:	482d      	ldr	r0, [pc, #180]	; (8000ecc <LL_Main+0x1a8>)
  8000e16:	f006 f9e3 	bl	80071e0 <memset>
 			break;
- 8000e1a:	e04d      	b.n	8000eb8 <logic+0x194>
+ 8000e1a:	e04d      	b.n	8000eb8 <LL_Main+0x194>
 		case text:
 			UB_VGA_writeText(text_s.xlup,
- 8000e1c:	4b2e      	ldr	r3, [pc, #184]	; (8000ed8 <logic+0x1b4>)
+ 8000e1c:	4b2e      	ldr	r3, [pc, #184]	; (8000ed8 <LL_Main+0x1b4>)
  8000e1e:	881e      	ldrh	r6, [r3, #0]
- 8000e20:	4b2d      	ldr	r3, [pc, #180]	; (8000ed8 <logic+0x1b4>)
+ 8000e20:	4b2d      	ldr	r3, [pc, #180]	; (8000ed8 <LL_Main+0x1b4>)
  8000e22:	f8b3 8002 	ldrh.w	r8, [r3, #2]
 					text_s.ylup,
 					color_check(text_s.color),
- 8000e26:	482d      	ldr	r0, [pc, #180]	; (8000edc <logic+0x1b8>)
+ 8000e26:	482d      	ldr	r0, [pc, #180]	; (8000edc <LL_Main+0x1b8>)
  8000e28:	f000 f8ea 	bl	8001000 <color_check>
  8000e2c:	4603      	mov	r3, r0
 			UB_VGA_writeText(text_s.xlup,
  8000e2e:	fa5f f983 	uxtb.w	r9, r3
 					text_s.textin,
 					font_check(text_s.fontname),
- 8000e32:	482b      	ldr	r0, [pc, #172]	; (8000ee0 <logic+0x1bc>)
+ 8000e32:	482b      	ldr	r0, [pc, #172]	; (8000ee0 <LL_Main+0x1bc>)
  8000e34:	f000 f862 	bl	8000efc <font_check>
  8000e38:	4603      	mov	r3, r0
 			UB_VGA_writeText(text_s.xlup,
  8000e3a:	b2dc      	uxtb	r4, r3
- 8000e3c:	4b26      	ldr	r3, [pc, #152]	; (8000ed8 <logic+0x1b4>)
+ 8000e3c:	4b26      	ldr	r3, [pc, #152]	; (8000ed8 <LL_Main+0x1b4>)
  8000e3e:	f893 50ae 	ldrb.w	r5, [r3, #174]	; 0xae
 					text_s.fontsize,
 					style_check(text_s.fontstyle));
- 8000e42:	4828      	ldr	r0, [pc, #160]	; (8000ee4 <logic+0x1c0>)
+ 8000e42:	4828      	ldr	r0, [pc, #160]	; (8000ee4 <LL_Main+0x1c0>)
  8000e44:	f000 f892 	bl	8000f6c <style_check>
  8000e48:	4603      	mov	r3, r0
 			UB_VGA_writeText(text_s.xlup,
@@ -1677,7 +1680,7 @@ void logic()
  8000e4c:	9302      	str	r3, [sp, #8]
  8000e4e:	9501      	str	r5, [sp, #4]
  8000e50:	9400      	str	r4, [sp, #0]
- 8000e52:	4b25      	ldr	r3, [pc, #148]	; (8000ee8 <logic+0x1c4>)
+ 8000e52:	4b25      	ldr	r3, [pc, #148]	; (8000ee8 <LL_Main+0x1c4>)
  8000e54:	464a      	mov	r2, r9
  8000e56:	4641      	mov	r1, r8
  8000e58:	4630      	mov	r0, r6
@@ -1685,18 +1688,18 @@ void logic()
 			 memset(&text_s, 0, sizeof(TEXT_S));
  8000e5e:	22bc      	movs	r2, #188	; 0xbc
  8000e60:	2100      	movs	r1, #0
- 8000e62:	481d      	ldr	r0, [pc, #116]	; (8000ed8 <logic+0x1b4>)
+ 8000e62:	481d      	ldr	r0, [pc, #116]	; (8000ed8 <LL_Main+0x1b4>)
  8000e64:	f006 f9bc 	bl	80071e0 <memset>
 			break;
- 8000e68:	e026      	b.n	8000eb8 <logic+0x194>
+ 8000e68:	e026      	b.n	8000eb8 <LL_Main+0x194>
 		case bitmap:
 			UB_VGA_DrawBitmap(bitmap_s.nr,
- 8000e6a:	4b20      	ldr	r3, [pc, #128]	; (8000eec <logic+0x1c8>)
+ 8000e6a:	4b20      	ldr	r3, [pc, #128]	; (8000eec <LL_Main+0x1c8>)
  8000e6c:	781b      	ldrb	r3, [r3, #0]
  8000e6e:	b298      	uxth	r0, r3
- 8000e70:	4b1e      	ldr	r3, [pc, #120]	; (8000eec <logic+0x1c8>)
+ 8000e70:	4b1e      	ldr	r3, [pc, #120]	; (8000eec <LL_Main+0x1c8>)
  8000e72:	8859      	ldrh	r1, [r3, #2]
- 8000e74:	4b1d      	ldr	r3, [pc, #116]	; (8000eec <logic+0x1c8>)
+ 8000e74:	4b1d      	ldr	r3, [pc, #116]	; (8000eec <LL_Main+0x1c8>)
  8000e76:	889a      	ldrh	r2, [r3, #4]
  8000e78:	2300      	movs	r3, #0
  8000e7a:	9300      	str	r3, [sp, #0]
@@ -1707,13 +1710,13 @@ void logic()
 			 memset(&bitmap_s, 0, sizeof(BITMAP_S));
  8000e82:	2206      	movs	r2, #6
  8000e84:	2100      	movs	r1, #0
- 8000e86:	4819      	ldr	r0, [pc, #100]	; (8000eec <logic+0x1c8>)
+ 8000e86:	4819      	ldr	r0, [pc, #100]	; (8000eec <LL_Main+0x1c8>)
  8000e88:	f006 f9aa 	bl	80071e0 <memset>
 			break;
- 8000e8c:	e014      	b.n	8000eb8 <logic+0x194>
+ 8000e8c:	e014      	b.n	8000eb8 <LL_Main+0x194>
 		case clearscreen:
 			UB_VGA_clearScreen(color_check(clearscreen_s.color));
- 8000e8e:	4818      	ldr	r0, [pc, #96]	; (8000ef0 <logic+0x1cc>)
+ 8000e8e:	4818      	ldr	r0, [pc, #96]	; (8000ef0 <LL_Main+0x1cc>)
  8000e90:	f000 f8b6 	bl	8001000 <color_check>
  8000e94:	4603      	mov	r3, r0
  8000e96:	b2db      	uxtb	r3, r3
@@ -1722,16 +1725,16 @@ void logic()
 			 memset(&clearscreen_s, 0, sizeof(CLEARSCREEN_S));
  8000e9e:	220c      	movs	r2, #12
  8000ea0:	2100      	movs	r1, #0
- 8000ea2:	4813      	ldr	r0, [pc, #76]	; (8000ef0 <logic+0x1cc>)
+ 8000ea2:	4813      	ldr	r0, [pc, #76]	; (8000ef0 <LL_Main+0x1cc>)
  8000ea4:	f006 f99c 	bl	80071e0 <memset>
 			break;
- 8000ea8:	e006      	b.n	8000eb8 <logic+0x194>
+ 8000ea8:	e006      	b.n	8000eb8 <LL_Main+0x194>
 		default:
 			HAL_UART_Transmit(&huart2, (uint8_t *)"no comando\n\r", sizeof("no comando"),100);
  8000eaa:	2364      	movs	r3, #100	; 0x64
  8000eac:	220b      	movs	r2, #11
- 8000eae:	4911      	ldr	r1, [pc, #68]	; (8000ef4 <logic+0x1d0>)
- 8000eb0:	4811      	ldr	r0, [pc, #68]	; (8000ef8 <logic+0x1d4>)
+ 8000eae:	4911      	ldr	r1, [pc, #68]	; (8000ef4 <LL_Main+0x1d0>)
+ 8000eb0:	4811      	ldr	r0, [pc, #68]	; (8000ef8 <LL_Main+0x1d4>)
  8000eb2:	f005 f920 	bl	80060f6 <HAL_UART_Transmit>
 			break;
  8000eb6:	bf00      	nop
@@ -1741,18 +1744,18 @@ void logic()
  8000eba:	46bd      	mov	sp, r7
  8000ebc:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
  8000ec0:	200008f4 	.word	0x200008f4
- 8000ec4:	200001ac 	.word	0x200001ac
- 8000ec8:	200001b4 	.word	0x200001b4
- 8000ecc:	200001d8 	.word	0x200001d8
- 8000ed0:	200001de 	.word	0x200001de
- 8000ed4:	200001eb 	.word	0x200001eb
- 8000ed8:	200001f8 	.word	0x200001f8
- 8000edc:	200001fc 	.word	0x200001fc
- 8000ee0:	20000288 	.word	0x20000288
- 8000ee4:	200002a7 	.word	0x200002a7
- 8000ee8:	20000208 	.word	0x20000208
- 8000eec:	200001c4 	.word	0x200001c4
- 8000ef0:	200001cc 	.word	0x200001cc
+ 8000ec4:	2000076c 	.word	0x2000076c
+ 8000ec8:	20000774 	.word	0x20000774
+ 8000ecc:	20000798 	.word	0x20000798
+ 8000ed0:	2000079e 	.word	0x2000079e
+ 8000ed4:	200007ab 	.word	0x200007ab
+ 8000ed8:	200007b8 	.word	0x200007b8
+ 8000edc:	200007bc 	.word	0x200007bc
+ 8000ee0:	20000848 	.word	0x20000848
+ 8000ee4:	20000867 	.word	0x20000867
+ 8000ee8:	200007c8 	.word	0x200007c8
+ 8000eec:	20000784 	.word	0x20000784
+ 8000ef0:	2000078c 	.word	0x2000078c
  8000ef4:	080082e4 	.word	0x080082e4
  8000ef8:	20000de8 	.word	0x20000de8
 
@@ -2552,23 +2555,24 @@ int main(void)
   MX_GPIO_Init();
  80013c6:	f7ff fc35 	bl	8000c34 <MX_GPIO_Init>
   MX_DMA_Init();
- 80013ca:	f7ff fc13 	bl	8000bf4 <MX_DMA_Init>
+ 80013ca:	f7ff f9a1 	bl	8000710 <MX_DMA_Init>
   MX_TIM1_Init();
  80013ce:	f000 fa91 	bl	80018f4 <MX_TIM1_Init>
   MX_TIM2_Init();
  80013d2:	f000 fadf 	bl	8001994 <MX_TIM2_Init>
   MX_USART2_UART_Init();
  80013d6:	f000 fbf5 	bl	8001bc4 <MX_USART2_UART_Init>
-  Bitmap_init();
- 80013da:	f7ff fb4d 	bl	8000a78 <Bitmap_init>
   /* USER CODE BEGIN 2 */
 
   UB_VGA_Screen_Init(); // Init VGA-Screen
- 80013de:	f000 fc95 	bl	8001d0c <UB_VGA_Screen_Init>
+ 80013da:	f000 fc97 	bl	8001d0c <UB_VGA_Screen_Init>
+  Bitmap_init();		// Init Bitmap
+ 80013de:	f7ff f8d9 	bl	8000594 <Bitmap_init>
 
   UB_VGA_FillScreen(VGA_COL_WHITE);
  80013e2:	20ff      	movs	r0, #255	; 0xff
  80013e4:	f000 fce4 	bl	8001db0 <UB_VGA_FillScreen>
+
   int i;
   for(i = 0; i < LINE_BUFLEN; i++)
  80013e8:	2300      	movs	r3, #0
@@ -2611,22 +2615,22 @@ int main(void)
  8001420:	4908      	ldr	r1, [pc, #32]	; (8001444 <main+0x8c>)
  8001422:	4809      	ldr	r0, [pc, #36]	; (8001448 <main+0x90>)
  8001424:	f004 ff00 	bl	8006228 <HAL_UART_Receive_IT>
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
 	  if(input.command_execute_flag == TRUE)
  8001428:	4b06      	ldr	r3, [pc, #24]	; (8001444 <main+0x8c>)
  800142a:	f893 340c 	ldrb.w	r3, [r3, #1036]	; 0x40c
  800142e:	2bff      	cmp	r3, #255	; 0xff
  8001430:	d1fa      	bne.n	8001428 <main+0x70>
 	  {
-		  // jump to parser
-		  FL_Input();
- 8001432:	f7ff f8af 	bl	8000594 <FL_Input>
-		  logic();
- 8001436:	f7ff fc75 	bl	8000d24 <logic>
+		  FL_Input();	  // start front layer
+ 8001432:	f7ff f98d 	bl	8000750 <FL_Input>
+		  LL_Main();	  // start logic layer
+ 8001436:	f7ff fc75 	bl	8000d24 <LL_Main>
+
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;
  800143a:	4b02      	ldr	r3, [pc, #8]	; (8001444 <main+0x8c>)
@@ -4817,7 +4821,7 @@ void UB_VGA_SetLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t 
  8002108:	bd90      	pop	{r4, r7, pc}
 
 0800210a <UB_VGA_DrawRectangle>:
-// @param[in] lineWidth: The width of the line that determines the border of the rectangle
+// @param[in] lineWidth The width of the line that determines the border of the rectangle
 //--------------------------------------------------------------
 
 void UB_VGA_DrawRectangle(uint16_t xp, uint16_t yp, uint8_t width, uint8_t height, uint8_t color, uint8_t filled,
@@ -5160,9 +5164,9 @@ void UB_VGA_clearScreen(uint8_t color)
 	...
 
 0800232c <UB_VGA_DrawBitmap>:
-// @param[in] x: The X-coordinate of the top left corner of the bitmap
-// @param[in] y: The Y-coordinate of the top left corner of the bitmap
-// @param[in] bmNr: The number ID of the bitmap to be loaded in
+// @param[in] x The X-coordinate of the top left corner of the bitmap
+// @param[in] y The Y-coordinate of the top left corner of the bitmap
+// @param[in] bmNr The number ID of the bitmap to be loaded in
 //--------------------------------------------------------------
 void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uint8_t double_size)
 {
@@ -5420,7 +5424,7 @@ void UB_VGA_DrawBitmap(uint16_t x, uint16_t y, uint16_t bmNr, uint8_t color, uin
  8002496:	46bd      	mov	sp, r7
  8002498:	bd90      	pop	{r4, r7, pc}
  800249a:	bf00      	nop
- 800249c:	200002b4 	.word	0x200002b4
+ 800249c:	2000012c 	.word	0x2000012c
  80024a0:	08008324 	.word	0x08008324
 
 080024a4 <UB_VGA_writeText>:

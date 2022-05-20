@@ -1,17 +1,16 @@
-/*
- * logic_layer.h
- *
- *  Created on: 12 mei 2022
- *      Author: thrij
- */
+//--------------------------------------------------------------
+// File     : logic_layer.h
+//--------------------------------------------------------------
 
 #ifndef INC_LOGIC_LAYER_H_
 #define INC_LOGIC_LAYER_H_
 
+//--------------------------------------------------------------
+// Global function call
+//--------------------------------------------------------------
+void LL_Main();
 
-
-//void logic (char);
 
 #endif /* INC_LOGIC_LAYER_H_ */
 
-void logic();
+

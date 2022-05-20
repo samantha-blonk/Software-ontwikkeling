@@ -18,12 +18,12 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include "front_layer.h"
 #include "main.h"
 #include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "Frontlayer.h"
 #include "logic_layer.h"
 #include "bitmap.h"
 
@@ -100,12 +100,13 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_USART2_UART_Init();
-  Bitmap_init();
   /* USER CODE BEGIN 2 */
 
   UB_VGA_Screen_Init(); // Init VGA-Screen
+  Bitmap_init();		// Init Bitmap
 
   UB_VGA_FillScreen(VGA_COL_WHITE);
+
   int i;
   for(i = 0; i < LINE_BUFLEN; i++)
 	  input.line_rx_buffer[i] = 0;
@@ -120,7 +121,6 @@ int main(void)
   // See stm32f4xx_it.c
   HAL_UART_Receive_IT(&huart2, input.byte_buffer_rx, BYTE_BUFLEN);
 
-  // Test to see if the screen reacts to UART
 
   /* USER CODE END 2 */
 
@@ -128,12 +128,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	  UB_VGA_SetPixel(160,120,VGA_COL_RED);
 	  if(input.command_execute_flag == TRUE)
 	  {
-		  // jump to parser
-		  FL_Input();
-		  logic();
+		  FL_Input();	  // start front layer
+		  LL_Main();	  // start logic layer
+
 		  // When finished reset the flag
 		  input.command_execute_flag = FALSE;
 	  }
